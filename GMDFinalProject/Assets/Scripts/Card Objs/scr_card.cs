@@ -4,4 +4,5 @@ using UnityEngine;
 public class scr_card : ScriptableObject
 {
     public int cost, health;
+    public scr_player player;
 }

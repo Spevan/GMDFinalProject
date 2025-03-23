@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class scr_player : MonoBehaviour
 {
@@ -10,27 +11,54 @@ public class scr_player : MonoBehaviour
     public GameObject ProductionPlant;
     public Camera main;
     public scr_guiManager GUI;
+    int timeRemain;
+
+    private void Awake()
+    {
+        SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameObject.AddComponent<Camera>();
-        SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
-        //DrawCard();
+        GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
+        GUI.ChangeCardCount(Deck.Count);
+        GUI.UpdateWater(water);
+        foreach (scr_card card in Deck)
+        {
+            card.player = this;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetSceneByName("sce_gui") != null && GUI == null)
+        if(timeRemain <= 0)
         {
-            GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
+            timeRemain -= (int)Time.deltaTime;
+        }
+
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            DrawCard();
         }
     }
 
     public void DrawCard()
     {
-        GUI.DrawCard(Deck[0]);
-        Deck.RemoveAt(0);
+        if (Deck.Count > 0)
+        {
+            GUI.DrawCard(Deck[0]);
+            Deck.RemoveAt(0);
+            GUI.ChangeCardCount(Deck.Count);
+        }
+    }
+
+    public void PlayCard(scr_card card)
+    {
+        water -= card.cost;
+        GUI.UpdateWater(water);
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6188687731211197329}
   - component: {fileID: 8792315619888448665}
   - component: {fileID: 4334176439576143684}
+  - component: {fileID: -6841555308398875291}
   m_Layer: 5
   m_Name: gui_card
   m_TagString: Untagged
@@ -67,8 +68,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -77,6 +78,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-6841555308398875291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888845159088792813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd6d93a19513ce4697834fdc010b041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: {fileID: 7778425260673425451}
+  health: {fileID: 3666035420856671491}
+  cardData: {fileID: 0}
+  GUI: {fileID: 0}
 --- !u!1 &7979865110832428074
 GameObject:
   m_ObjectHideFlags: 0
