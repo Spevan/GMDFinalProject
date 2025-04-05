@@ -7,7 +7,7 @@ public class scr_guiManager : MonoBehaviour
 {
     public GameObject[] players;
     public TextMeshProUGUI cardCount, waterCount;
-    public GameObject hand, cardPrefab;
+    public GameObject hand, cardPrefab, statsTab;
 
     public float fanSpread;
     public int cardSpacing, verticalSpacing;
@@ -15,14 +15,30 @@ public class scr_guiManager : MonoBehaviour
 
     public List<GameObject> cardsInHand;
 
+    public scr_analyticsManager analyticsManager;
+    public TextMeshProUGUI cardsPlayed, waterUsed, timeElapsed;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         canvas = GetComponent<Canvas>();
         //Find all player objects to reference
         players = GameObject.FindGameObjectsWithTag("Player");
+        analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
     }
 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Tab))
+        {
+            statsTab.SetActive(true);
+            timeElapsed.text = analyticsManager.GetTimeElapsed().ToString();
+        }
+        else
+        {
+            statsTab.SetActive(false);
+        }
+    }
 
     //Function to draw a card to the player's hand
     public void DrawCard(scr_card nextCard)
@@ -69,6 +85,11 @@ public class scr_guiManager : MonoBehaviour
             if(card.Equals(removedCard))
             {
                 cardsInHand.Remove(card);
+
+                cardsPlayed.text = analyticsManager.GetCardsPlayed().ToString();
+
+                waterUsed.text = analyticsManager.GetWaterUsed(card.GetComponent<scr_cardsInHand>().cardData.cost).ToString();
+
                 return;
             }
         }
@@ -77,5 +98,10 @@ public class scr_guiManager : MonoBehaviour
     public void UpdateWater(int water)
     {
         waterCount.text = water.ToString();
+
+        if (analyticsManager != null)
+        {
+            
+        }
     }
 }
