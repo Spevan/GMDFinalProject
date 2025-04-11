@@ -21,8 +21,11 @@ public class scr_cardsInHand : MonoBehaviour, IPointerMoveHandler
         Debug.Log("mouse over card " + gameObject.name);
         if (Input.GetMouseButton(0))
         {
-            transform.position = Input.mousePosition;
-            if (transform.localPosition.y > 100)
+            //transform.position = Input.mousePosition;
+            Vector2 pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(GUI.gameObject.GetComponent<Canvas>().transform as RectTransform, Input.mousePosition, GUI.gameObject.GetComponent<Canvas>().worldCamera, out pos);
+            transform.position = GUI.gameObject.GetComponent<Canvas>().transform.TransformPoint(pos);
+            if (transform.position.y > 1000)
             {
                 cardData.player.PlayCard(cardData);
                 GUI.RemoveCard(gameObject);

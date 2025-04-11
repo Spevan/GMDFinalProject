@@ -3,26 +3,27 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class scr_player : MonoBehaviour
+public class scr_player : NetworkBehaviour
 {
     public int water;
     public List<scr_card> Deck;
     public GameObject ProductionPlant;
-    public Camera main;
+    public Camera cam;
     public scr_guiManager GUI;
     int timeRemain;
 
     private void Awake()
     {
-        SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
+        //NetworkManager.Singleton.SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameObject.AddComponent<Camera>();
-        GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
+        //gameObject.AddComponent<Camera>();
+        //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
         GUI.ChangeCardCount(Deck.Count);
         GUI.UpdateWater(water);
         foreach (scr_card card in Deck)
@@ -40,15 +41,19 @@ public class scr_player : MonoBehaviour
             timeRemain -= (int)Time.deltaTime;
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        if (IsOwner)
         {
             DrawCard();
+        }
+        else
+        {
+            cam.enabled = false;
         }
     }
 
     public void DrawCard()
     {
-        if (Deck.Count > 0)
+        if (Input.GetKeyUp(KeyCode.Space) && Deck.Count > 0)
         {
             GUI.DrawCard(Deck[0]);
             Deck.RemoveAt(0);
