@@ -98,10 +98,5 @@ public class scr_guiManager : MonoBehaviour
     public void UpdateWater(int water)
     {
         waterCount.text = water.ToString();
-
-        if (analyticsManager != null)
-        {
-            
-        }
     }
 }
