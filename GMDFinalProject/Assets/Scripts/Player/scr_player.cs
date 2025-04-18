@@ -25,6 +25,8 @@ public class scr_player : NetworkBehaviour
         //gameObject.AddComponent<Camera>();
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
         GUI.ChangeCardCount(Deck.Count);
+
+        water.Value = 10;
         GUI.UpdateWater(water.Value);
         foreach (scr_card card in Deck)
         {
