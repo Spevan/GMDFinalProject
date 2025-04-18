@@ -1,8 +1,13 @@
+using NUnit.Framework;
+using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class scr_analyticsManager : MonoBehaviour
 {
-    int cardsPlayed, waterUsed, minsElapsed;
+    int minsElapsed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,20 +21,9 @@ public class scr_analyticsManager : MonoBehaviour
         minsElapsed = (int)Time.fixedTime;
     }
 
+    [ServerRpc]
     public int GetTimeElapsed()
     {
         return minsElapsed;
-    }
-
-    public int GetWaterUsed(int waterSpent)
-    {
-        waterUsed += waterSpent;
-        return waterUsed;
-    }
-
-    public int GetCardsPlayed()
-    {
-        cardsPlayed++;
-        return cardsPlayed;
     }
 }

@@ -2,10 +2,11 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
+using Unity.Netcode;
 
 public class scr_guiManager : MonoBehaviour
 {
-    public GameObject[] players;
     public TextMeshProUGUI cardCount, waterCount;
     public GameObject hand, cardPrefab, statsTab;
 
@@ -13,24 +14,27 @@ public class scr_guiManager : MonoBehaviour
     public int cardSpacing, verticalSpacing;
     public Canvas canvas;
 
-    public List<GameObject> cardsInHand;
+    public List<GameObject> cardsInHand, playersList;
 
     public scr_analyticsManager analyticsManager;
-    public TextMeshProUGUI cardsPlayed, waterUsed, timeElapsed;
+    public TextMeshProUGUI cardsPlayed, timeElapsed;
+    public List<TextMeshProUGUI> waterList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playersList = GameObject.FindGameObjectsWithTag("Player").ToList();
         canvas = GetComponent<Canvas>();
         //Find all player objects to reference
-        players = GameObject.FindGameObjectsWithTag("Player");
         analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
+        UpdateAnalytics();
     }
 
     private void Update()
     {
         if(Input.GetKey(KeyCode.Tab))
         {
+            UpdateAnalytics();
             statsTab.SetActive(true);
             timeElapsed.text = analyticsManager.GetTimeElapsed().ToString();
         }
@@ -41,12 +45,14 @@ public class scr_guiManager : MonoBehaviour
     }
 
     //Function to draw a card to the player's hand
-    public void DrawCard(scr_card nextCard)
+    public void DrawCard(scr_card nextCard, scr_player thisPlayer)
     {
         //Create a new card prefab
         cardsInHand.Add(Instantiate(cardPrefab, hand.transform));//.position, Quaternion.identity, hand.transform));
-        cardsInHand[cardsInHand.Count - 1].GetComponent<scr_cardsInHand>().cardData = nextCard;
-
+        scr_cardsInHand drawnCard = cardsInHand[cardsInHand.Count - 1].GetComponent<scr_cardsInHand>();
+        drawnCard.cardData = nextCard;
+        drawnCard.player = thisPlayer;
+        drawnCard.GUI = this;
         UpdateHand();
     }
 
@@ -78,7 +84,7 @@ public class scr_guiManager : MonoBehaviour
         }
     }
 
-    public void RemoveCard(GameObject removedCard)
+    public void RemoveCard(scr_player player, GameObject removedCard)
     {
         foreach (var card in cardsInHand)
         {
@@ -86,9 +92,7 @@ public class scr_guiManager : MonoBehaviour
             {
                 cardsInHand.Remove(card);
 
-                cardsPlayed.text = analyticsManager.GetCardsPlayed().ToString();
-
-                waterUsed.text = analyticsManager.GetWaterUsed(card.GetComponent<scr_cardsInHand>().cardData.cost).ToString();
+                UpdateAnalytics();
 
                 return;
             }
@@ -98,5 +102,19 @@ public class scr_guiManager : MonoBehaviour
     public void UpdateWater(int water)
     {
         waterCount.text = water.ToString();
+    }
+
+    [ClientRpc]
+    public void UpdateAnalytics()
+    {
+        for(int i = 0; i < playersList.Count; i++)
+        {
+            for (int j = 0; j < waterList.Count; j++)
+            {
+                //water updated
+                playersList[i].GetComponentInChildren<scr_guiManager>().waterList[j].text = playersList[j].GetComponent<scr_player>().water.Value.ToString();
+                //Debug.Log("player " + (j + 1) + "'s water text updated on player " + (i + 1) + "'s screen");
+            }
+        }
     }
 }

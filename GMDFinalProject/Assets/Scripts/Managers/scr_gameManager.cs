@@ -23,7 +23,7 @@ public class scr_gameManager : MonoBehaviour
 
             for (int i = 0; i < clients.Count; ++i)
             {
-                players.Add(Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation));
+                players.Add(NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation));
                 players[i].GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
             }
         }
