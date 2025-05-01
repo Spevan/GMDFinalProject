@@ -18,12 +18,15 @@ public class scr_guiManager : MonoBehaviour
 
     public scr_analyticsManager analyticsManager;
     public TextMeshProUGUI cardsPlayed, timeElapsed;
-    public List<TextMeshProUGUI> waterList;
+
+    public GameObject playerStatPrefab;
+    public List<GameObject> waterList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playersList = GameObject.FindGameObjectsWithTag("Player").ToList();
+        CreateAnalytics();
         canvas = GetComponent<Canvas>();
         //Find all player objects to reference
         analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
@@ -104,6 +107,15 @@ public class scr_guiManager : MonoBehaviour
         waterCount.text = water.ToString();
     }
 
+    public void CreateAnalytics()
+    {
+        foreach (GameObject player in playersList)
+        {
+            waterList.Add(Instantiate(playerStatPrefab, (statsTab.transform.position + new Vector3(0, waterList.Count * 10, 0)),
+                new Quaternion(0, 0, 0, 0), statsTab.transform));
+        }
+    }
+
     [ClientRpc]
     public void UpdateAnalytics()
     {
@@ -112,7 +124,8 @@ public class scr_guiManager : MonoBehaviour
             for (int j = 0; j < waterList.Count; j++)
             {
                 //water updated
-                playersList[i].GetComponentInChildren<scr_guiManager>().waterList[j].text = playersList[j].GetComponent<scr_player>().water.Value.ToString();
+                waterList[j].GetComponent<TextMeshProUGUI>().text = playersList[j].GetComponent<scr_player>().NetworkObject.NetworkObjectId.ToString();
+                waterList[j].GetComponentInChildren<TextMeshProUGUI>().text = playersList[j].GetComponent<scr_player>().water.Value.ToString();
                 //Debug.Log("player " + (j + 1) + "'s water text updated on player " + (i + 1) + "'s screen");
             }
         }

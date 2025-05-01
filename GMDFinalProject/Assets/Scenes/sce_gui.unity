@@ -344,7 +344,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.25
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -408,7 +408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e693a84c0a3aaaa42a4a7b211d93cc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
   cardCount: {fileID: 2071668267}
   waterCount: {fileID: 1378455449}
   hand: {fileID: 359013976}
@@ -419,10 +418,11 @@ MonoBehaviour:
   verticalSpacing: 25
   canvas: {fileID: 0}
   cardsInHand: []
+  playersList: []
   analyticsManager: {fileID: 0}
   cardsPlayed: {fileID: 1660869862}
-  waterUsed: {fileID: 1510192919}
   timeElapsed: {fileID: 1067552598}
+  waterList: []
 --- !u!1 &764676951
 GameObject:
   m_ObjectHideFlags: 0
