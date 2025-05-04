@@ -696,11 +696,11 @@ MonoBehaviour:
   water:
     m_InternalValue: 0
   Deck:
-  - {fileID: 11400000, guid: 7541e28e16f4de240a1fbe5addad7303, type: 2}
-  - {fileID: 11400000, guid: 0ece2a8a5cdea1248989d96b0bd92591, type: 2}
-  - {fileID: 11400000, guid: 7541e28e16f4de240a1fbe5addad7303, type: 2}
-  - {fileID: 11400000, guid: 951de6634350e51449e9039b616739a3, type: 2}
-  - {fileID: 11400000, guid: 0ece2a8a5cdea1248989d96b0bd92591, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   ProductionPlant: {fileID: 0}
   cam: {fileID: 3645341287546304988}
   GUI: {fileID: 8531002893481407077}

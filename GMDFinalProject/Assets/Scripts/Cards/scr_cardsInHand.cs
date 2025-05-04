@@ -29,14 +29,16 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
 
     void IDropHandler.OnDrop(UnityEngine.EventSystems.PointerEventData eventData)
     {
-        Vector3 mousePos = playerCam.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Debug.DrawRay(mousePos, playerCam.transform.forward);
-        if (Physics.Raycast(mousePos, playerCam.transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+            Debug.Log(hit.point);
+            Debug.DrawRay(Input.mousePosition, playerCam.transform.forward, Color.red, Mathf.Infinity);
             Debug.Log("Card played: " + name);
             player.PlayCard(cardData);
-            Instantiate(cardData.unit, hit.transform.position, new Quaternion(0, player.transform.rotation.y, 0, 0));
+            GameObject unit = Instantiate(cardData.unit, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+            unit.GetComponent<scr_heroUnit>().player = player;
             GUI.RemoveCard(player, gameObject);
             GUI.UpdateHand();
             Destroy(gameObject);

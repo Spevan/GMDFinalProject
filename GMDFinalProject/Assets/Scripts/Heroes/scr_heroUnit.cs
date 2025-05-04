@@ -1,31 +1,46 @@
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class scr_heroUnit : MonoBehaviour
+public class scr_heroUnit : NetworkBehaviour
 {
+    public scr_player player;
     public scr_hero cardData;
     public SphereCollider range;
     bool movementLock;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
+        SpawnNetworkClientRpc();
+
         movementLock = false;
+        transform.position = transform.position + new Vector3 (0, 0.25f, 0);
 
         range = this.AddComponent<SphereCollider>();
         range.radius = cardData.range;
+        range.isTrigger = true;
+    }
+
+    [ClientRpc]
+    void SpawnNetworkClientRpc()
+    {
+        this.GetComponent<NetworkObject>().Spawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 
     void Move()
     {
         if (!movementLock)
         {
-            transform.position = transform.forward * cardData.speed * Time.deltaTime;
+            Vector3 direction = new Vector3(0, 0, player.cam.transform.forward.z);
+            transform.Translate(-direction * cardData.speed * Time.deltaTime);
         }
     }
 

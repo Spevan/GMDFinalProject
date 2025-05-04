@@ -107,11 +107,12 @@ public class scr_guiManager : MonoBehaviour
         waterCount.text = water.ToString();
     }
 
+    [ServerRpc]
     public void CreateAnalytics()
     {
-        foreach (GameObject player in playersList)
+        for(int i = 0; i < cardsInHand.Count; i++)
         {
-            waterList.Add(Instantiate(playerStatPrefab, (statsTab.transform.position + new Vector3(0, waterList.Count * 10, 0)),
+            waterList.Add(Instantiate(playerStatPrefab, (statsTab.transform.position + new Vector3(0, i * 10, 0)),
                 new Quaternion(0, 0, 0, 0), statsTab.transform));
         }
     }

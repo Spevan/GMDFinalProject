@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
+  m_Name: hero
+  m_EditorClassIdentifier: 
+  unit: {fileID: 4841726575583476779, guid: 324d4fd6501f588499960ec51c3fbe05, type: 3}
+  cost: 1
+  power: 5
+  health: 10
+  range: 2
+  description: A dummy stupidhead
+  maxCooldown: 2
+  statusAmnt: 0
+  player: {fileID: 0}
+  speed: 2
+  upkeep: 1
