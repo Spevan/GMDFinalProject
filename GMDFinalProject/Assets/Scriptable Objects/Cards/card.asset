@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f78d13ec025e946aefc32f59c30e0f, type: 3}
   m_Name: card
   m_EditorClassIdentifier: 
+  unit: {fileID: 0}
   cost: 2
+  power: 0
   health: 3
+  range: 0
+  description: 
+  maxCooldown: 0
+  status: 0
+  statusAmnt: 0
+  costType: 0
   player: {fileID: 0}
