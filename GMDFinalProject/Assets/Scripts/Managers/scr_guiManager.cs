@@ -107,7 +107,6 @@ public class scr_guiManager : MonoBehaviour
         waterCount.text = water.ToString();
     }
 
-    [ServerRpc]
     public void CreateAnalytics()
     {
         for(int i = 0; i < cardsInHand.Count; i++)
@@ -117,7 +116,6 @@ public class scr_guiManager : MonoBehaviour
         }
     }
 
-    [ClientRpc]
     public void UpdateAnalytics()
     {
         for(int i = 0; i < playersList.Count; i++)

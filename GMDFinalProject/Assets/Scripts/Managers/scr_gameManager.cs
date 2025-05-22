@@ -7,12 +7,25 @@ using System.Linq;
 
 public class scr_gameManager : MonoBehaviour
 {
+    public static scr_gameManager instance {  get; private set; }
+
     [SerializeField] private List<Transform> playerSpawns;
 
     public GameObject player;
     public List<GameObject> players;
 
     List<NetworkClient> clients;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,9 +42,10 @@ public class scr_gameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    [ServerRpc]
+    public void SpawnNetworkObjServerRpc(GameObject unit, scr_player player)
     {
-        
+        unit.GetComponent<NetworkObject>().Spawn(true);
+        unit.GetComponent<scr_heroUnit>().player = player;
     }
 }

@@ -10,10 +10,9 @@ public class scr_heroUnit : NetworkBehaviour
     bool movementLock;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
     void Start()
     {
-        SpawnNetworkClientRpc();
+        //SpawnNetwork();
 
         movementLock = false;
         transform.position = transform.position + new Vector3 (0, 0.25f, 0);
@@ -23,10 +22,10 @@ public class scr_heroUnit : NetworkBehaviour
         range.isTrigger = true;
     }
 
-    [ClientRpc]
-    void SpawnNetworkClientRpc()
+    
+    void SpawnNetwork()
     {
-        this.GetComponent<NetworkObject>().Spawn();
+        this.GetComponent<NetworkObject>().Spawn(true);
     }
 
     // Update is called once per frame
