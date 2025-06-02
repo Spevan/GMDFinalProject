@@ -37,10 +37,9 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
             Debug.Log(hit.point);
             Debug.DrawRay(Input.mousePosition, playerCam.transform.forward, Color.red, Mathf.Infinity);
             Debug.Log("Card played: " + name);
+
             player.PlayCard(cardData);
-            GameObject unit = Instantiate(cardData.unit, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
-            scr_gameManager.instance.SpawnNetworkObjServerRpc(unit, player);
-            //unit.GetComponent<scr_heroUnit>().player = player;
+            scr_gameManager.instance.SpawnNetworkObjServerRpc(cardData, player, hit);
             GUI.RemoveCard(player, gameObject);
             GUI.UpdateHand();
             Destroy(gameObject);

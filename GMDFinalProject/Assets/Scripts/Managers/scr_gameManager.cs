@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor.Networking.PlayerConnection;
 using System.Linq;
 
-public class scr_gameManager : MonoBehaviour
+public class scr_gameManager : NetworkManager
 {
     public static scr_gameManager instance {  get; private set; }
 
@@ -43,9 +43,14 @@ public class scr_gameManager : MonoBehaviour
     }
 
     [ServerRpc]
-    public void SpawnNetworkObjServerRpc(GameObject unit, scr_player player)
+    public void SpawnNetworkObjServerRpc(scr_card cardData, scr_player player, RaycastHit hit)
     {
-        unit.GetComponent<NetworkObject>().Spawn(true);
-        unit.GetComponent<scr_heroUnit>().player = player;
+        //if (IsServer)
+        {
+            GameObject unit = Instantiate(cardData.unit, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+            unit.GetComponent<scr_heroUnit>().player = player;
+            unit.GetComponent<NetworkObject>().Spawn(true);
+            
+        }
     }
 }
