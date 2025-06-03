@@ -12,34 +12,28 @@ public class scr_heroUnit : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //SpawnNetwork();
-
+        //Set movement lock to false and hero position so it sits above ground
         movementLock = false;
         transform.position = transform.position + new Vector3 (0, 0.25f, 0);
 
+        //Setting range component, size and trigger status
         range = this.AddComponent<SphereCollider>();
         range.radius = cardData.range;
         range.isTrigger = true;
     }
 
-    
-    void SpawnNetwork()
-    {
-        this.GetComponent<NetworkObject>().Spawn(true);
-    }
-
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Move(); //Call move function every frame
     }
 
     void Move()
     {
-        if (!movementLock)
+        if (!movementLock) //If the movement lock is false
         {
-            Vector3 direction = new Vector3(0, 0, player.cam.transform.forward.z);
-            transform.Translate(-direction * cardData.speed * Time.deltaTime);
+            //Hero moves forward
+            transform.Translate(Vector3.forward * cardData.speed * Time.deltaTime);
         }
     }
 
@@ -50,8 +44,10 @@ public class scr_heroUnit : NetworkBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        //If the range collides with a tower
         if(collision.gameObject.tag.Equals("Tower"))
         {
+            //Set movement lock to true and move towards tower position
             movementLock = true;
             transform.position = Vector3.MoveTowards(transform.position, collision.transform.position, cardData.speed * Time.deltaTime);
         }

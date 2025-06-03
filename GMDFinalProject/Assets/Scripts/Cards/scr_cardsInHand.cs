@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -39,7 +40,15 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
             Debug.Log("Card played: " + name);
 
             player.PlayCard(cardData);
-            scr_gameManager.instance.SpawnNetworkObjServerRpc(cardData, player, hit);
+
+            if (NetworkManager.Singleton.IsServer)
+            {
+                scr_gameManager.instance.SpawnNetworkObj(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+            }
+            else
+            {
+                scr_gameManager.instance.SpawnNetworkObjServerRpc(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+            }
             GUI.RemoveCard(player, gameObject);
             GUI.UpdateHand();
             Destroy(gameObject);
