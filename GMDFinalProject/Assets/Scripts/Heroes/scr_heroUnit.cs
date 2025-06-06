@@ -9,6 +9,8 @@ public class scr_heroUnit : NetworkBehaviour
     public SphereCollider range;
     bool movementLock;
 
+    private Collider target;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +37,10 @@ public class scr_heroUnit : NetworkBehaviour
             //Hero moves forward
             transform.Translate(Vector3.forward * cardData.speed * Time.deltaTime);
         }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, cardData.speed * Time.deltaTime);
+        }
     }
 
     void Attack()
@@ -42,14 +48,23 @@ public class scr_heroUnit : NetworkBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if(collision.gameObject.tag.Equals("Tower"))
+        if(!movementLock && other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower"))
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;
-            transform.position = Vector3.MoveTowards(transform.position, collision.transform.position, cardData.speed * Time.deltaTime);
+            target = other;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.Equals(target))
+        {
+            movementLock = false;
+            target = null;
         }
     }
 }
