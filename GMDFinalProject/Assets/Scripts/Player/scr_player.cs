@@ -31,9 +31,9 @@ public class scr_player : NetworkBehaviour
         GUI.ChangeCardCount(Deck.Count);
         water.Value = 10;
         GUI.UpdateWater(water.Value);
-        foreach (scr_card card in Deck)
+        //foreach (scr_card card in Deck)
         {
-            card.player = this;
+            //card.player = this;
         }
 
     }

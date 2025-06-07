@@ -5,6 +5,15 @@ using UnityEngine;
 public class scr_card : ScriptableObject
 {
     public GameObject unit;
+    [System.Serializable]
+    public enum costTypes
+    {
+        none,
+        water,
+        steel
+    }
+    [SerializeField]
+    public costTypes costType;
     public int cost, power, health, range;
     public string description;
     public float maxCooldown;
@@ -19,14 +28,4 @@ public class scr_card : ScriptableObject
     [SerializeField]
     private statusTypes status;
     public int statusAmnt;
-    [System.Serializable]
-    public enum costTypes
-    {
-        none,
-        water,
-        steel
-    }
-    [SerializeField]
-    private costTypes costType;
-    public scr_player player;
 }

@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class scr_towerUnit : MonoBehaviour
 {
-    public scr_player player;
-    public scr_hero cardData;
+    public scr_tower cardData;
     public SphereCollider range;
 
     private Collider target;
@@ -43,7 +42,7 @@ public class scr_towerUnit : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if (target.Equals(other))
+        if (target != null && target.Equals(other))
         {
             //Set movement lock to true and move towards tower position
             Attack();
@@ -52,7 +51,7 @@ public class scr_towerUnit : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (target.Equals(other))
+        if (target != null && target.Equals(other))
         {
             target = null;
         }

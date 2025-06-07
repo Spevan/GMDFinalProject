@@ -479,6 +479,7 @@ MonoBehaviour:
   players: []
   cardPrefabs:
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
 --- !u!114 &597385074
 MonoBehaviour:
   m_ObjectHideFlags: 0

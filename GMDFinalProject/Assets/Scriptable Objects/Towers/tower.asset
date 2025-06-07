@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
-  m_Name: hero
+  m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
+  m_Name: tower
   m_EditorClassIdentifier: 
-  unit: {fileID: 4841726575583476779, guid: 324d4fd6501f588499960ec51c3fbe05, type: 3}
-  costType: 1
-  cost: 1
-  power: 5
+  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  costType: 2
+  cost: 3
+  power: 2
   health: 10
-  range: 2
-  description: A dummy stupidhead
-  maxCooldown: 2
+  range: 5
+  description: A silly little tower
+  maxCooldown: 1
   status: 0
   statusAmnt: 0
   player: {fileID: 0}
-  speed: 2
-  upkeep: 1
+  ammunition: {fileID: 0}

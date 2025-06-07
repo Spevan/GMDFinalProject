@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class scr_heroUnit : NetworkBehaviour
 {
-    public scr_player player;
     public scr_hero cardData;
     public SphereCollider range;
     bool movementLock;
