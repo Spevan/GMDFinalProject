@@ -6,6 +6,11 @@ public class scr_towerUnit : MonoBehaviour
     public scr_tower cardData;
     public SphereCollider range;
 
+    public int cooldown, power, health;
+    public float timer;
+
+    public GameObject[] pooledProj;
+
     private Collider target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,6 +23,8 @@ public class scr_towerUnit : MonoBehaviour
         range = this.AddComponent<SphereCollider>();
         range.radius = cardData.range;
         range.isTrigger = true;
+
+        cooldown = (int)cardData.maxCooldown;
     }
 
     // Update is called once per frame
@@ -28,7 +35,26 @@ public class scr_towerUnit : MonoBehaviour
 
     void Attack()
     {
+        if (timer <= cooldown)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            ObjectPooling();
+        }
+    }
 
+    void ObjectPooling()
+    {
+        for (int i = 0; i < pooledProj.Length; i++)
+        {
+            if (!pooledProj[i].activeSelf)
+            {
+                pooledProj[i].SetActive(true);
+                pooledProj[i].transform.position = transform.position;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
