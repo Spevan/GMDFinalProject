@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ammo", menuName = "Scriptable Objects/scr_ammo")]
+[CreateAssetMenu(fileName = "ammo", menuName = "Scriptable Sheets/Ammo")]
 public class scr_ammo : ScriptableObject
 {
     public string description;

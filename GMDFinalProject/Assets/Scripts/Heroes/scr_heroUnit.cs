@@ -8,6 +8,8 @@ public class scr_heroUnit : NetworkBehaviour
     public SphereCollider range;
     bool movementLock;
 
+    public int cooldown, power, health;
+
     private Collider target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -57,7 +59,6 @@ public class scr_heroUnit : NetworkBehaviour
             target = other;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if(other.Equals(target))
@@ -65,5 +66,24 @@ public class scr_heroUnit : NetworkBehaviour
             movementLock = false;
             target = null;
         }
+    }
+
+    public void ChangeHealth(int delta)
+    {
+        health += delta;
+
+        if(health < 0)
+        {
+            Death();
+        }
+        else if(health > cardData.health)
+        {
+            health = cardData.health;
+        }
+    }
+
+    void Death()
+    {
+
     }
 }

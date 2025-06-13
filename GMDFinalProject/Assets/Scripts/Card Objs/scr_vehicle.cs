@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "scr_vehicle", menuName = "Scriptable Objects/scr_vehicle")]
+[CreateAssetMenu(fileName = "scr_vehicle", menuName = "Scriptable Sheets/Vehicle")]
 public class scr_vehicle : scr_tower
 {
     public int speed;

@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "card", menuName = "Scriptable Sheets/card")]
+[CreateAssetMenu(fileName = "card", menuName = "Scriptable Sheets/Card")]
 public class scr_card : ScriptableObject
 {
     public GameObject unit;

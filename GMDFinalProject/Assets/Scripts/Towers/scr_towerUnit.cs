@@ -1,7 +1,9 @@
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class scr_towerUnit : MonoBehaviour
+public class scr_towerUnit : NetworkBehaviour
 {
     public scr_tower cardData;
     public SphereCollider range;
@@ -9,7 +11,8 @@ public class scr_towerUnit : MonoBehaviour
     public int cooldown, power, health;
     public float timer;
 
-    public GameObject[] pooledProj;
+    public List<GameObject> pooledProj;
+    public int amountPooledProj;
 
     private Collider target;
 
@@ -25,34 +28,36 @@ public class scr_towerUnit : MonoBehaviour
         range.isTrigger = true;
 
         cooldown = (int)cardData.maxCooldown;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        pooledProj = new List<GameObject>();
+        for (int i = 0; i < amountPooledProj; i++)
+        {
+            if (NetworkManager.Singleton.IsServer)
+            {
+                scr_gameManager.instance.SpawnNetworkAmmo(
+                    cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
+            }
+            else
+            {
+                scr_gameManager.instance.SpawnNetworkAmmoServerRpc(GetComponent<NetworkObject>().NetworkObjectId,
+                    cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
+            }
+        }
     }
 
     void Attack()
     {
-        if (timer <= cooldown)
+        if (pooledProj.Count < 20)
         {
-            timer += Time.deltaTime;
+            
+            pooledProj[pooledProj.Count - 1].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
         }
         else
         {
-            ObjectPooling();
-        }
-    }
-
-    void ObjectPooling()
-    {
-        for (int i = 0; i < pooledProj.Length; i++)
-        {
-            if (!pooledProj[i].activeSelf)
+            for (int i = 0; i < pooledProj.Count; i++)
             {
-                pooledProj[i].SetActive(true);
                 pooledProj[i].transform.position = transform.position;
+                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
             }
         }
     }
@@ -70,8 +75,16 @@ public class scr_towerUnit : MonoBehaviour
         //If the range collides with a tower
         if (target != null && target.Equals(other))
         {
-            //Set movement lock to true and move towards tower position
-            Attack();
+            if (timer <= cooldown)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                //Set movement lock to true and move towards tower position
+                Attack();
+                timer = 0;
+            }
         }
     }
 
@@ -81,5 +94,24 @@ public class scr_towerUnit : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    public void ChangeHealth(int delta)
+    {
+        health += delta;
+
+        if (health < 0)
+        {
+            Death();
+        }
+        else if(health > cardData.health)
+        {
+            health = cardData.health;
+        }
+    }
+
+    void Death()
+    {
+
     }
 }

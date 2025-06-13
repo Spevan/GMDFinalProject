@@ -19,8 +19,7 @@ MonoBehaviour:
   health: 10
   range: 5
   description: A silly little tower
-  maxCooldown: 1
+  maxCooldown: 5
   status: 0
   statusAmnt: 0
-  player: {fileID: 0}
-  ammunition: {fileID: 0}
+  ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
