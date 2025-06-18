@@ -99,10 +99,21 @@ public class scr_gameManager : NetworkBehaviour
 
     //Request the server to...
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnNetworkAmmoServerRpc(ulong towerID, string ammoName, Vector3 pos, Quaternion rot)
+    public void SpawnNetworkAmmoServerRpc(ulong objID, string ammoName, Vector3 pos, Quaternion rot)
     {
-        GameObject ammo = SpawnNetworkAmmo(ammoName, pos, rot);
-        ReturnAmmoClientRpc(towerID, ammo.GetComponent<NetworkObject>());
+        GameObject result = SpawnNetworkAmmo(ammoName, pos, rot);
+
+        ReturnAmmoClientRpc(objID, result);
+
+        /*foreach (NetworkObject i in NetworkManager.Singleton.SpawnManager.SpawnedObjectsList)
+        {
+            if(i.NetworkObjectId == objID)
+            {
+                Debug.Log("spawning ammo for obj: " + i.NetworkObjectId);
+                i.GetComponent<scr_towerUnit>().pooledProj.Add(result);
+            }
+        }*/
+        
     }
 
     //BULLSHIT!!!!

@@ -30,32 +30,32 @@ public class scr_towerUnit : NetworkBehaviour
         cooldown = (int)cardData.maxCooldown;
 
         pooledProj = new List<GameObject>();
-        for (int i = 0; i < amountPooledProj; i++)
+        if (this.GetComponent<NetworkObject>().IsOwner)
         {
-            if (NetworkManager.Singleton.IsServer)
+            for (int i = 0; i < amountPooledProj; i++)
             {
-                scr_gameManager.instance.SpawnNetworkAmmo(
-                    cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
-            }
-            else
-            {
-                scr_gameManager.instance.SpawnNetworkAmmoServerRpc(GetComponent<NetworkObject>().NetworkObjectId,
-                    cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
+                if (NetworkManager.Singleton.IsServer)
+                {
+                    pooledProj.Add(
+                        scr_gameManager.instance.SpawnNetworkAmmo(
+                            cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0)));
+                }
+                else
+                {
+                    scr_gameManager.instance.SpawnNetworkAmmoServerRpc(this.GetComponent<NetworkObject>().NetworkObjectId,
+                        cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
+                }
             }
         }
     }
 
     void Attack()
     {
-        if (pooledProj.Count < 20)
+        for (int i = 0; i < pooledProj.Count; i++)
         {
-            
-            pooledProj[pooledProj.Count - 1].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
-        }
-        else
-        {
-            for (int i = 0; i < pooledProj.Count; i++)
+            if (!pooledProj[i].activeSelf)
             {
+                pooledProj[i].SetActive(true);
                 pooledProj[i].transform.position = transform.position;
                 pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
             }
