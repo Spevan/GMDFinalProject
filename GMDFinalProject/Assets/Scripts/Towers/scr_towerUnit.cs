@@ -8,8 +8,7 @@ public class scr_towerUnit : NetworkBehaviour
     public scr_tower cardData;
     public SphereCollider range;
 
-    public int cooldown, power, health;
-    public float timer;
+    public float timer, cooldown, power, health;
 
     public List<GameObject> pooledProj;
     public int amountPooledProj;
@@ -27,7 +26,9 @@ public class scr_towerUnit : NetworkBehaviour
         range.radius = cardData.range;
         range.isTrigger = true;
 
-        cooldown = (int)cardData.maxCooldown;
+        power = cardData.power;
+        cooldown = cardData.maxCooldown;
+        health = cardData.health;
 
         pooledProj = new List<GameObject>();
         if (this.GetComponent<NetworkObject>().IsOwner)
@@ -49,6 +50,8 @@ public class scr_towerUnit : NetworkBehaviour
         }
     }
 
+
+
     void Attack()
     {
         for (int i = 0; i < pooledProj.Count; i++)
@@ -58,14 +61,17 @@ public class scr_towerUnit : NetworkBehaviour
                 pooledProj[i].SetActive(true);
                 pooledProj[i].transform.position = transform.position;
                 pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
+                break;
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(target == null && other.gameObject.tag.Equals("Hero"))
+        if(target == null || !target.gameObject.activeInHierarchy && other.gameObject.tag.Equals("Hero"))
         {
+            Debug.Log(other.name + " detected by " + this.cardData.name);
+            timer = cooldown;
             target = other;
         }
     }
@@ -82,6 +88,7 @@ public class scr_towerUnit : NetworkBehaviour
             else
             {
                 //Set movement lock to true and move towards tower position
+                Debug.Log(this.cardData.name + " is attacking " + other.name);
                 Attack();
                 timer = 0;
             }
@@ -90,8 +97,10 @@ public class scr_towerUnit : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("Trigger exit @" + other.name);
         if (target != null && target.Equals(other))
         {
+            Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
         }
     }
@@ -100,7 +109,7 @@ public class scr_towerUnit : NetworkBehaviour
     {
         health += delta;
 
-        if (health < 0)
+        if (health <= 0)
         {
             Death();
         }
@@ -112,6 +121,6 @@ public class scr_towerUnit : NetworkBehaviour
 
     void Death()
     {
-
+        this.gameObject.SetActive(false);
     }
 }

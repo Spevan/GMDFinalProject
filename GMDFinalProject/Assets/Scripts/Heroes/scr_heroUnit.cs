@@ -8,7 +8,7 @@ public class scr_heroUnit : NetworkBehaviour
     public SphereCollider range;
     bool movementLock;
 
-    public int cooldown, power, health;
+    public float timer, cooldown, power, health;
 
     private Collider target;
 
@@ -23,6 +23,10 @@ public class scr_heroUnit : NetworkBehaviour
         range = this.AddComponent<SphereCollider>();
         range.radius = cardData.range;
         range.isTrigger = true;
+
+        power = cardData.power;
+        cooldown = cardData.maxCooldown;
+        health = cardData.health;
     }
 
     // Update is called once per frame
@@ -46,7 +50,37 @@ public class scr_heroUnit : NetworkBehaviour
 
     void Attack()
     {
+        if (target.gameObject.tag.Equals("Hero"))
+        {
+            Debug.Log(this.cardData.name + " is attacking " + target.name);
+            target.GetComponent<scr_heroUnit>().ChangeHealth(-cardData.power);
+            Death();
 
+        }
+        else if (target.gameObject.tag.Equals("Tower"))
+        {
+            Debug.Log(this.cardData.name + " is attacking " + target.name);
+            target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
+            Death();
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //If the range collides with a tower
+        if (target != null && target.Equals(collision.collider))
+        {
+            if (timer <= cooldown)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                //Set movement lock to true and move towards tower position
+                Attack();
+                timer = 0;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -56,6 +90,7 @@ public class scr_heroUnit : NetworkBehaviour
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;
+            timer = cooldown;
             target = other;
         }
     }
@@ -63,6 +98,7 @@ public class scr_heroUnit : NetworkBehaviour
     {
         if(other.Equals(target))
         {
+            Debug.Log(this.cardData.name + " has terminated " + other.name);
             movementLock = false;
             target = null;
         }
@@ -72,7 +108,7 @@ public class scr_heroUnit : NetworkBehaviour
     {
         health += delta;
 
-        if(health < 0)
+        if(health <= 0)
         {
             Death();
         }
@@ -84,6 +120,6 @@ public class scr_heroUnit : NetworkBehaviour
 
     void Death()
     {
-
+        this.gameObject.SetActive(false);
     }
 }

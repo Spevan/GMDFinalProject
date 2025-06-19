@@ -37,7 +37,7 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
         {
             Debug.Log(hit.point);
             Debug.DrawRay(Input.mousePosition, playerCam.transform.forward, Color.red, Mathf.Infinity);
-            Debug.Log("Card played: " + name);
+            Debug.Log("Card played: " + cardData.name);
 
             player.PlayCard(cardData);
 

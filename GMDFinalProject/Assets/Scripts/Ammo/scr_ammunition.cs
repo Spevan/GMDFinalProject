@@ -11,7 +11,7 @@ public class scr_ammunition : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.gameObject.SetActive(false);
+        Destroy();
     }
 
     // Update is called once per frame
@@ -32,15 +32,23 @@ public class scr_ammunition : NetworkBehaviour
         target = newTarget;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag.Equals("Hero"))
+        if (collision.gameObject.tag.Equals("Hero"))
         {
-            other.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
+            collision.collider.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
+            Destroy();
+
         }
-        else if(other.gameObject.tag.Equals("Tower"))
+        else if (collision.gameObject.tag.Equals("Tower"))
         {
-            other.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+            collision.collider.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+            Destroy();
         }
+    }
+
+    private void Destroy()
+    {
+        this.gameObject.SetActive(false);
     }
 }
