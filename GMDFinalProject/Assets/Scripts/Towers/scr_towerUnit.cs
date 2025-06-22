@@ -13,7 +13,7 @@ public class scr_towerUnit : NetworkBehaviour
     public List<GameObject> pooledProj;
     public int amountPooledProj;
 
-    private Collider target;
+    public Collider target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,7 +68,7 @@ public class scr_towerUnit : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(target == null || !target.gameObject.activeInHierarchy && other.gameObject.tag.Equals("Hero"))
+        if((target == null || !target.gameObject.activeInHierarchy) && other.gameObject.tag.Equals("Hero"))
         {
             Debug.Log(other.name + " detected by " + this.cardData.name);
             timer = cooldown;
@@ -79,7 +79,7 @@ public class scr_towerUnit : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(other))
+        if (target != null && target.Equals(other) && target.gameObject.activeSelf && !IsOwner)
         {
             if (timer <= cooldown)
             {
@@ -93,12 +93,7 @@ public class scr_towerUnit : NetworkBehaviour
                 timer = 0;
             }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Trigger exit @" + other.name);
-        if (target != null && target.Equals(other))
+        else if(target == null || !target.gameObject.activeSelf)
         {
             Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;

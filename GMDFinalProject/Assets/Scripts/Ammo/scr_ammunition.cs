@@ -34,13 +34,13 @@ public class scr_ammunition : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Hero"))
+        if (collision.gameObject.tag.Equals("Hero") && !IsOwner)
         {
             collision.collider.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
             Destroy();
 
         }
-        else if (collision.gameObject.tag.Equals("Tower"))
+        else if (collision.gameObject.tag.Equals("Tower") && !IsOwner)
         {
             collision.collider.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
             Destroy();

@@ -10,7 +10,7 @@ public class scr_heroUnit : NetworkBehaviour
 
     public float timer, cooldown, power, health;
 
-    private Collider target;
+    public Collider target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,21 +54,21 @@ public class scr_heroUnit : NetworkBehaviour
         {
             Debug.Log(this.cardData.name + " is attacking " + target.name);
             target.GetComponent<scr_heroUnit>().ChangeHealth(-cardData.power);
-            Death();
+            //Death();
 
         }
         else if (target.gameObject.tag.Equals("Tower"))
         {
             Debug.Log(this.cardData.name + " is attacking " + target.name);
             target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
-            Death();
+            //Death();
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(collision.collider))
+        if (target != null && target.Equals(collision) && target.gameObject.activeSelf && !IsOwner)
         {
             if (timer <= cooldown)
             {
@@ -81,26 +81,23 @@ public class scr_heroUnit : NetworkBehaviour
                 timer = 0;
             }
         }
+        else if (target == null || !target.gameObject.activeSelf)
+        {
+            Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
+            movementLock = false;
+            target = null;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if(!movementLock && other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower"))
+        if(!IsOwner && !movementLock && other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower"))
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;
             timer = cooldown;
             target = other;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.Equals(target))
-        {
-            Debug.Log(this.cardData.name + " has terminated " + other.name);
-            movementLock = false;
-            target = null;
         }
     }
 
