@@ -6,7 +6,7 @@ public class scr_ammunition : NetworkBehaviour
 {
     [SerializeField] scr_ammo ammoData;
 
-    GameObject target;
+    public GameObject target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,13 +34,15 @@ public class scr_ammunition : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Hero") && !IsOwner)
+        if (collision.gameObject.tag.Equals("Hero") && 
+            target.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             collision.collider.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
             Destroy();
 
         }
-        else if (collision.gameObject.tag.Equals("Tower") && !IsOwner)
+        else if (collision.gameObject.tag.Equals("Tower") && 
+            target.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             collision.collider.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
             Destroy();

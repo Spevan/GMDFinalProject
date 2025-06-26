@@ -19,7 +19,7 @@ public class scr_towerUnit : NetworkBehaviour
     void Start()
     {
         //Set tower position so it sits above ground
-        transform.position = transform.position + new Vector3(0, 0.25f, 0);
+        transform.position = transform.position + new Vector3(0, 0.5f, 0);
 
         //Setting range component, size and trigger status
         range = this.AddComponent<SphereCollider>();
@@ -35,22 +35,20 @@ public class scr_towerUnit : NetworkBehaviour
         {
             for (int i = 0; i < amountPooledProj; i++)
             {
-                if (NetworkManager.Singleton.IsServer)
+                /*if (NetworkManager.Singleton.IsServer)
                 {
                     pooledProj.Add(
-                        scr_gameManager.instance.SpawnNetworkAmmo(
-                            cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0)));
+                        scr_gameManager.instance.SpawnNetworkAmmo(this.GetComponent<NetworkObject>().NetworkObjectId,
+                            cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), this.GetComponent<NetworkObject>().OwnerClientId));
                 }
                 else
-                {
+                {*/
                     scr_gameManager.instance.SpawnNetworkAmmoServerRpc(this.GetComponent<NetworkObject>().NetworkObjectId,
-                        cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0));
-                }
+                        cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), this.GetComponent<NetworkObject>().OwnerClientId);
+                //}
             }
         }
     }
-
-
 
     void Attack()
     {
@@ -58,6 +56,7 @@ public class scr_towerUnit : NetworkBehaviour
         {
             if (!pooledProj[i].activeSelf)
             {
+                Debug.Log("This should show up, no?");
                 pooledProj[i].SetActive(true);
                 pooledProj[i].transform.position = transform.position;
                 pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
@@ -68,7 +67,7 @@ public class scr_towerUnit : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((target == null || !target.gameObject.activeInHierarchy) && other.gameObject.tag.Equals("Hero"))
+        if ((target == null || !target.gameObject.activeInHierarchy) && other.gameObject.tag.Equals("Hero"))
         {
             Debug.Log(other.name + " detected by " + this.cardData.name);
             timer = cooldown;
@@ -79,7 +78,8 @@ public class scr_towerUnit : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(other) && target.gameObject.activeSelf && !IsOwner)
+        if (target != null && target.Equals(other) && target.gameObject.activeSelf &&
+            other.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             if (timer <= cooldown)
             {
@@ -93,7 +93,7 @@ public class scr_towerUnit : NetworkBehaviour
                 timer = 0;
             }
         }
-        else if(target == null || !target.gameObject.activeSelf)
+        else if (target == null || !target.gameObject.activeSelf)
         {
             Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
@@ -108,7 +108,7 @@ public class scr_towerUnit : NetworkBehaviour
         {
             Death();
         }
-        else if(health > cardData.health)
+        else if (health > cardData.health)
         {
             health = cardData.health;
         }

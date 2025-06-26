@@ -55,7 +55,7 @@ public class scr_gameManager : NetworkBehaviour
     }
 
     //Spawn a new network object based on parameters
-    public void SpawnNetworkCard(string cardName, Vector3 pos, Quaternion rot)
+    public void SpawnNetworkCard(string cardName, Vector3 pos, Quaternion rot, ulong clientID)
     {
         //For each card...
         for(int i = 0; i < cardPrefabs.Count; ++i)
@@ -65,21 +65,21 @@ public class scr_gameManager : NetworkBehaviour
             {
                 //Instantiate and spawn the network object of that card's unit value
                 GameObject unit = Instantiate(cardPrefabs[i].unit, pos, rot);
-                unit.GetComponent<NetworkObject>().Spawn(true);
+                unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
             }
         }
     }
 
     //Request the server to...
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnNetworkCardServerRpc(string cardName, Vector3 pos, Quaternion rot)
+    public void SpawnNetworkCardServerRpc(string cardName, Vector3 pos, Quaternion rot, ulong clientID)
     {
         //Spawn a new network obj based on parameters
-        SpawnNetworkCard(cardName, pos, rot);
+        SpawnNetworkCard(cardName, pos, rot, clientID);
     }
 
     //Spawn a new network object based on parameters
-    public GameObject SpawnNetworkAmmo(string ammoName, Vector3 pos, Quaternion rot)
+    public GameObject SpawnNetworkAmmo(ulong objID, string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
     {
         //For each card...
         for (int i = 0; i < ammoPrefabs.Count; ++i)
@@ -90,7 +90,8 @@ public class scr_gameManager : NetworkBehaviour
                 Debug.Log("Spawning ammo");
                 //Instantiate and spawn the network object of that card's unit value
                 GameObject unit = Instantiate(ammoPrefabs[i], pos, rot);
-                unit.GetComponent<NetworkObject>().Spawn(true);
+                unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+                ReturnAmmoClientRpc(objID, unit);
                 return unit;
             }
         }
@@ -99,11 +100,11 @@ public class scr_gameManager : NetworkBehaviour
 
     //Request the server to...
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnNetworkAmmoServerRpc(ulong objID, string ammoName, Vector3 pos, Quaternion rot)
+    public void SpawnNetworkAmmoServerRpc(ulong objID, string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
     {
-        GameObject result = SpawnNetworkAmmo(ammoName, pos, rot);
+        GameObject result = SpawnNetworkAmmo(objID, ammoName, pos, rot, clientID);
 
-        ReturnAmmoClientRpc(objID, result);
+        
 
         /*foreach (NetworkObject i in NetworkManager.Singleton.SpawnManager.SpawnedObjectsList)
         {
@@ -124,7 +125,7 @@ public class scr_gameManager : NetworkBehaviour
         {
             if(obj.NetworkObjectId == tower)
             {
-                Debug.Log("kill me");
+                Debug.Log("tower: " + tower.ToString() + " pools obj: " + ammo.ToString());
                 obj.GetComponent<scr_towerUnit>().pooledProj.Add(ammo);
             }
         }

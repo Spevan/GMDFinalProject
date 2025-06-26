@@ -68,7 +68,8 @@ public class scr_heroUnit : NetworkBehaviour
     private void OnCollisionStay(Collision collision)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(collision) && target.gameObject.activeSelf && !IsOwner)
+        if (target != null && target.Equals(collision) && target.gameObject.activeSelf &&
+            collision.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             if (timer <= cooldown)
             {
@@ -92,7 +93,9 @@ public class scr_heroUnit : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if(!IsOwner && !movementLock && other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower"))
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) &&
+            other.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId &&
+            !movementLock)
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;

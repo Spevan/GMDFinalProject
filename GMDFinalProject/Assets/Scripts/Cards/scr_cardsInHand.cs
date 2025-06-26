@@ -43,11 +43,11 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
 
             if (NetworkManager.Singleton.IsServer)
             {
-                scr_gameManager.instance.SpawnNetworkCard(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+                scr_gameManager.instance.SpawnNetworkCard(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0), player.GetComponent<NetworkObject>().OwnerClientId);
             }
             else
             {
-                scr_gameManager.instance.SpawnNetworkCardServerRpc(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0));
+                scr_gameManager.instance.SpawnNetworkCardServerRpc(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0), player.GetComponent<NetworkObject>().OwnerClientId);
             }
             GUI.RemoveCard(player, gameObject);
             GUI.UpdateHand();
