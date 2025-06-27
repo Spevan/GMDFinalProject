@@ -10,10 +10,10 @@ public class scr_towerUnit : NetworkBehaviour
 
     public float timer, cooldown, power, health;
 
-    public List<GameObject> pooledProj;
+    public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
-    public Collider target;
+    public GameObject target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,24 +30,47 @@ public class scr_towerUnit : NetworkBehaviour
         cooldown = cardData.maxCooldown;
         health = cardData.health;
 
-        pooledProj = new List<GameObject>();
         if (this.GetComponent<NetworkObject>().IsOwner)
         {
             for (int i = 0; i < amountPooledProj; i++)
             {
-                /*if (NetworkManager.Singleton.IsServer)
+                if (NetworkManager.Singleton.IsServer)
                 {
-                    pooledProj.Add(
-                        scr_gameManager.instance.SpawnNetworkAmmo(this.GetComponent<NetworkObject>().NetworkObjectId,
-                            cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), this.GetComponent<NetworkObject>().OwnerClientId));
+                    SpawnNetworkAmmo(cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
+                        this.GetComponent<NetworkObject>().OwnerClientId);
                 }
                 else
-                {*/
-                    scr_gameManager.instance.SpawnNetworkAmmoServerRpc(this.GetComponent<NetworkObject>().NetworkObjectId,
-                        cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), this.GetComponent<NetworkObject>().OwnerClientId);
-                //}
+                {
+                    SpawnNetworkAmmoServerRpc(cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
+                        this.GetComponent<NetworkObject>().OwnerClientId);
+                }
             }
         }
+    }
+
+    //Spawn a new network object based on parameters
+    public void SpawnNetworkAmmo(string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
+    {
+        //Debug.Log("Spawning ammo");
+        //Instantiate and spawn the network object of that card's unit value
+        GameObject unit = Instantiate(cardData.ammunition, pos, rot);
+        unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+        ReturnAmmoClientRpc(unit);
+    }
+
+    //Request the server to...
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnNetworkAmmoServerRpc(string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
+    {
+        SpawnNetworkAmmo(ammoName, pos, rot, clientID);
+    }
+
+    //BULLSHIT!!!!
+    [ClientRpc(RequireOwnership = false)]
+    public void ReturnAmmoClientRpc(NetworkObjectReference ammo)
+    {
+        //Debug.Log("tower: " + this.ToString() + " pools obj: " + ammo.ToString());
+        pooledProj.Add(ammo);
     }
 
     void Attack()
@@ -57,9 +80,9 @@ public class scr_towerUnit : NetworkBehaviour
             if (!pooledProj[i].activeSelf)
             {
                 Debug.Log("This should show up, no?");
+                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
                 pooledProj[i].SetActive(true);
                 pooledProj[i].transform.position = transform.position;
-                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
                 break;
             }
         }
@@ -69,17 +92,17 @@ public class scr_towerUnit : NetworkBehaviour
     {
         if ((target == null || !target.gameObject.activeInHierarchy) && other.gameObject.tag.Equals("Hero"))
         {
-            Debug.Log(other.name + " detected by " + this.cardData.name);
+            //Debug.Log(other.name + " detected by " + this.cardData.name);
             timer = cooldown;
-            target = other;
+            target = other.gameObject;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(other) && target.gameObject.activeSelf &&
-            other.gameObject.GetComponent<NetworkObject>().OwnerClientId != gameObject.GetComponent<NetworkObject>().OwnerClientId)
+        if (target != null && target.Equals(other.gameObject) && other.gameObject.activeSelf &&
+            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             if (timer <= cooldown)
             {
@@ -88,7 +111,7 @@ public class scr_towerUnit : NetworkBehaviour
             else
             {
                 //Set movement lock to true and move towards tower position
-                Debug.Log(this.cardData.name + " is attacking " + other.name);
+                //Debug.Log(this.cardData.name + " is attacking " + other.name);
                 Attack();
                 timer = 0;
             }

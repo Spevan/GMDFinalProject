@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   ammoData: {fileID: 11400000, guid: dcdd7d9df256046488f7524b91d601cc, type: 2}
+  target: {fileID: 0}
 --- !u!114 &8423106330558288027
 MonoBehaviour:
   m_ObjectHideFlags: 0
