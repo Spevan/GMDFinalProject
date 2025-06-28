@@ -31,7 +31,7 @@ public class scr_ammunition : NetworkBehaviour
         }
         else
         {
-            transform.position = Vector3.forward * ammoData.speed * Time.deltaTime;
+            transform.position = transform.position + Vector3.forward * ammoData.speed * Time.deltaTime;
         }
     }
 
@@ -45,24 +45,27 @@ public class scr_ammunition : NetworkBehaviour
         if (target != null && target.Equals(collision.gameObject) && target.gameObject.activeSelf &&
             gameObject.GetComponent<NetworkObject>().OwnerClientId != target.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
-            BulletHitClientRpc();
+            BulletHitClientRpc(target);
         }
     }
 
     [ClientRpc]
-    public void BulletHitClientRpc()
+    public void BulletHitClientRpc(NetworkObjectReference tryTarget)
     {
-        if (target.tag.Equals("Hero") &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != target.GetComponent<NetworkObject>().OwnerClientId)
-        {
-            Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-            target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
-        }
-        else if (target.tag.Equals("Tower") &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != target.GetComponent<NetworkObject>().OwnerClientId)
-        {
-            Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-            target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+        if (tryTarget.TryGet(out NetworkObject target))
+            {
+            if (target.tag.Equals("Hero") &&
+                gameObject.GetComponent<NetworkObject>().OwnerClientId != target.GetComponent<NetworkObject>().OwnerClientId)
+            {
+                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
+                target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
+            }
+            else if (target.tag.Equals("Tower") &&
+                gameObject.GetComponent<NetworkObject>().OwnerClientId != target.GetComponent<NetworkObject>().OwnerClientId)
+            {
+                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
+                target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+            }
         }
         Destroy();
     }

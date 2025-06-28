@@ -158,7 +158,7 @@ MonoBehaviour:
   power: 0
   health: 0
   pooledProj: []
-  amountPooledProj: 20
+  amountPooledProj: 5
   target: {fileID: 0}
 --- !u!114 &9060199011452161778
 MonoBehaviour:
