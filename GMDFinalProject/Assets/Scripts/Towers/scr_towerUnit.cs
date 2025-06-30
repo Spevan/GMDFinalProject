@@ -3,17 +3,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class scr_towerUnit : NetworkBehaviour
+public class scr_towerUnit : scr_unit
 {
-    public scr_tower cardData;
-    public SphereCollider range;
-
-    public float timer, cooldown, power, health;
-
+    //public new override scr_tower cardData;
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
-
-    public GameObject target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -121,24 +115,5 @@ public class scr_towerUnit : NetworkBehaviour
             Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
         }
-    }
-
-    public void ChangeHealth(int delta)
-    {
-        health += delta;
-
-        if (health <= 0)
-        {
-            Death();
-        }
-        else if (health > cardData.health)
-        {
-            health = cardData.health;
-        }
-    }
-
-    void Death()
-    {
-        this.gameObject.SetActive(false);
     }
 }

@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: hero
   m_EditorClassIdentifier: 
   unit: {fileID: 4841726575583476779, guid: 324d4fd6501f588499960ec51c3fbe05, type: 3}
-  costType: 1
-  cost: 1
+  costType: 01000000
+  cost: 01000000
   power: 5
   health: 10
   range: 2
   description: A dummy stupidhead
   maxCooldown: 2
-  status: 0
-  statusAmnt: 0
-  player: {fileID: 0}
+  status: 
+  statusAmnt: 
   speed: 2
   upkeep: 1

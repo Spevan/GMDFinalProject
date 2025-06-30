@@ -2,15 +2,9 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class scr_heroUnit : NetworkBehaviour
+public class scr_heroUnit : scr_unit
 {
-    public scr_hero cardData;
-    public SphereCollider range;
     bool movementLock;
-
-    public float timer, cooldown, power, health;
-
-    public GameObject target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,7 +34,7 @@ public class scr_heroUnit : NetworkBehaviour
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            transform.Translate(Vector3.forward * cardData.speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * cardData..speed * Time.deltaTime);
         }
         else
         {
@@ -105,24 +99,5 @@ public class scr_heroUnit : NetworkBehaviour
             timer = cooldown;
             target = other.gameObject;
         }
-    }
-
-    public void ChangeHealth(int delta)
-    {
-        health += delta;
-
-        if(health <= 0)
-        {
-            Death();
-        }
-        else if(health > cardData.health)
-        {
-            health = cardData.health;
-        }
-    }
-
-    void Death()
-    {
-        this.gameObject.SetActive(false);
     }
 }

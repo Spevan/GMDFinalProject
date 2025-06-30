@@ -13,19 +13,27 @@ public class scr_card : ScriptableObject
         steel
     }
     [SerializeField]
-    public costTypes costType;
-    public int cost, power, health, range;
+    public costTypes[] costType;
+    public int[] cost;
+    public int power, health, range;
     public string description;
     public float maxCooldown;
     [System.Serializable]
     public enum statusTypes
     {
         none,
-        poison,
-        munitions,
-        ironclad
+        swift,
+        frugal,
+        perceptive,
+        strong,
+        fortified,
+        exhausted,
+        expensive,
+        blind,
+        weak,
+        brittle
     }
     [SerializeField]
-    private statusTypes status;
-    public int statusAmnt;
+    private statusTypes[] status;
+    public int[] statusAmnt;
 }
