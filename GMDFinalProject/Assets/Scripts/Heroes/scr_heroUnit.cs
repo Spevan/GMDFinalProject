@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class scr_heroUnit : scr_unit
 {
+    public scr_hero heroData;
+
     bool movementLock;
+    float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        heroData = (scr_hero)cardData;
         //Set movement lock to false and hero position so it sits above ground
         movementLock = false;
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
@@ -21,6 +25,7 @@ public class scr_heroUnit : scr_unit
         power = cardData.power;
         cooldown = cardData.maxCooldown;
         health = cardData.health;
+        speed  = heroData.speed;
     }
 
     // Update is called once per frame
@@ -34,12 +39,12 @@ public class scr_heroUnit : scr_unit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            transform.Translate(Vector3.forward * cardData..speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(
-                target.transform.position.x, transform.position.y, target.transform.position.z), cardData.speed * Time.deltaTime);
+                target.transform.position.x, transform.position.y, target.transform.position.z), speed * Time.deltaTime);
         }
     }
 

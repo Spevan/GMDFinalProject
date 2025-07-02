@@ -9,9 +9,13 @@ public class scr_towerUnit : scr_unit
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
+    public scr_tower towerData;
+    public GameObject ammunition;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        towerData = (scr_tower)cardData;
         //Set tower position so it sits above ground
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
 
@@ -23,6 +27,7 @@ public class scr_towerUnit : scr_unit
         power = cardData.power;
         cooldown = cardData.maxCooldown;
         health = cardData.health;
+        ammunition = towerData.ammunition;
 
         if (this.GetComponent<NetworkObject>().IsOwner)
         {
@@ -30,12 +35,12 @@ public class scr_towerUnit : scr_unit
             {
                 if (NetworkManager.Singleton.IsServer)
                 {
-                    SpawnNetworkAmmo(cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
+                    SpawnNetworkAmmo(ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
                         this.GetComponent<NetworkObject>().OwnerClientId);
                 }
                 else
                 {
-                    SpawnNetworkAmmoServerRpc(cardData.ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
+                    SpawnNetworkAmmoServerRpc(ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
                         this.GetComponent<NetworkObject>().OwnerClientId);
                 }
             }
@@ -47,7 +52,7 @@ public class scr_towerUnit : scr_unit
     {
         //Debug.Log("Spawning ammo");
         //Instantiate and spawn the network object of that card's unit value
-        GameObject unit = Instantiate(cardData.ammunition, pos, rot);
+        GameObject unit = Instantiate(ammunition, pos, rot);
         unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
         ReturnAmmoClientRpc(unit);
     }

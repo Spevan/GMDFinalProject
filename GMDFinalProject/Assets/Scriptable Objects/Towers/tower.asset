@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: tower
   m_EditorClassIdentifier: 
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
-  costType: 2
-  cost: 3
+  costType: 01000000
+  cost: 03000000
   power: 2
   health: 10
   range: 5
   description: A silly little tower
   maxCooldown: 1
-  status: 0
-  statusAmnt: 0
+  status: 
+  statusAmnt: 
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

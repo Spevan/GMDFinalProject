@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 
 public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
 {
-    public TextMeshProUGUI cost, health;
+    public TextMeshProUGUI[] cost;
+    public TextMeshProUGUI health;
     public scr_card cardData;
     public scr_guiManager GUI;
     public scr_player player;
@@ -16,7 +17,10 @@ public class scr_cardsInHand : MonoBehaviour, IDragHandler, IDropHandler
     void Start()
     {
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
-        cost.text = cardData.cost.ToString();
+        for(int i = 0; i < cardData.cost.Length; i++)
+        {
+            cost[i].text = cardData.cost[i].ToString();
+        }
         health.text = cardData.health.ToString();
         playerCam = player.GetComponent<Camera>();
     }

@@ -7,7 +7,8 @@ using Unity.Netcode;
 
 public class scr_player : NetworkBehaviour
 {
-    public NetworkVariable<int> water, steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> water = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner),
+        steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public List<scr_card> Deck;
     public GameObject ProductionPlant;
     public Camera cam;
@@ -29,8 +30,8 @@ public class scr_player : NetworkBehaviour
         //gameObject.AddComponent<Camera>();
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
         GUI.ChangeCardCount(Deck.Count);
-        water.Value = 10;
-        GUI.UpdateWater(water.Value);
+        ChangeWater(10);
+        //GUI.UpdateWater(water.Value);
         //foreach (scr_card card in Deck)
         {
             //card.player = this;
@@ -77,13 +78,27 @@ public class scr_player : NetworkBehaviour
         {
             if (card.costType[i].Equals("water"))
             {
-                water.Value -= card.cost[i];
-                GUI.UpdateWater(water.Value);
+                ChangeWater(card.cost[i]);
             }
             else if (card.costType[i].Equals("steel"))
             {
                 steel.Value -= card.cost[i];
             }
         }
+    }
+
+    public void ChangeWater(int waterDelta)
+    {
+        water.Value += waterDelta;
+        GUI.UpdateWater(water.Value);
+        Debug.Log("added " + waterDelta + " to water count");
+    }
+
+    [ServerRpc]
+    public void ChangeWaterServerRpc(int waterDelta)
+    {
+        ChangeWater(waterDelta);
+        GUI.UpdateWater(water.Value);
+        Debug.Log("added " + waterDelta + " to water count");
     }
 }
