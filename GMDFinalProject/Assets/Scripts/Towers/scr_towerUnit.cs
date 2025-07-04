@@ -100,7 +100,7 @@ public class scr_towerUnit : scr_unit
     private void OnTriggerStay(Collider other)
     {
         //If the range collides with a tower
-        if (target != null && target.Equals(other.gameObject) && other.gameObject.activeSelf &&
+        if (target != null && target.Equals(other.gameObject) && !other.isTrigger && other.gameObject.activeSelf &&
             gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             if (timer <= cooldown)

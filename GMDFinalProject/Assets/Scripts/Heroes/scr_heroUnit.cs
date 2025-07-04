@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class scr_heroUnit : scr_unit
 {
-    public scr_hero heroData;
+    scr_hero heroData;
 
-    bool movementLock;
-    float speed;
+    public bool movementLock, ranged;
+    public float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         heroData = (scr_hero)cardData;
         //Set movement lock to false and hero position so it sits above ground
@@ -29,19 +29,19 @@ public class scr_heroUnit : scr_unit
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         Move(); //Call move function every frame
     }
 
-    void Move()
+    public void Move()
     {
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-        else
+        else if(movementLock && !ranged)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(
                 target.transform.position.x, transform.position.y, target.transform.position.z), speed * Time.deltaTime);
@@ -52,8 +52,7 @@ public class scr_heroUnit : scr_unit
     {
         Debug.Log(collision.gameObject.name);
         //If the range collides with a tower
-        if (target != null && target.Equals(collision.gameObject) && collision.gameObject.activeSelf &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != collision.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+        if (target != null && target.Equals(collision.gameObject))
         {
             if (timer <= cooldown)
             {
@@ -62,7 +61,14 @@ public class scr_heroUnit : scr_unit
             else
             {
                 //Set movement lock to true and move towards tower position
-                AttackClientRpc();
+                if (NetworkManager.Singleton.IsServer)
+                {
+                    AttackClientRpc();
+                }
+                else
+                {
+                    AttackServerRpc();
+                }    
                 timer = 0;
             }
         }
@@ -72,6 +78,12 @@ public class scr_heroUnit : scr_unit
             movementLock = false;
             target = null;
         }
+    }
+
+    [ServerRpc]
+    public void AttackServerRpc()
+    {
+        AttackClientRpc();
     }
 
     [ClientRpc]
@@ -95,9 +107,8 @@ public class scr_heroUnit : scr_unit
     private void OnTriggerEnter(Collider other)
     {
         //If the range collides with a tower
-        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId &&
-            !movementLock)
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) && !other.isTrigger && other.gameObject.activeSelf &&
+            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !movementLock)
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;

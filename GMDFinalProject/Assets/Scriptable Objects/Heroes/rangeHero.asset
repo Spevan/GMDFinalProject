@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
-  m_Name: hero 1
+  m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
+  m_Name: rangeHero
   m_EditorClassIdentifier: 
   unit: {fileID: 4841726575583476779, guid: b8c9a06d64c1fcd4897fb79331803a47, type: 3}
   costType: 01000000
   cost: 02000000
   power: 10
   health: 5
-  range: 3
-  description: A dummy stupidhead
+  range: 5
+  description: A dummy stupidhead (with range).
   maxCooldown: 2
   status: 
   statusAmnt: 
   speed: 1
   ranged: 1
+  ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

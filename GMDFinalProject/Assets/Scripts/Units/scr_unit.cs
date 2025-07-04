@@ -23,8 +23,6 @@ public class scr_unit : NetworkBehaviour
         }
     }
 
-    
-
     void Death()
     {
         this.gameObject.SetActive(false);
