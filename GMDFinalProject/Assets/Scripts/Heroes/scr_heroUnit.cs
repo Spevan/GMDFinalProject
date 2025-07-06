@@ -10,21 +10,14 @@ public class scr_heroUnit : scr_unit
     public float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public virtual void Start()
+    public override void Start()
     {
         heroData = (scr_hero)cardData;
         //Set movement lock to false and hero position so it sits above ground
         movementLock = false;
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
 
-        //Setting range component, size and trigger status
-        range = this.AddComponent<SphereCollider>();
-        range.radius = cardData.range;
-        range.isTrigger = true;
-
-        power = cardData.power;
-        cooldown = cardData.maxCooldown;
-        health = cardData.health;
+        base.Start();
         speed  = heroData.speed;
     }
 
@@ -83,6 +76,7 @@ public class scr_heroUnit : scr_unit
     [ServerRpc]
     public void AttackServerRpc()
     {
+        Debug.Log("bullshit");
         AttackClientRpc();
     }
 

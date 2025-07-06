@@ -9,11 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c478b536f809c3e4d847921b8ca1eb90, type: 3}
-  m_Name: ammo
+  m_Script: {fileID: 11500000, guid: fc4d5607a3ba9ea44812a726de54a0e9, type: 3}
+  m_Name: generator
   m_EditorClassIdentifier: 
+  unit: {fileID: 6070432198559468909, guid: 82ab0bf7daa8f934890397c5e0d22ce7, type: 3}
+  costType: 
+  cost: 
+  power: 1
+  health: 10
+  range: 0
   description: 
-  speed: 2
-  damage: 2
-  splashDmg: 0
-  splashRng: {x: 0, y: 0}
+  maxCooldown: 5
+  status: 
+  statusAmnt: 
+  typeGenerated: 0

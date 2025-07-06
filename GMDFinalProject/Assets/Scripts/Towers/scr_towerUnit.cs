@@ -9,24 +9,17 @@ public class scr_towerUnit : scr_unit
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
-    public scr_tower towerData;
+    scr_tower towerData;
     public GameObject ammunition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
         towerData = (scr_tower)cardData;
         //Set tower position so it sits above ground
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
 
-        //Setting range component, size and trigger status
-        range = this.AddComponent<SphereCollider>();
-        range.radius = cardData.range;
-        range.isTrigger = true;
-
-        power = cardData.power;
-        cooldown = cardData.maxCooldown;
-        health = cardData.health;
+        base.Start();
         ammunition = towerData.ammunition;
 
         if (this.GetComponent<NetworkObject>().IsOwner)
@@ -78,7 +71,7 @@ public class scr_towerUnit : scr_unit
         {
             if (!pooledProj[i].activeSelf)
             {
-                Debug.Log("This should show up, no?");
+                //Debug.Log("This should show up, no?");
                 pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
                 pooledProj[i].transform.position = transform.position;
                 pooledProj[i].SetActive(true);
@@ -117,7 +110,7 @@ public class scr_towerUnit : scr_unit
         }
         else if (target == null || !target.gameObject.activeSelf)
         {
-            Debug.Log(this.cardData.name + " has terminated " + other.name);
+            //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
         }
     }

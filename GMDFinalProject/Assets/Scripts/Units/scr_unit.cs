@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class scr_unit : NetworkBehaviour
@@ -8,6 +9,17 @@ public class scr_unit : NetworkBehaviour
     public SphereCollider range;
     public float timer, cooldown, power, health;
     public GameObject target;
+
+    public virtual void Start()
+    {
+        range = this.AddComponent<SphereCollider>();
+        range.radius = cardData.range;
+        range.isTrigger = true;
+
+        power = cardData.power;
+        cooldown = cardData.maxCooldown;
+        health = cardData.health;
+    }
 
     public void ChangeHealth(int delta)
     {

@@ -24,6 +24,7 @@ public class scr_ammunition : NetworkBehaviour
     {
         if (target != null && target.activeSelf)
         {
+            Debug.Log("Tracking " +  target.name);
             Vector3 direction = (target.transform.position - transform.position).normalized;
 
             transform.position = transform.position + direction * ammoData.speed * Time.deltaTime;
@@ -32,6 +33,7 @@ public class scr_ammunition : NetworkBehaviour
         else
         {
             transform.position = transform.position + gameObject.transform.forward * ammoData.speed * Time.deltaTime;
+            Debug.Log("Target lost.");
         }
     }
 
@@ -40,33 +42,11 @@ public class scr_ammunition : NetworkBehaviour
         target = newTarget;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (target != null && target.Equals(collision.gameObject) && collision.gameObject.activeSelf &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != collision.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+        if (!other.isTrigger && 
+            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
-            if(NetworkManager.Singleton.IsServer)
-            {
-                BulletHitClientRpc(target);
-            }
-            else
-            {
-                BulletHitServerRpc(target);
-            }
-        }
-    }
-
-    [ServerRpc]
-    public void BulletHitServerRpc(NetworkObjectReference tryTarget)
-    {
-        BulletHitClientRpc(tryTarget);
-    }
-
-    [ClientRpc]
-    public void BulletHitClientRpc(NetworkObjectReference tryTarget)
-    {
-        if (tryTarget.TryGet(out NetworkObject target))
-            {
             if (target.tag.Equals("Hero"))
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
@@ -77,12 +57,13 @@ public class scr_ammunition : NetworkBehaviour
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
             }
+            Destroy();
         }
-        Destroy();
     }
 
     private void Destroy()
     {
+        target = null;
         this.gameObject.SetActive(false);
     }
 }

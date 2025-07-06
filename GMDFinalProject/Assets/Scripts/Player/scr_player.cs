@@ -7,6 +7,8 @@ using Unity.Netcode;
 
 public class scr_player : NetworkBehaviour
 {
+    public static scr_player instance { get; private set; }
+
     public NetworkVariable<int> water = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner),
         steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public List<scr_card> Deck;
@@ -26,6 +28,17 @@ public class scr_player : NetworkBehaviour
         {
             cam.enabled = false;
             return;
+        }
+        else
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
         //gameObject.AddComponent<Camera>();
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
@@ -76,11 +89,11 @@ public class scr_player : NetworkBehaviour
     {
         for (int i = 0; i < card.costType.Length; i++)
         {
-            if (card.costType[i].Equals("water"))
+            if (card.costType[i] == scr_card.costTypes.water)
             {
-                ChangeWater(card.cost[i]);
+                ChangeWater(-card.cost[i]);
             }
-            else if (card.costType[i].Equals("steel"))
+            else if (card.costType[i] == scr_card.costTypes.steel)
             {
                 steel.Value -= card.cost[i];
             }
