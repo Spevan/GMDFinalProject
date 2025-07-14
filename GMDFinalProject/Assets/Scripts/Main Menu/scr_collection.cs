@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class scr_collection : MonoBehaviour
 {
-    public GameObject cardPrefab, grid;
+    public GameObject prefab, grid;
 
-    private void Start()
+    public virtual void Start()
     {
+
         foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
         {
-            GameObject temp = Instantiate(cardPrefab, grid.transform);
+            GameObject temp = Instantiate(prefab, grid.transform);
             temp.GetComponent<scr_cardsInMenu>().cardData = card;
         }
     }

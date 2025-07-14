@@ -1725,7 +1725,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 449.5, y: -179.14781}
-  m_SizeDelta: {x: 899, y: 0}
+  m_SizeDelta: {x: 899, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538231000
 MonoBehaviour:
@@ -1761,7 +1761,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 85, y: 100}
+  m_CellSize: {x: 130, y: 100}
   m_Spacing: {x: 14, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -2021,10 +2021,10 @@ RectTransform:
   - {fileID: 1135114652}
   m_Father: {fileID: 538230999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -60}
+  m_SizeDelta: {x: 130, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &610246005
 MonoBehaviour:
@@ -2069,7 +2069,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 610246006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1119959831}
+        m_TargetAssemblyTypeName: scr_deckCollection, Assembly-CSharp
+        m_MethodName: CreateDeck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &610246006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8d88e74336eee49b463644506af903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
+  prefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
   grid: {fileID: 1997286087}
 --- !u!114 &760520210
 MonoBehaviour:
@@ -2950,7 +2962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1109780083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2986,8 +2998,8 @@ GameObject:
   - component: {fileID: 1119959830}
   - component: {fileID: 1119959829}
   - component: {fileID: 1119959828}
-  - component: {fileID: 1119959827}
   - component: {fileID: 1119959826}
+  - component: {fileID: 1119959831}
   m_Layer: 5
   m_Name: gui_collection
   m_TagString: Untagged
@@ -3029,20 +3041,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
---- !u!114 &1119959827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119959824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8d88e74336eee49b463644506af903, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
-  grid: {fileID: 538230998}
 --- !u!114 &1119959828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,6 +3109,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119959824}
   m_CullTransparentMesh: 1
+--- !u!114 &1119959831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119959824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5bbded1012771408a049ec29d5a85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7222511150195318843, guid: 4acb29dda5f11be42a6189cda60af928, type: 3}
+  grid: {fileID: 538230998}
 --- !u!1 &1135114651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3930,7 +3942,7 @@ RectTransform:
   m_Father: {fileID: 1987986985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5069,7 +5081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1966813032
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5491,7 +5503,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1488446707}
   m_HandleRect: {fileID: 1488446706}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

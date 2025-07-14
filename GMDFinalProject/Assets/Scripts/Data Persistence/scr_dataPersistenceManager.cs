@@ -85,4 +85,9 @@ public class scr_dataPersistenceManager : MonoBehaviour
     {
         playerData.cards.Add(card);
     }
+
+    public void AddDeckToCollection(scr_deck deck)
+    {
+        playerData.decks.Add(deck);
+    }
 }
