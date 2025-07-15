@@ -1,27 +1,21 @@
-using TMPro;
-using TMPro.EditorUtilities;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class scr_deckEdit : MonoBehaviour
 {
-    public scr_deck deckData;
-    public GameObject nameField;
-    string path = "Assets/Scriptable Objects/Decks/";
+    bool isVisible = true;
+    Vector3 moveDistance = new Vector3(160, 0, 0);
 
-    private void Start()
+    public void ToggleViewList()
     {
-        if(nameField != null)
+        if(isVisible)
         {
-            nameField.GetComponent<TMP_InputField>().onEndEdit.AddListener(delegate { EditDeckName(nameField.GetComponent<TMP_InputField>().text); });
+            transform.Translate(moveDistance);
+            isVisible = false;
         }
-    }
-
-    public void EditDeckName(string name)
-    {
-        AssetDatabase.RenameAsset(path + "temp.asset", name + ".asset");
-        AssetDatabase.Refresh();
-        deckData.name = name;
+        else
+        {
+            transform.Translate(-moveDistance);
+            isVisible = true;
+        }
     }
 }
