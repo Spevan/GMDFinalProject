@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 
 public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
 {
-    
-    public scr_guiManager GUI;
     public scr_player player;
     public Camera playerCam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,14 +14,6 @@ public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
     {
         base.Start();
         playerCam = player.GetComponent<Camera>();
-    }
-
-    void IDragHandler.OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
-    {
-        Vector2 pos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(GUI.gameObject.GetComponent<Canvas>().transform as RectTransform,
-            Input.mousePosition, GUI.gameObject.GetComponent<Canvas>().worldCamera, out pos);
-        transform.position = GUI.gameObject.GetComponent<Canvas>().transform.TransformPoint(pos);
     }
 
     void IDropHandler.OnDrop(UnityEngine.EventSystems.PointerEventData eventData)
@@ -46,13 +36,13 @@ public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
             {
                 scr_gameManager.instance.SpawnNetworkCardServerRpc(cardData.name, hit.point, new Quaternion(0, player.transform.rotation.y, 0, 0), player.GetComponent<NetworkObject>().OwnerClientId);
             }
-            GUI.RemoveCard(player, gameObject);
-            GUI.UpdateHand();
+            GUI.GetComponent<scr_guiManager>().RemoveCard(player, gameObject);
+            GUI.GetComponent<scr_guiManager>().UpdateHand();
             Destroy(gameObject);
         }
         else
         {
-            GUI.UpdateHand();
+            GUI.GetComponent<scr_guiManager>().UpdateHand();
         }
     }
 }

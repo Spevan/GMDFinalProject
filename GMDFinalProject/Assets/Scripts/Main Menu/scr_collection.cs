@@ -11,6 +11,7 @@ public class scr_collection : MonoBehaviour
         {
             GameObject temp = Instantiate(prefab, grid.transform);
             temp.GetComponent<scr_cardsInMenu>().cardData = card;
+            temp.GetComponent<scr_cardsInMenu>().GUI = GetComponentInParent<Canvas>().gameObject;
         }
     }
 

@@ -55,7 +55,7 @@ public class scr_guiManager : MonoBehaviour
         scr_cardsInHand drawnCard = cardsInHand[cardsInHand.Count - 1].GetComponent<scr_cardsInHand>();
         drawnCard.cardData = nextCard;
         drawnCard.player = thisPlayer;
-        drawnCard.GUI = this;
+        drawnCard.GUI = this.gameObject;
         UpdateHand();
     }
 

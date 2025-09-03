@@ -38,7 +38,8 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        if (nameField.GetComponent<TMP_InputField>() == null)
+        TMP_InputField editName = nameField.GetComponent<TMP_InputField>();
+        if (editName == null || !editName.isActiveAndEnabled)
         {
             options.SetActive(true);
         }

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class scr_cardsInMenu : MonoBehaviour, IDragHandler, IDropHandler
 {
+    public GameObject GUI;
     public TextMeshProUGUI[] cost;
     public TextMeshProUGUI health;
     public scr_card cardData;
@@ -18,9 +19,12 @@ public class scr_cardsInMenu : MonoBehaviour, IDragHandler, IDropHandler
         health.text = cardData.health.ToString();
     }
 
-    void IDragHandler.OnDrag(PointerEventData eventData)
+    void IDragHandler.OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
     {
-
+        Vector2 pos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(GUI.GetComponent<Canvas>().transform as RectTransform,
+            Input.mousePosition, GUI.GetComponent<Canvas>().worldCamera, out pos);
+        transform.position = GUI.GetComponent<Canvas>().transform.TransformPoint(pos);
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
