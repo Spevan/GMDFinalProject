@@ -29,6 +29,15 @@ public class scr_cardsInMenu : MonoBehaviour, IDragHandler, IDropHandler
 
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
+        Ray ray = GUI.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Debug.Log(hit.point);
+            Debug.DrawRay(Input.mousePosition, GUI.GetComponentInChildren<Camera>().transform.forward, Color.red, Mathf.Infinity);
+            Debug.Log("Card played: " + cardData.name);
 
+            //Use raycast to detect collision onto deck builder
+        }
     }
 }

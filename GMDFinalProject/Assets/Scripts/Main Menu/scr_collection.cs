@@ -6,7 +6,6 @@ public class scr_collection : MonoBehaviour
 
     public virtual void Start()
     {
-
         foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
         {
             GameObject temp = Instantiate(prefab, grid.transform);
