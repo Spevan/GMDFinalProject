@@ -11,7 +11,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
     [SerializeField] private bool useEncryption;
     public static scr_dataPersistenceManager instance { get; private set; }
 
-    public scr_playerData playerData;
+    [SerializeField] public scr_playerData playerData;
     private List<scr_IDataPersistence> dataPersistenceObjects;
     private scr_fileDataHandler dataHandler;
 
@@ -55,6 +55,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
             dataPersistenceObj.LoadData(playerData);
         }
 
+        SaveGame();
         Debug.Log("Loaded Inventory");
     }
 
@@ -70,10 +71,10 @@ public class scr_dataPersistenceManager : MonoBehaviour
         dataHandler.Save(playerData);
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
         SaveGame();
-    }
+    }*/
 
     private List<scr_IDataPersistence> FindAllDataPersistenceObjects()
     {
@@ -84,10 +85,12 @@ public class scr_dataPersistenceManager : MonoBehaviour
     public void AddCardToCollection(scr_card card)
     {
         playerData.cards.Add(card);
+        SaveGame();
     }
 
     public void AddDeckToCollection(scr_deck deck)
     {
         playerData.decks.Add(deck);
+        SaveGame();
     }
 }

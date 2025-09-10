@@ -10,10 +10,17 @@ public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
     public scr_player player;
     public Camera playerCam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         playerCam = player.GetComponent<Camera>();
+    }
+
+    void IDragHandler.OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
+    {
+        Vector2 pos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(playerCam.GetComponentInChildren<Canvas>().transform as RectTransform,
+            Input.mousePosition, playerCam.GetComponentInChildren<Canvas>().worldCamera, out pos);
+        transform.position =playerCam.GetComponentInChildren<Canvas>().transform.TransformPoint(pos);
     }
 
     void IDropHandler.OnDrop(UnityEngine.EventSystems.PointerEventData eventData)

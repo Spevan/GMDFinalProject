@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class scr_deckCollection : scr_collection
     string path = "Assets/Scriptable Objects/Decks/";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public override void Start()
+    public void OnEnable()
     {
         foreach (scr_deck deck in scr_dataPersistenceManager.instance.playerData.decks)
         {

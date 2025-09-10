@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class scr_collection : MonoBehaviour
 {
     public GameObject prefab, grid;
 
-    public virtual void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void OnEnable()
     {
+        grid.GetComponent<RectTransform>().localPosition = new Vector3(0, grid.GetComponent<RectTransform>().rect.yMin, 0);
+
         foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
         {
             GameObject temp = Instantiate(prefab, grid.transform);
@@ -14,15 +18,14 @@ public class scr_collection : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void OnEnable()
+    private void OnDisable()
     {
-        grid.GetComponent<RectTransform>().localPosition = new Vector3(0, grid.GetComponent<RectTransform>().rect.yMin, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach(Transform child in grid.transform)
+        {
+            if (!child.tag.Equals("PleaseDontDestroy"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 }

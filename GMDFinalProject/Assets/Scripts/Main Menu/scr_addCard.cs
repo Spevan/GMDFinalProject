@@ -7,6 +7,5 @@ public class scr_addCard : MonoBehaviour
     public void AddCard()
     {
         scr_dataPersistenceManager.instance.AddCardToCollection(card);
-        scr_dataPersistenceManager.instance.SaveGame();
     }
 }
