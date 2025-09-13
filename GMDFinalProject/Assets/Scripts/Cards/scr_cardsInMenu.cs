@@ -20,6 +20,8 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             temp.transform.localPosition = this.transform.localPosition + new Vector3(-160, 0, 5);
         }
+
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -28,5 +30,15 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             Destroy(temp);
         }
+    }
+
+    public void AddCard()
+    {
+
+    }
+
+    public void RemoveCard()
+    {
+
     }
 }

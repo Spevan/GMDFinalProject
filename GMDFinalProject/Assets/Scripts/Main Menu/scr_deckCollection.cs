@@ -10,9 +10,12 @@ public class scr_deckCollection : scr_collection
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
-        foreach (scr_deck deck in scr_dataPersistenceManager.instance.playerData.decks)
+        if (scr_dataPersistenceManager.instance.playerData != null)
         {
-            CreateDeck(deck);
+            foreach (scr_deck deck in scr_dataPersistenceManager.instance.playerData.decks)
+            {
+                CreateDeck(deck);
+            }
         }
     }
 
