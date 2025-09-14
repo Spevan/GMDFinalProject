@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6edf8a5c1d064c1448f70bde1c8d3f56, type: 3}
-  m_Name: John
+  m_Name: another new deck
   m_EditorClassIdentifier: 
-  name: John
+  name: another new deck
   cardsInDeck:
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
-  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
-  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
-  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  - {fileID: 11400000, guid: 032ebe8b700d0224081eb3934eb5a510, type: 2}
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}

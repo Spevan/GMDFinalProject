@@ -10,13 +10,16 @@ public class scr_collection : MonoBehaviour
     {
         grid.GetComponent<RectTransform>().localPosition = new Vector3(0, grid.GetComponent<RectTransform>().rect.yMin, 0);
 
-        foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
+        if (scr_dataPersistenceManager.instance.playerData.cards != null)
         {
-            GameObject temp = Instantiate(prefab, grid.transform);
-            scr_cardsInMenu tempCard = temp.GetComponent<scr_cardsInMenu>();
-            tempCard.cardData = card;
-            tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
-            tempCard.deckList = deckList;
+            foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
+            {
+                GameObject temp = Instantiate(prefab, grid.transform);
+                scr_cardsInMenu tempCard = temp.GetComponent<scr_cardsInMenu>();
+                tempCard.cardData = card;
+                tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
+                tempCard.deckList = deckList;
+            }
         }
     }
 

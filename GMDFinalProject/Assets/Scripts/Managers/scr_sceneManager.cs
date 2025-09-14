@@ -4,9 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class scr_sceneManager : MonoBehaviour
 {
-    public void ChangeScene(string sceneName)
+    public void ChangeSceneNetwork(string sceneName)
     {
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         //SceneManager.LoadScene(sceneName);
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

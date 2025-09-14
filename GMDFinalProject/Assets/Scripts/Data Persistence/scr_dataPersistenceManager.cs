@@ -84,6 +84,10 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     public void AddCardToCollection(scr_card card)
     {
+        if (playerData.cards == null)
+        {
+            playerData.cards = new List<scr_card>();
+        }
         playerData.cards.Add(card);
         SaveGame();
     }

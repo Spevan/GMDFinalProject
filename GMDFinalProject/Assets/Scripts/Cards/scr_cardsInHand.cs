@@ -5,7 +5,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
+public class scr_cardsInHand : scr_cards, IDragHandler, IDropHandler
 {
     public scr_player player;
     public Camera playerCam;
@@ -20,7 +20,7 @@ public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
         Vector2 pos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(playerCam.GetComponentInChildren<Canvas>().transform as RectTransform,
             Input.mousePosition, playerCam.GetComponentInChildren<Canvas>().worldCamera, out pos);
-        transform.position =playerCam.GetComponentInChildren<Canvas>().transform.TransformPoint(pos);
+        transform.position = playerCam.GetComponentInChildren<Canvas>().transform.TransformPoint(pos);
     }
 
     void IDropHandler.OnDrop(UnityEngine.EventSystems.PointerEventData eventData)
@@ -51,5 +51,6 @@ public class scr_cardsInHand : scr_cardsInMenu, IDragHandler, IDropHandler
         {
             GUI.GetComponent<scr_guiManager>().UpdateHand();
         }
+        base.OnPointerExit(eventData);
     }
 }

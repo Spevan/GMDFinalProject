@@ -1,14 +1,15 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class scr_cardsInMenu : scr_cards
 {
     scr_mainMenuManager menuManager; 
-    public GameObject GUI, details, temp, deckEditBtns, deckList;
-    public scr_card cardData;
+    public GameObject deckEditBtns, deckList;
+
     string deckPath = "Assets/Scriptable Objects/Decks/";
 
     private void Start()
@@ -16,11 +17,11 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
         menuManager = GameObject.Find("gui_mainMenuButtons").GetComponent<scr_mainMenuManager>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerEnter(PointerEventData eventData)
     {
         temp = Instantiate(details, GUI.transform);
         temp.GetComponent<scr_cardDetails>().cardData = cardData;
-        if(this.transform.localPosition.x < (GUI.GetComponentInChildren<Camera>().scaledPixelWidth / 2))
+        if (this.transform.localPosition.x < (GUI.GetComponentInChildren<Camera>().scaledPixelWidth / 2))
         {
             temp.transform.localPosition = this.transform.localPosition + new Vector3(160, 0, 5);
         }
@@ -29,7 +30,7 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
             temp.transform.localPosition = this.transform.localPosition + new Vector3(-160, 0, 5);
         }
 
-        if(menuManager.deckEditMode == true)
+        if (menuManager.deckEditMode == true)
         {
             deckEditBtns.SetActive(true);
         }
@@ -39,14 +40,11 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
-        if(temp != null)
-        {
-            Destroy(temp);
-            deckEditBtns.SetActive(false);
-        }
-    }
+        base.OnPointerExit(eventData);
+        deckEditBtns.SetActive(false);
+    }    
 
     public void AddCard()
     {
