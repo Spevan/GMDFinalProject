@@ -10,7 +10,7 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     public scr_mainMenuManager menuManager;
     public scr_deck deckData;
-    public GameObject nameField, options, editList;
+    public GameObject nameField, options, deckList;
     string path = "Assets/Scriptable Objects/Decks/";
 
     private void Start()
@@ -30,8 +30,19 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void EditDeckName(string name)
     {
         AssetDatabase.RenameAsset(path + "temp.asset", name + ".asset");
-        deckData.name = name;
-        AssetDatabase.Refresh();
+        scr_deck newDeck = AssetDatabase.LoadAssetAtPath<scr_deck>(path + name + ".asset");
+
+        if( newDeck != null )
+        {
+            newDeck.name = name;
+            EditorUtility.SetDirty(newDeck);
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            Debug.Log(name + " could not be found.");
+        }
+
         nameField.GetComponent<Image>().enabled = false;
         nameField.GetComponent<TMP_InputField>().enabled = false;
     }
@@ -53,7 +64,8 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void EditDeckCards()
     {
         menuManager.LockMenu();
-        editList.SetActive(true);
+        deckList.GetComponent<scr_deckEdit>().SelectDeck(deckData);
+        deckList.SetActive(true);
     }
 
     public void DeleteDeck()

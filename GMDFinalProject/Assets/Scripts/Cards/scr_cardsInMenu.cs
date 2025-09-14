@@ -1,12 +1,20 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject GUI, details, temp;
+    scr_mainMenuManager menuManager; 
+    public GameObject GUI, details, temp, deckEditBtns, deckList;
     public scr_card cardData;
+    string deckPath = "Assets/Scriptable Objects/Decks/";
+
+    private void Start()
+    {
+        menuManager = GameObject.Find("gui_mainMenuButtons").GetComponent<scr_mainMenuManager>();
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -21,7 +29,14 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
             temp.transform.localPosition = this.transform.localPosition + new Vector3(-160, 0, 5);
         }
 
-
+        if(menuManager.deckEditMode == true)
+        {
+            deckEditBtns.SetActive(true);
+        }
+        else
+        {
+            deckEditBtns.SetActive(false);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -29,16 +44,35 @@ public class scr_cardsInMenu : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if(temp != null)
         {
             Destroy(temp);
+            deckEditBtns.SetActive(false);
         }
     }
 
     public void AddCard()
     {
-
+        scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
+        scr_deck tempDeck = AssetDatabase.LoadAssetAtPath<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
+        if (tempDeck != null)
+        {
+            tempDeck.cardsInDeck.Add(cardData);
+            EditorUtility.SetDirty(tempDeck);
+            AssetDatabase.SaveAssets();
+            editList.HideDeck();
+            editList.DisplayDeck();
+        }
     }
 
     public void RemoveCard()
     {
-
+        scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
+        scr_deck tempDeck = AssetDatabase.LoadAssetAtPath<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
+        if (tempDeck != null)
+        {
+            tempDeck.cardsInDeck.Remove(cardData);
+            EditorUtility.SetDirty(tempDeck);
+            AssetDatabase.SaveAssets();
+            editList.HideDeck();
+            editList.DisplayDeck();
+        }
     }
 }

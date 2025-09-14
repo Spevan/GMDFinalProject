@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class scr_collection : MonoBehaviour
 {
-    public GameObject prefab, grid;
+    public GameObject prefab, grid, deckList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
@@ -13,8 +13,10 @@ public class scr_collection : MonoBehaviour
         foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.cards)
         {
             GameObject temp = Instantiate(prefab, grid.transform);
-            temp.GetComponent<scr_cardsInMenu>().cardData = card;
-            temp.GetComponent<scr_cardsInMenu>().GUI = GetComponentInParent<Canvas>().gameObject;
+            scr_cardsInMenu tempCard = temp.GetComponent<scr_cardsInMenu>();
+            tempCard.cardData = card;
+            tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
+            tempCard.deckList = deckList;
         }
     }
 

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class scr_deckCollection : scr_collection
 {
-    public GameObject newDeck, editList;
+    public GameObject newDeck;
     string path = "Assets/Scriptable Objects/Decks/";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
-        if (scr_dataPersistenceManager.instance.playerData != null)
+        if (scr_dataPersistenceManager.instance.playerData.decks != null)
         {
             foreach (scr_deck deck in scr_dataPersistenceManager.instance.playerData.decks)
             {
@@ -25,10 +25,10 @@ public class scr_deckCollection : scr_collection
 
         ScriptableObject temp = ScriptableObject.CreateInstance(typeof(scr_deck));
         AssetDatabase.CreateAsset(temp, path + "temp.asset");
-        AssetDatabase.Refresh();
+        AssetDatabase.SaveAssets();
 
         tempObj.GetComponent<scr_deckSelect>().deckData = (scr_deck)temp;
-        tempObj.GetComponent<scr_deckSelect>().editList = editList;
+        tempObj.GetComponent<scr_deckSelect>().deckList = deckList;
         scr_dataPersistenceManager.instance.AddDeckToCollection((scr_deck)temp);
     }
 
@@ -36,6 +36,6 @@ public class scr_deckCollection : scr_collection
     {
         GameObject temp = Instantiate(prefab, grid.transform);
         temp.GetComponent<scr_deckSelect>().deckData = deck;
-        temp.GetComponent<scr_deckSelect>().editList = editList;
+        temp.GetComponent<scr_deckSelect>().deckList = deckList;
     }
 }

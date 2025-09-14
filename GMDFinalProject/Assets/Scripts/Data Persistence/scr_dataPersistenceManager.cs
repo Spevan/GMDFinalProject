@@ -90,6 +90,13 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     public void AddDeckToCollection(scr_deck deck)
     {
+        Debug.Log(deck.ToString());
+
+        if(playerData.decks == null)
+        {
+            playerData.decks = new List<scr_deck>();
+        }
+
         playerData.decks.Add(deck);
         SaveGame();
     }
