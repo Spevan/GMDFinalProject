@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//This is the GO that players will manipulate to edit their decks
 public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public scr_mainMenuManager menuManager;
@@ -70,6 +71,7 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void DeleteDeck()
     {
-
+        scr_dataPersistenceManager.instance.RemoveDeckFromCollection(deckData);
+        Destroy(this.gameObject);
     }
 }

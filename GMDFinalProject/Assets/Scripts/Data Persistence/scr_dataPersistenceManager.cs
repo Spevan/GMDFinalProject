@@ -104,4 +104,10 @@ public class scr_dataPersistenceManager : MonoBehaviour
         playerData.decks.Add(deck);
         SaveGame();
     }
+
+    public void RemoveDeckFromCollection(scr_deck deck)
+    {
+        playerData.decks.Remove(deck);
+        SaveGame();
+    }
 }

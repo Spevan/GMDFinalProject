@@ -23,11 +23,11 @@ public class scr_cardsInMenu : scr_cards
         temp.GetComponent<scr_cardDetails>().cardData = cardData;
         if (this.transform.localPosition.x < (GUI.GetComponentInChildren<Camera>().scaledPixelWidth / 2))
         {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(160, 0, 5);
+            temp.transform.localPosition = this.transform.localPosition + new Vector3(80, 0, 5);
         }
         else
         {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(-160, 0, 5);
+            temp.transform.localPosition = this.transform.localPosition + new Vector3(-80, 0, 5);
         }
 
         if (menuManager.deckEditMode == true)
@@ -66,6 +66,7 @@ public class scr_cardsInMenu : scr_cards
         scr_deck tempDeck = AssetDatabase.LoadAssetAtPath<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
         if (tempDeck != null)
         {
+            OnPointerExit(null);
             tempDeck.cardsInDeck.Remove(cardData);
             EditorUtility.SetDirty(tempDeck);
             AssetDatabase.SaveAssets();

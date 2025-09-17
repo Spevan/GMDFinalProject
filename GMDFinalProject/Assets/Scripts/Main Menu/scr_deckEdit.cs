@@ -1,22 +1,31 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This is the GO for the deck edit list that displays all cards in a deck
 public class scr_deckEdit : MonoBehaviour
 {
     public GameObject cardPrefab;
     bool isVisible = true;
     Vector3 moveDistance = new Vector3(160, 0, 0);
     public scr_deck selectedDeck; public scr_mainMenuManager menuManager;
-    public VerticalLayoutGroup deckList;
+    public GridLayoutGroup deckList;
+    public TextMeshProUGUI deckName;
 
     private void OnEnable()
     {
+        ChangeDisplayName();
         DisplayDeck();
     }
 
     private void OnDisable()
     {
         HideDeck();
+    }
+
+    public void ChangeDisplayName()
+    {
+        deckName.text = selectedDeck.name;
     }
 
     public void ToggleViewList()
