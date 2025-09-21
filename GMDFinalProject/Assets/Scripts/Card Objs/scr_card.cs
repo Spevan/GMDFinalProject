@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "card", menuName = "Scriptable Sheets/Card")]
 public class scr_card : ScriptableObject
 {
+    public bool loaded;
     public GameObject unit;
     [System.Serializable]
     public enum costTypes

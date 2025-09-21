@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //This is the GO that players will manipulate to edit their decks
-public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public scr_mainMenuManager menuManager;
     public scr_deck deckData;
@@ -24,8 +24,27 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         else
         {
-            nameField.GetComponent<TMP_Text>().text = deckData.name;
+            //nameField.GetComponent<TMP_Text>().text = deckData.name;
         }
+    }
+
+    void scr_IDataPersistence.LoadData(scr_playerData gameData)
+    {
+        foreach (scr_deck deck in gameData.decks)
+        {
+            if (!deck.loaded)
+            {
+                deck.loaded = true;
+                deckData = deck;
+            }
+        }
+
+    }
+
+    void scr_IDataPersistence.SaveData(ref scr_playerData data)
+    {
+        deckData.loaded = false;
+        data.decks.Add(deckData);
     }
 
     public void EditDeckName(string name)

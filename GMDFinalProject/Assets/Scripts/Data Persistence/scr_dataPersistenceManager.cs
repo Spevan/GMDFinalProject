@@ -31,7 +31,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
     private void Start()
     {
         this.dataHandler = new scr_fileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        
         LoadGame();
     }
 
@@ -42,6 +42,8 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+
         playerData = dataHandler.Load();
 
         if (this.playerData == null)
@@ -55,7 +57,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
             dataPersistenceObj.LoadData(playerData);
         }
 
-        SaveGame();
+        //SaveGame();
         Debug.Log("Loaded Inventory");
     }
 
@@ -71,14 +73,9 @@ public class scr_dataPersistenceManager : MonoBehaviour
         dataHandler.Save(playerData);
     }
 
-    /*private void OnApplicationQuit()
-    {
-        SaveGame();
-    }*/
-
     private List<scr_IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<scr_IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<scr_IDataPersistence>();
+        IEnumerable<scr_IDataPersistence> dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.InstanceID).OfType<scr_IDataPersistence>();
         return new List<scr_IDataPersistence>(dataPersistenceObjects);
     }
 

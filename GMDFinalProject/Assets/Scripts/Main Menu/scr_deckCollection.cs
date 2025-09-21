@@ -10,12 +10,14 @@ public class scr_deckCollection : scr_collection
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
+        
         if (scr_dataPersistenceManager.instance.playerData.decks != null)
         {
             foreach (scr_deck deck in scr_dataPersistenceManager.instance.playerData.decks)
             {
                 CreateDeck(deck);
             }
+            scr_dataPersistenceManager.instance.LoadGame();
         }
     }
 
@@ -35,7 +37,7 @@ public class scr_deckCollection : scr_collection
     public void CreateDeck(scr_deck deck)
     {
         GameObject temp = Instantiate(prefab, grid.transform);
-        temp.GetComponent<scr_deckSelect>().deckData = deck;
+        //temp.GetComponent<scr_deckSelect>().deckData = deck;
         temp.GetComponent<scr_deckSelect>().deckList = deckList;
     }
 }
