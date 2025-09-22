@@ -31,7 +31,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
     private void Start()
     {
         this.dataHandler = new scr_fileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-        
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
 
@@ -42,7 +42,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        
 
         playerData = dataHandler.Load();
 
@@ -57,15 +57,19 @@ public class scr_dataPersistenceManager : MonoBehaviour
             dataPersistenceObj.LoadData(playerData);
         }
 
-        //SaveGame();
-        Debug.Log("Loaded Inventory");
+        Debug.Log("Loaded collection");
+        /*Debug.Log(playerData.decks.Count);
+        foreach (scr_deck deck in playerData.decks)
+        {
+            Debug.Log(deck.ToString());
+        }*/
     }
 
     public void SaveGame()
     {
-        foreach (scr_IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        //foreach (scr_IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(ref playerData);
+            //dataPersistenceObj.SaveData(ref playerData);
         }
 
         Debug.Log("Saved Inventory");
@@ -79,32 +83,9 @@ public class scr_dataPersistenceManager : MonoBehaviour
         return new List<scr_IDataPersistence>(dataPersistenceObjects);
     }
 
-    public void AddCardToCollection(scr_card card)
-    {
-        if (playerData.cards == null)
-        {
-            playerData.cards = new List<scr_card>();
-        }
-        playerData.cards.Add(card);
-        SaveGame();
-    }
-
-    public void AddDeckToCollection(scr_deck deck)
-    {
-        Debug.Log(deck.ToString());
-
-        if(playerData.decks == null)
-        {
-            playerData.decks = new List<scr_deck>();
-        }
-
-        playerData.decks.Add(deck);
-        SaveGame();
-    }
-
-    public void RemoveDeckFromCollection(scr_deck deck)
+    /*public void RemoveDeckFromCollection(scr_deck deck)
     {
         playerData.decks.Remove(deck);
         SaveGame();
-    }
+    }*/
 }

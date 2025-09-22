@@ -23,7 +23,7 @@ public class scr_fileDataHandler
     public scr_playerData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        scr_playerData loadedData = null;
+        scr_playerData loadedData = new scr_playerData();
         if (File.Exists(fullPath))
         {
             try
@@ -34,6 +34,7 @@ public class scr_fileDataHandler
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         dataToLoad = reader.ReadToEnd();
+                        Debug.Log(dataToLoad);
                     }
                 }
 
@@ -42,7 +43,11 @@ public class scr_fileDataHandler
                     dataToLoad = EncryptDecrpyt(dataToLoad);
                 }
 
-                loadedData = JsonUtility.FromJson<scr_playerData>(dataToLoad);
+                JsonUtility.FromJsonOverwrite(dataToLoad, loadedData);
+                foreach(scr_card card in loadedData.cardsCollected)
+                {
+                    Debug.Log(card.name);
+                }
             }
             catch (Exception e)
             {

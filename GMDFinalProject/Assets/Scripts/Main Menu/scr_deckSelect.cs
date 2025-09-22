@@ -1,5 +1,4 @@
 using TMPro;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -22,29 +21,32 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             nameField.GetComponent<TMP_InputField>().onEndEdit.AddListener(delegate { EditDeckName(nameField.GetComponent<TMP_InputField>().text); });
         }
-        else
-        {
-            //nameField.GetComponent<TMP_Text>().text = deckData.name;
-        }
     }
 
-    void scr_IDataPersistence.LoadData(scr_playerData gameData)
+    public void LoadData(scr_playerData gameData)
     {
-        foreach (scr_deck deck in gameData.decks)
+        foreach (scr_deck deck in gameData.decksCollected)
         {
-            if (!deck.loaded)
+            for (int i = 0; i < gameData.decksCollected.Count; i++)
             {
-                deck.loaded = true;
-                deckData = deck;
+                if (deck.deck_id == i && !deck.loaded)
+                {
+                    deck.loaded = true;
+                    deckData = deck;
+                    nameField.GetComponent<TextMeshProUGUI>().text = deck.name;
+                    Debug.Log(deck.name + " card data loaded.");
+                    return;
+                }
             }
         }
-
     }
 
-    void scr_IDataPersistence.SaveData(ref scr_playerData data)
+    public void SaveData(ref scr_playerData data)
     {
         deckData.loaded = false;
-        data.decks.Add(deckData);
+        deckData.deck_id = data.decksCollected.Count;
+        data.decksCollected.Add(deckData);
+        scr_dataPersistenceManager.instance.SaveGame();
     }
 
     public void EditDeckName(string name)
@@ -90,7 +92,17 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void DeleteDeck()
     {
-        scr_dataPersistenceManager.instance.RemoveDeckFromCollection(deckData);
+        //scr_dataPersistenceManager.instance.RemoveDeckFromCollection(deckData);
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        deckData.loaded = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        OnDestroy();
     }
 }

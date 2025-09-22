@@ -2,8 +2,10 @@ using Unity.Netcode;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "card", menuName = "Scriptable Sheets/Card")]
+[System.Serializable]
 public class scr_card : ScriptableObject
 {
+    public int card_id;
     public bool loaded;
     public GameObject unit;
     [System.Serializable]

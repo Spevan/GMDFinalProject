@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface scr_IDataPersistence
 {
-    void LoadData(scr_playerData gameData);
+    public void LoadData(scr_playerData gameData);
 
     public void SaveData(ref scr_playerData data);
 }

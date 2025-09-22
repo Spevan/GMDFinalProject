@@ -1984,6 +1984,7 @@ GameObject:
   - component: {fileID: 550165377}
   - component: {fileID: 550165376}
   - component: {fileID: 550165375}
+  - component: {fileID: 550165380}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -2023,7 +2024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec251a8b6949714ea08452ab46a2810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  card: {fileID: 550165380}
 --- !u!114 &550165376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,6 +2119,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550165373}
   m_CullTransparentMesh: 1
+--- !u!114 &550165380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550165373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loaded: 0
+  GUI: {fileID: 774256017}
+  details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
+  temp: {fileID: 0}
+  cardData: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  deckEditBtns: {fileID: 862113736}
+  deckList: {fileID: 160336909}
 --- !u!1 &564716733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,6 +2875,8 @@ MonoBehaviour:
   prefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
   grid: {fileID: 1997286087}
   deckList: {fileID: 862113736}
+  timeRemain: 0.25
+  count: 0
 --- !u!114 &760520210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2989,7 +3011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &810800786
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3744,7 +3766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1109780083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3904,6 +3926,8 @@ MonoBehaviour:
   prefab: {fileID: 7222511150195318843, guid: f071c18311c06954986ea8b3cc2d4420, type: 3}
   grid: {fileID: 538230998}
   deckList: {fileID: 862113736}
+  timeRemain: 0.1
+  count: 0
   newDeck: {fileID: 7222511150195318843, guid: 4acb29dda5f11be42a6189cda60af928, type: 3}
 --- !u!1 &1135114651
 GameObject:
@@ -5435,7 +5459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec251a8b6949714ea08452ab46a2810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  card: {fileID: 1787508025}
 --- !u!114 &1787508022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5480,9 +5504,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1787508025}
+      - m_Target: {fileID: 1787508021}
         m_TargetAssemblyTypeName: scr_addCard, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: AddCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5539,14 +5563,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787508019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb07d0215be58e458ab364e6b1a880c, type: 3}
+  m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   loaded: 0
-  GUI: {fileID: 0}
-  details: {fileID: 0}
+  GUI: {fileID: 774256017}
+  details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
   cardData: {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  deckEditBtns: {fileID: 862113736}
+  deckList: {fileID: 160336909}
 --- !u!1 &1861559855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5831,6 +5857,7 @@ GameObject:
   - component: {fileID: 1920332261}
   - component: {fileID: 1920332260}
   - component: {fileID: 1920332259}
+  - component: {fileID: 1920332264}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -5870,7 +5897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec251a8b6949714ea08452ab46a2810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 032ebe8b700d0224081eb3934eb5a510, type: 2}
+  card: {fileID: 1920332264}
 --- !u!114 &1920332260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5965,6 +5992,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920332257}
   m_CullTransparentMesh: 1
+--- !u!114 &1920332264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920332257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loaded: 0
+  GUI: {fileID: 774256017}
+  details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
+  temp: {fileID: 0}
+  cardData: {fileID: 11400000, guid: 032ebe8b700d0224081eb3934eb5a510, type: 2}
+  deckEditBtns: {fileID: 862113736}
+  deckList: {fileID: 160336909}
 --- !u!1 &1966813031
 GameObject:
   m_ObjectHideFlags: 0

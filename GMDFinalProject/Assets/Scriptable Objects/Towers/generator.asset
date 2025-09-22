@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4d5607a3ba9ea44812a726de54a0e9, type: 3}
   m_Name: generator
   m_EditorClassIdentifier: 
+  card_id: 2
+  loaded: 0
   unit: {fileID: 6070432198559468909, guid: 82ab0bf7daa8f934890397c5e0d22ce7, type: 3}
   costType: 
   cost: 

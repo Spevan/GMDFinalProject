@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class scr_deck : ScriptableObject
 {
     public bool loaded;
+    public int deck_id;
     public new string name;
     public List<scr_card> cardsInDeck;
 

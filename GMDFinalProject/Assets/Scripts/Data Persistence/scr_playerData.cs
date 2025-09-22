@@ -6,6 +6,14 @@ public class scr_playerData
 {
     public string username;
     public int currency;
-    public List<scr_deck> decks;
-    public List<scr_card> cards;
+    public List<scr_deck> decksCollected;
+    public List<scr_card> cardsCollected;
+
+    public scr_playerData()
+    {
+        username = "";
+        currency = 0;
+        decksCollected = new List<scr_deck>();
+        cardsCollected = new List<scr_card>();
+    }
 }

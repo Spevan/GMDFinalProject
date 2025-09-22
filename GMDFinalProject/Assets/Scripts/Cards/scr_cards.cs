@@ -1,32 +1,40 @@
+using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
 
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
-    public bool loaded;
     public GameObject GUI, details, temp;
     public scr_card cardData;
 
-    void scr_IDataPersistence.LoadData(scr_playerData gameData)
+    public void LoadData(scr_playerData gameData)
     {
-        foreach( scr_card card in gameData.cards )
+        foreach( scr_card card in gameData.cardsCollected )
         {
-            if(!card.loaded)
+            for(int i = 0; i < gameData.cardsCollected.Count; i++)
             {
-                card.loaded = true;
-                cardData = card;
+                Debug.Log(gameData.cardsCollected[i].name + " loaded: " + gameData.cardsCollected[i].loaded);
+                if (card.card_id == i && !card.loaded)
+                {
+                    cardData = card;
+                    card.loaded = true;
+                    Debug.Log(card.name + " card data loaded.");
+                    return;
+                }
             }
         }
-        
     }
-
-    void scr_IDataPersistence.SaveData(ref scr_playerData data)
+    
+    public void SaveData(ref scr_playerData data)
     {
         cardData.loaded = false;
-        data.cards.Add(cardData);
+        cardData.card_id = data.cardsCollected.Count;
+        //data.cardCount.Add(data.cardCount.Count);
+        data.cardsCollected.Add(cardData);
+        scr_dataPersistenceManager.instance.SaveGame();
+        Debug.Log("Added card: " +  cardData.name + " to collection.");
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)
@@ -49,5 +57,15 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             Destroy(temp);
         }
+    }
+
+    private void OnDestroy()
+    {
+        cardData.loaded = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        OnDestroy();
     }
 }
