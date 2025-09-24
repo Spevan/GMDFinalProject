@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class scr_deckCollection : scr_collection
 {
-    public ScriptableObject temp;
+    public scr_deck temp;
     public GameObject newDeck;
+    public int total;
     string path = "Assets/Scriptable Objects/Decks/";
+
+    private new void OnEnable()
+    {
+        base.OnEnable();
+        total = scr_dataPersistenceManager.instance.playerData.decksCollected.Count;
+    }
 
     public override void Update()
     {
@@ -14,7 +21,7 @@ public class scr_deckCollection : scr_collection
         {
             timeRemain -= Time.deltaTime;
         }
-        else if (count < scr_dataPersistenceManager.instance.playerData.decksCollected.Count && temp == null)
+        else if (count < total) //&& temp == null)
         {
             CreateDeck(scr_dataPersistenceManager.instance.playerData.decksCollected[count]);
             count++;
@@ -27,20 +34,27 @@ public class scr_deckCollection : scr_collection
     {
         GameObject tempObj = Instantiate(newDeck, grid.transform);
 
-        temp = ScriptableObject.CreateInstance(typeof(scr_deck));
-        AssetDatabase.CreateAsset(temp, path + "temp.asset");
-        AssetDatabase.SaveAssets();
+        temp = new scr_deck();//ScriptableObject.CreateInstance(typeof(scr_deck));
 
-        tempObj.GetComponent<scr_deckSelect>().deckData = (scr_deck)temp;
-        tempObj.GetComponent<scr_deckSelect>().deckList = deckList;
+        //scr_deckSelect newSelect = tempObj.GetComponent<scr_deckSelect>();
+        
+        scr_dataPersistenceManager.instance.playerData.decksCollected.Add(
+            tempObj.GetComponent<scr_deckSelect>().SetData((scr_deck)temp, deckList));
         tempObj.GetComponent<scr_deckSelect>().SaveData(ref scr_dataPersistenceManager.instance.playerData);
+        //AssetDatabase.CreateAsset(temp, path + "temp.asset");
+        //AssetDatabase.SaveAssets();
+
+        /*tempObj.GetComponent<scr_deckSelect>().deckData = (scr_deck)temp;
+        tempObj.GetComponent<scr_deckSelect>().deckList = deckList;
+        tempObj.GetComponent<scr_deckSelect>().SaveData(ref scr_dataPersistenceManager.instance.playerData);*/
     }
 
     public void CreateDeck(scr_deck deck)
     {
         GameObject temp = Instantiate(prefab, grid.transform);
-        temp.GetComponent<scr_deckSelect>().LoadData(scr_dataPersistenceManager.instance.playerData);
-        temp.GetComponent<scr_deckSelect>().deckList = deckList;
+        temp.GetComponent<scr_deckSelect>().SetData(deck, deckList);
+        //temp.GetComponent<scr_deckSelect>().LoadData(scr_dataPersistenceManager.instance.playerData);
+        //temp.GetComponent<scr_deckSelect>().deckList = deckList;
     }
 
     private new void OnDisable()

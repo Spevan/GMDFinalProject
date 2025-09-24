@@ -81,6 +81,7 @@ public class scr_deckEdit : MonoBehaviour
 
     public void FinishEdit()
     {
+        scr_dataPersistenceManager.instance.SaveGame();
         HideDeck();
         menuManager.UnlockMenu();
         this.gameObject.SetActive(false);

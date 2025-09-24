@@ -49,25 +49,25 @@ public class scr_cardsInMenu : scr_cards
     public void AddCard()
     {
         scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
-        scr_deck tempDeck = Resources.Load<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
+        scr_deck tempDeck = editList.selectedDeck;
         if (tempDeck != null)
         {
             tempDeck.cardsInDeck.Add(cardData);
-            Resources.UnloadAsset(tempDeck);
+            //Resources.UnloadAsset(tempDeck);
             editList.HideDeck();
             editList.DisplayDeck();
         }
     }
 
-    public void RemoveCard()
+    public void RemoveCard(scr_deck tempDeck)
     {
         scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
-        scr_deck tempDeck = Resources.Load<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
+        //scr_deck tempDeck = Resources.Load<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
         if (tempDeck != null)
         {
             OnPointerExit(null);
             tempDeck.cardsInDeck.Remove(cardData);
-            Resources.UnloadAsset(tempDeck);
+            //Resources.UnloadAsset(tempDeck);
             editList.HideDeck();
             editList.DisplayDeck();
         }

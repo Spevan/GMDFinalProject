@@ -2,18 +2,18 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "deck", menuName = "Scriptable Sheets/scr_deck")]
-public class scr_deck : ScriptableObject
+//[CreateAssetMenu(fileName = "deck", menuName = "Scriptable Sheets/deck")]
+[System.Serializable]
+public class scr_deck 
 {
+    public string name;
     public bool loaded;
     public int deck_id;
-    public new string name;
-    public List<scr_card> cardsInDeck;
+    [SerializeField] public List<scr_card> cardsInDeck;
 
     public scr_deck()
     {
         loaded = false;
-        name = "";
         cardsInDeck = new List<scr_card>();
     }
 }

@@ -30,7 +30,7 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
-        this.dataHandler = new scr_fileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        this.dataHandler = new scr_fileDataHandler(Application.persistentDataPath + "/", fileName, useEncryption);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -42,8 +42,6 @@ public class scr_dataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        
-
         playerData = dataHandler.Load();
 
         if (this.playerData == null)

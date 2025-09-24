@@ -13,13 +13,27 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public GameObject nameField, options, deckList;
     string path = "Assets/Scriptable Objects/Decks/";
 
+    public scr_deck SetData(scr_deck newData, GameObject newList)
+    {
+        deckData = newData;
+        deckList = newList;
+        deckData.loaded = true;
+        deckData.deck_id = scr_dataPersistenceManager.instance.playerData.decksCollected.Count;
+        return deckData;
+        //SaveData(ref scr_dataPersistenceManager.instance.playerData);
+    }
+
     private void Start()
     {
         menuManager = GameObject.Find("gui_mainMenuButtons").GetComponent<scr_mainMenuManager>();
 
         if(nameField.GetComponent<TMP_InputField>() != null)
         {
-            nameField.GetComponent<TMP_InputField>().onEndEdit.AddListener(delegate { EditDeckName(nameField.GetComponent<TMP_InputField>().text); });
+            nameField.GetComponent<TMP_InputField>().onEndEdit.AddListener(delegate { EditDeckName(deckData, nameField.GetComponent<TMP_InputField>().text); });
+        }
+        else
+        {
+            nameField.GetComponent<TMP_Text>().text = deckData.name;
         }
     }
 
@@ -29,11 +43,11 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             for (int i = 0; i < gameData.decksCollected.Count; i++)
             {
-                if (deck.deck_id == i && !deck.loaded)
+                if (/*deck.deck_id == i &&*/ !deck.loaded)
                 {
                     deck.loaded = true;
                     deckData = deck;
-                    nameField.GetComponent<TextMeshProUGUI>().text = deck.name;
+                    
                     Debug.Log(deck.name + " card data loaded.");
                     return;
                 }
@@ -43,22 +57,21 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void SaveData(ref scr_playerData data)
     {
-        deckData.loaded = false;
-        deckData.deck_id = data.decksCollected.Count;
-        data.decksCollected.Add(deckData);
         scr_dataPersistenceManager.instance.SaveGame();
     }
 
-    public void EditDeckName(string name)
+    public void EditDeckName(scr_deck deck, string name)
     {
-        AssetDatabase.RenameAsset(path + "temp.asset", name + ".asset");
-        scr_deck newDeck = AssetDatabase.LoadAssetAtPath<scr_deck>(path + name + ".asset");
+        //scr_deck newDeck;
+        //AssetDatabase.RenameAsset(path + "temp.asset", name + ".asset");
+        //newDeck = Resources.Load<scr_deck>(path + "temp.asset");
+        Debug.Log("changing deck name.");
 
-        if( newDeck != null )
+        if( deck != null )
         {
-            newDeck.name = name;
-            EditorUtility.SetDirty(newDeck);
-            AssetDatabase.SaveAssets();
+            deck.name = name;
+            //EditorUtility.SetDirty(newDeck);
+            //AssetDatabase.SaveAssets();
         }
         else
         {
@@ -67,6 +80,7 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         nameField.GetComponent<Image>().enabled = false;
         nameField.GetComponent<TMP_InputField>().enabled = false;
+        SaveData(ref scr_dataPersistenceManager.instance.playerData);
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)
@@ -88,12 +102,14 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         menuManager.LockMenu();
         deckList.GetComponent<scr_deckEdit>().SelectDeck(deckData);
         deckList.SetActive(true);
+        SaveData(ref scr_dataPersistenceManager.instance.playerData);
     }
 
     public void DeleteDeck()
     {
         //scr_dataPersistenceManager.instance.RemoveDeckFromCollection(deckData);
         Destroy(this.gameObject);
+        SaveData(ref scr_dataPersistenceManager.instance.playerData);
     }
 
     private void OnDestroy()

@@ -7,9 +7,9 @@ public class scr_collection : MonoBehaviour
     public float timeRemain = 0.5f; public int count = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void OnEnable()
+    public void OnEnable()
     {
-        scr_dataPersistenceManager.instance.LoadGame();
+        //scr_dataPersistenceManager.instance.LoadGame();
         grid.GetComponent<RectTransform>().localPosition = new Vector3(0, grid.GetComponent<RectTransform>().rect.yMin, 0);
         count = 0;
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class scr_fileDataHandler
@@ -43,11 +44,15 @@ public class scr_fileDataHandler
                     dataToLoad = EncryptDecrpyt(dataToLoad);
                 }
 
-                JsonUtility.FromJsonOverwrite(dataToLoad, loadedData);
-                foreach(scr_card card in loadedData.cardsCollected)
+                loadedData = JsonUtility.FromJson<scr_playerData>(dataToLoad);
+                /*int total = loadedData.decksCollected.Count;
+                for (int i = 0; i < total; i++)
                 {
-                    Debug.Log(card.name);
-                }
+                    //Debug.Log(loadedData.decksCollected[i].name);
+                    scr_deck newDeck = new scr_deck(); //ScriptableObject.CreateInstance<scr_deck>();
+                    JsonUtility.FromJsonOverwrite(dataToLoad, newDeck);
+                    loadedData.decksCollected[i] = newDeck;
+                }*/
             }
             catch (Exception e)
             {
