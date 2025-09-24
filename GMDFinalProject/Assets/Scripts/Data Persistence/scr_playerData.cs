@@ -9,12 +9,13 @@ public class scr_playerData
     public int currency;
     [SerializeField] public List<scr_deck> decksCollected;
     [SerializeField] public List<scr_card> cardsCollected;
-
+    [SerializeField] public List<scr_productionPlant> productionPlants;
     public scr_playerData()
     {
         username = "";
         currency = 0;
         decksCollected = new List<scr_deck>();
         cardsCollected = new List<scr_card>();
+        productionPlants = new List<scr_productionPlant>();
     }
 }
