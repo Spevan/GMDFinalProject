@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class scr_cardsInMenu : scr_cards
 {
     scr_mainMenuManager menuManager; 
-    public GameObject deckEditBtns, deckList;
+    public GameObject deckEditBtns, deckList, alertText;
 
     string deckPath = "Assets/Scriptable Objects/Decks/";
 
@@ -52,10 +52,25 @@ public class scr_cardsInMenu : scr_cards
         scr_deck tempDeck = editList.selectedDeck;
         if (tempDeck != null)
         {
-            tempDeck.cardsInDeck.Add(cardData);
-            //Resources.UnloadAsset(tempDeck);
-            editList.HideDeck();
-            editList.DisplayDeck();
+            if(cardData.GetType() == typeof(scr_productionPlant) && editList.selectedDeck.productionPlant != null)
+            {
+                GameObject temp = Instantiate(alertText, GUI.GetComponent<RectTransform>().TransformPoint(GUI.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.transform);
+                temp.GetComponent<scr_alertText>().ChangeText("You have already added a Production Plant to this deck.\n" +
+                    "Please remove the previous Plant before adding a new one.");
+            }
+            else if(cardData.GetType() == typeof(scr_productionPlant) && editList.selectedDeck.productionPlant == null)
+            {
+                tempDeck.productionPlant = (scr_productionPlant)cardData;
+                editList.HideDeck();
+                editList.DisplayDeck();
+            }
+            else
+            {
+                tempDeck.cardsInDeck.Add(cardData);
+                //Resources.UnloadAsset(tempDeck);
+                editList.HideDeck();
+                editList.DisplayDeck();
+            }
         }
     }
 

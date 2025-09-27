@@ -9,12 +9,13 @@ public class scr_player : NetworkBehaviour
 {
     public static scr_player instance { get; private set; }
 
-    public NetworkVariable<int> water = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner),
-        steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> water = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        //steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public List<scr_card> Deck;
-    public GameObject ProductionPlant;
+    public scr_productionPlant ProductionPlant;
     public Camera cam;
     public scr_guiManager GUI;
+    public GameObject plantPrefab;
     int timeRemain;
     private void Awake()
     {
@@ -75,6 +76,12 @@ public class scr_player : NetworkBehaviour
         }
     }
 
+    public void CreateProductionPlant(scr_productionPlant plantData)
+    {
+        ProductionPlant = plantData;
+        Instantiate(ProductionPlant.unit, plantPrefab.transform);
+    }
+
     public void DrawCard()
     {
         if (Input.GetKeyUp(KeyCode.Space) && Deck.Count > 0)
@@ -87,17 +94,7 @@ public class scr_player : NetworkBehaviour
 
     public void PlayCard(scr_card card)
     {
-        for (int i = 0; i < card.costType.Length; i++)
-        {
-            if (card.costType[i] == scr_card.costTypes.water)
-            {
-                ChangeWater(-card.cost[i]);
-            }
-            else if (card.costType[i] == scr_card.costTypes.steel)
-            {
-                steel.Value -= card.cost[i];
-            }
-        }
+        ChangeWater(-card.cost);
     }
 
     public void ChangeWater(int waterDelta)
@@ -113,5 +110,15 @@ public class scr_player : NetworkBehaviour
         ChangeWater(waterDelta);
         GUI.UpdateWater(water.Value);
         Debug.Log("added " + waterDelta + " to water count");
+    }
+
+    public void WinGame()
+    {
+
+    }
+
+    public void LoseGame()
+    {
+
     }
 }

@@ -49,6 +49,12 @@ public class scr_gameManager : NetworkBehaviour
             {
                 players.Add(NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation));
                 players[i].GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
+
+                players[i].GetComponent<scr_player>().CreateProductionPlant(scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant);
+                foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
+                {
+                    players[i].GetComponent<scr_player>().Deck.Add(card);
+                }
             }
         }
     }

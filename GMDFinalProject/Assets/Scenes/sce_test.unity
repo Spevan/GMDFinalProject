@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obj_generator (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6070432198559468909, guid: 82ab0bf7daa8f934890397c5e0d22ce7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -541,6 +545,10 @@ PrefabInstance:
     - target: {fileID: 6070432198559468909, guid: 82ab0bf7daa8f934890397c5e0d22ce7, type: 3}
       propertyPath: m_Name
       value: obj_generator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070432198559468909, guid: 82ab0bf7daa8f934890397c5e0d22ce7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -790,6 +798,10 @@ PrefabInstance:
     - target: {fileID: 6171635975332166887, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2815323269
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: cardPrefabs.Array.size
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

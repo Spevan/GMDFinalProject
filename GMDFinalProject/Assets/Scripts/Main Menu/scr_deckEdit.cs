@@ -53,6 +53,15 @@ public class scr_deckEdit : MonoBehaviour
     {
         if(selectedDeck != null)
         {
+            if (selectedDeck.productionPlant != null)
+            {
+                GameObject temp = Instantiate(cardPrefab, deckList.transform);
+                scr_cardsInMenu tempCard = temp.GetComponent<scr_cardsInMenu>();
+                tempCard.cardData = selectedDeck.productionPlant;
+                tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
+                tempCard.deckList = this.gameObject;
+            }
+
             foreach (scr_card card in selectedDeck.cardsInDeck)
             {
                 GameObject temp = Instantiate(cardPrefab, deckList.transform);

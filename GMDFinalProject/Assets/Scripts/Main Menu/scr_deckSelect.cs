@@ -97,6 +97,11 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         options.SetActive(false);
     }
 
+    public void EquipDeck()
+    {
+        scr_dataPersistenceManager.instance.playerData.equippedDeck = deckData;
+    }
+
     public void EditDeckCards()
     {
         menuManager.LockMenu();

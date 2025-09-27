@@ -2131,13 +2131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loaded: 0
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
   cardData: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
+  alertText: {fileID: 0}
 --- !u!1 &564716733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,7 +3127,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
-  selectedDeck: {fileID: 0}
+  selectedDeck:
+    name: 
+    loaded: 0
+    deck_id: 0
+    productionPlant: {fileID: 0}
+    cardsInDeck: []
   menuManager: {fileID: 913862954}
   deckList: {fileID: 894602930}
   deckName: {fileID: 519178796}
@@ -3928,7 +3933,14 @@ MonoBehaviour:
   deckList: {fileID: 862113736}
   timeRemain: 0.1
   count: 0
+  temp:
+    name: 
+    loaded: 0
+    deck_id: 0
+    productionPlant: {fileID: 0}
+    cardsInDeck: []
   newDeck: {fileID: 7222511150195318843, guid: 4acb29dda5f11be42a6189cda60af928, type: 3}
+  total: 0
 --- !u!1 &1135114651
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,13 +5578,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loaded: 0
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
   cardData: {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
+  alertText: {fileID: 0}
 --- !u!1 &1861559855
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,13 +6016,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0820b3e32773f34fa9df02330ca5f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loaded: 0
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
-  cardData: {fileID: 11400000, guid: 032ebe8b700d0224081eb3934eb5a510, type: 2}
+  cardData: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
+  alertText: {fileID: 0}
 --- !u!1 &1966813031
 GameObject:
   m_ObjectHideFlags: 0
@@ -6233,6 +6245,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: data.game
   useEncryption: 0
+  playerData:
+    username: 
+    currency: 0
+    decksCollected: []
+    cardsCollected: []
+    productionPlants: []
 --- !u!4 &2050100540
 Transform:
   m_ObjectHideFlags: 0

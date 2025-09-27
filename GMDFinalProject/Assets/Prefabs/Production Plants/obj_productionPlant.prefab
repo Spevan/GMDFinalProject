@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 032ebe8b700d0224081eb3934eb5a510, type: 2}
+  cardData: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
   range: {fileID: 0}
   timer: 0
   cooldown: 0

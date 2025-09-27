@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: hero 1
   m_EditorClassIdentifier: 
+  card_id: 0
+  loaded: 0
   unit: {fileID: 4841726575583476779, guid: b8c9a06d64c1fcd4897fb79331803a47, type: 3}
-  costType: 01000000
-  cost: 02000000
+  cost: 2
   power: 10
   health: 5
   range: 3
