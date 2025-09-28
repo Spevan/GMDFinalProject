@@ -54,10 +54,6 @@ public class scr_gameManager : NetworkBehaviour
                 players[i].GetComponent<scr_player>().ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
                 GameObject obj = NetworkManager.Instantiate(players[i].GetComponent<scr_player>().ProductionPlant.unit, players[i].GetComponent<scr_player>().plantPrefab.transform.position, Quaternion.identity);
                 obj.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
-                foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
-                {
-                    players[i].GetComponent<scr_player>().Deck.Add(card);
-                }
             }
         }
     }
@@ -84,5 +80,21 @@ public class scr_gameManager : NetworkBehaviour
     {
         //Spawn a new network obj based on parameters
         SpawnNetworkCard(cardName, pos, rot, clientID);
+    }
+
+    [ServerRpc (RequireOwnership = false)]
+    public void EndGameServerRpc(ulong losingClient)
+    {
+        for(int i = 0; i < clients.Count; ++i)
+        {
+            if (clients[i].ClientId == losingClient)
+            {
+                players[i].GetComponent<scr_player>().LoseGameClientRpc();
+            }
+            else
+            {
+                players[i].GetComponent<scr_player>().WinGameClientRpc();
+            }
+        }
     }
 }

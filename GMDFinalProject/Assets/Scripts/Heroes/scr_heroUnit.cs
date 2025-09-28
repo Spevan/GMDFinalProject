@@ -32,12 +32,11 @@ public class scr_heroUnit : scr_unit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
         }
         else if(movementLock && !ranged)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(
-                target.transform.position.x, transform.position.y, target.transform.position.z), speed * Time.deltaTime);
+            rb.MovePosition(rb.position + (target.transform.position - rb.position).normalized * speed * Time.deltaTime);
         }
     }
 
@@ -106,7 +105,7 @@ public class scr_heroUnit : scr_unit
     private void OnTriggerEnter(Collider other)
     {
         //If the range collides with a tower
-        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) && !other.isTrigger && other.gameObject.activeSelf &&
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) || other.gameObject.tag.Equals("ProductionPlant") && !other.isTrigger && other.gameObject.activeSelf &&
             gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !movementLock)
         {
             //Set movement lock to true and move towards tower position

@@ -15,7 +15,7 @@ public class scr_player : NetworkBehaviour
     public scr_productionPlant ProductionPlant;
     public Camera cam;
     public scr_guiManager GUI;
-    public GameObject plantPrefab;
+    public GameObject plantPrefab, alertText;
     int timeRemain;
     private void Awake()
     {
@@ -39,6 +39,11 @@ public class scr_player : NetworkBehaviour
             else
             {
                 Destroy(this);
+            }
+
+            foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
+            {
+                Deck.Add(card);
             }
         }
         //gameObject.AddComponent<Camera>();
@@ -76,13 +81,6 @@ public class scr_player : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void CreateProductionPlantClientRpc()
-    {
-        ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
-        GameObject obj = Instantiate(ProductionPlant.unit, plantPrefab.transform);
-    }
-
     public void DrawCard()
     {
         if (Input.GetKeyUp(KeyCode.Space) && Deck.Count > 0)
@@ -105,21 +103,27 @@ public class scr_player : NetworkBehaviour
         Debug.Log("added " + waterDelta + " to water count");
     }
 
-    [ServerRpc]
-    public void ChangeWaterServerRpc(int waterDelta)
+    [ClientRpc]
+    public void WinGameClientRpc()
     {
-        ChangeWater(waterDelta);
-        GUI.UpdateWater(water.Value);
-        Debug.Log("added " + waterDelta + " to water count");
+        //GameObject temp = Instantiate(alertText, GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.gameObject.transform);
+        alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
+        alertText.SetActive(true);
+        alertText.GetComponent<scr_alertText>().ChangeText("You won! Thanks for all your help General.\n" +
+            "Please collect your reward and return to the barracks.");
+        Time.timeScale = 0;
+        //SceneManager.LoadScene("sce_mainMenu");
     }
 
-    public void WinGame()
+    [ClientRpc]
+    public void LoseGameClientRpc()
     {
-
-    }
-
-    public void LoseGame()
-    {
-
+        //GameObject temp = Instantiate(alertText, GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.gameObject.transform);
+        alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
+        alertText.SetActive(true);
+        alertText.GetComponent<scr_alertText>().ChangeText("You lost... what a disgrace.\n" +
+            "Your pay will be docked. Return to the barracks ashamed.");
+        Time.timeScale = 0;
+        //SceneManager.LoadScene("sce_mainMenu");
     }
 }

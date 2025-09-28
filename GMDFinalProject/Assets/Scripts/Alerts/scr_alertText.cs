@@ -7,13 +7,14 @@ public class scr_alertText : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameObject.SetActive(false);
         timeRemaining = 4;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0, 0.1f, 0);
+        //transform.position += new Vector3(0, 0.1f, 0);
         if(timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
@@ -21,7 +22,7 @@ public class scr_alertText : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

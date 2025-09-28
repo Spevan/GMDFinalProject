@@ -6,12 +6,14 @@ public class scr_unit : NetworkBehaviour
 {
     public scr_card cardData;
 
+    public Rigidbody rb;
     public SphereCollider range;
     public float timer, cooldown, power, health;
     public GameObject target;
 
     public virtual void Start()
     {
+        rb = GetComponent<Rigidbody>();
         range = this.AddComponent<SphereCollider>();
         range.radius = cardData.range;
         range.isTrigger = true;

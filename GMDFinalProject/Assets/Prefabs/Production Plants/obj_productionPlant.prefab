@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9060199011452161778}
   - component: {fileID: 4640057384263600510}
   - component: {fileID: -7389392417467665142}
-  - component: {fileID: -6061789210679717530}
+  - component: {fileID: 6190789866291367191}
   m_Layer: 0
   m_Name: obj_productionPlant
   m_TagString: ProductionPlant
@@ -200,7 +200,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-7389392417467665142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!114 &-6061789210679717530
+--- !u!114 &6190789866291367191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6070432198559468909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315aa2cec0fdf5d4582e0cd709960ec4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e92e1df82f11404b8765a80163aaf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
