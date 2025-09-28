@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Unity.VisualScripting;
 
 public class scr_gameManager : NetworkBehaviour
 {
@@ -50,7 +51,9 @@ public class scr_gameManager : NetworkBehaviour
                 players.Add(NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation));
                 players[i].GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
 
-                players[i].GetComponent<scr_player>().CreateProductionPlant(scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant);
+                players[i].GetComponent<scr_player>().ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
+                GameObject obj = NetworkManager.Instantiate(players[i].GetComponent<scr_player>().ProductionPlant.unit, players[i].GetComponent<scr_player>().plantPrefab.transform.position, Quaternion.identity);
+                obj.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
                 foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
                 {
                     players[i].GetComponent<scr_player>().Deck.Add(card);

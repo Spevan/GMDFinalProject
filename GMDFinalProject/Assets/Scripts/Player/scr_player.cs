@@ -76,10 +76,11 @@ public class scr_player : NetworkBehaviour
         }
     }
 
-    public void CreateProductionPlant(scr_productionPlant plantData)
+    [ClientRpc]
+    public void CreateProductionPlantClientRpc()
     {
-        ProductionPlant = plantData;
-        Instantiate(ProductionPlant.unit, plantPrefab.transform);
+        ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
+        GameObject obj = Instantiate(ProductionPlant.unit, plantPrefab.transform);
     }
 
     public void DrawCard()

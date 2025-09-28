@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -6061789210679717530}
   m_Layer: 0
   m_Name: obj_productionPlant
-  m_TagString: Tower
+  m_TagString: ProductionPlant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -96,6 +96,11 @@ public class scr_heroUnit : scr_unit
             target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
             //Death();
         }
+        else if (target.gameObject.tag.Equals("ProductionPlant"))
+        {
+            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
+            target.GetComponent<scr_prodPlantUnit>().ChangeHealth(-cardData.power);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
