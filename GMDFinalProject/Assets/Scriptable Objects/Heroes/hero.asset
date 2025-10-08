@@ -19,7 +19,7 @@ MonoBehaviour:
   power: 5
   health: 10
   range: 2
-  description: A dummy stupidhead
+  description: Status Type
   maxCooldown: 2
   status: 
   statusAmnt: 

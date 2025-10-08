@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +8,7 @@ using UnityEngine.Playables;
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public GameObject GUI, details, temp;
+    public TextMeshProUGUI nameTXT, costTXT;
     public scr_card cardData;
 
     public void LoadData(scr_playerData gameData)
@@ -20,11 +22,18 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 {
                     cardData = card;
                     card.loaded = true;
+                    SetCardTXT();
                     Debug.Log(card.name + " card data loaded.");
                     return;
                 }
             }
         }
+    }
+
+    public void SetCardTXT()
+    {
+        nameTXT.text = cardData.name;
+        costTXT.text = cardData.cost.ToString();
     }
     
     public void SaveData(ref scr_playerData data)
@@ -43,11 +52,13 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         temp.GetComponent<scr_cardDetails>().cardData = cardData;
         if (this.transform.localPosition.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
         {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
+            temp.transform.localPosition = this.GetComponent<RectTransform>().anchorMax + new Vector2(100, 0);
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
         }
         else
         {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
+            temp.transform.localPosition = this.GetComponent<RectTransform>().anchorMax + new Vector2(-100, 0);
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
         }
     }
 
