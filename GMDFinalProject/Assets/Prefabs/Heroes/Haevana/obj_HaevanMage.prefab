@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -2949879674052590494}
   - component: {fileID: -1377012593027676971}
   m_Layer: 0
-  m_Name: obj_Hero 1
+  m_Name: obj_HaevanMage
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 270405814
+  GlobalObjectIdHash: 1432690415
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 8
@@ -161,10 +161,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1
 --- !u!114 &4852908580238576682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
+  cardData: {fileID: 11400000, guid: 6fa98b356062fe849935e933ba1ac2ea, type: 2}
+  rb: {fileID: 0}
   range: {fileID: 0}
   timer: 0
   cooldown: 0

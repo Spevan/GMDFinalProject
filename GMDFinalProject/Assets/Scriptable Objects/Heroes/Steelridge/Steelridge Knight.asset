@@ -9,18 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
-  m_Name: Orcland Rifleman
+  m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
+  m_Name: Steelridge Knight
   m_EditorClassIdentifier: 
-  card_id: 0
+  card_id: 1
   loaded: 0
-  unit: {fileID: 0}
-  cost: 5
-  power: 5
-  health: 20
+  unit: {fileID: 4841726575583476779, guid: 019ddb34589e11743a97552a9a1d4051, type: 3}
+  cost: 35
+  power: 20
+  health: 75
   description: 
-  range: 1
-  maxCooldown: 0.5
+  maxCooldown: 1.25
   statuses: []
-  speed: 1
-  ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
+  speed: 0.75

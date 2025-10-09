@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4852908580238576682}
   - component: {fileID: -2949879674052590494}
   m_Layer: 0
-  m_Name: obj_Hero
+  m_Name: obj_OrcScavenger
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1869754627
+  GlobalObjectIdHash: 3243388705
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 8
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  cardData: {fileID: 11400000, guid: ed082edae9c8d44418b4ea4b94a1a2e6, type: 2}
   rb: {fileID: 0}
   range: {fileID: 0}
   timer: 0
@@ -185,7 +185,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1

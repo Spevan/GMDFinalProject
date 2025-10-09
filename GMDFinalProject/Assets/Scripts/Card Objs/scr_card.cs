@@ -44,6 +44,6 @@ public class scr_card : ScriptableObject
     public GameObject unit;
     public int cost, power, health;
     public string description;
-    public float range, maxCooldown;
+    public float maxCooldown;
     public status[] statuses;
 }

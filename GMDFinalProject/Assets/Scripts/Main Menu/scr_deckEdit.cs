@@ -60,6 +60,7 @@ public class scr_deckEdit : MonoBehaviour
                 tempCard.cardData = selectedDeck.productionPlant;
                 tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
                 tempCard.deckList = this.gameObject;
+                tempCard.SetCardTXT();
             }
 
             foreach (scr_card card in selectedDeck.cardsInDeck)
@@ -69,6 +70,7 @@ public class scr_deckEdit : MonoBehaviour
                 tempCard.cardData = card;
                 tempCard.GUI = GetComponentInParent<Canvas>().gameObject;
                 tempCard.deckList = this.gameObject;
+                tempCard.SetCardTXT();
             }
         }
         else

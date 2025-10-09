@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class scr_rangeHeroUnit : scr_heroUnit
 {
     scr_rangeHero rangeHeroData;
     public GameObject ammunition;
+    public SphereCollider range;
 
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
@@ -13,9 +15,19 @@ public class scr_rangeHeroUnit : scr_heroUnit
     public override void Start()
     {
         base.Start();
+        range = this.AddComponent<SphereCollider>();
+        foreach (scr_card.status status in cardData.statuses)
+        {
+            if (status.statusType == scr_card.status.statusTypes.perceptive)
+            {
+                range.radius += status.statusAmnt;
+            }
+        }
         rangeHeroData = cardData as scr_rangeHero;
-        ammunition = rangeHeroData.ammo;
+        range.radius += rangeHeroData.range;
+        range.isTrigger = true;
 
+        ammunition = rangeHeroData.ammo;
         if (this.GetComponent<NetworkObject>().IsOwner)
         {
             for (int i = 0; i < amountPooledProj; i++)
@@ -31,6 +43,15 @@ public class scr_rangeHeroUnit : scr_heroUnit
                         this.GetComponent<NetworkObject>().OwnerClientId);
                 }
             }
+        }
+    }
+
+    public override void Move()
+    {
+        if (!movementLock) //If the movement lock is false
+        {
+            //Hero moves forward
+            rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
         }
     }
 

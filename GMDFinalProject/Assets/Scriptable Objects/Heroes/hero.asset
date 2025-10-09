@@ -18,10 +18,8 @@ MonoBehaviour:
   cost: 1
   power: 5
   health: 10
+  description: 
   range: 2
-  description: Status Type
   maxCooldown: 2
-  status: 
-  statusAmnt: 
+  statuses: []
   speed: 2
-  ranged: 0

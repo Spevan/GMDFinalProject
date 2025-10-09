@@ -57,8 +57,8 @@ public class scr_ammunition : NetworkBehaviour
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
             }
-            Destroy();
         }
+        Destroy();
     }
 
     private void Destroy()

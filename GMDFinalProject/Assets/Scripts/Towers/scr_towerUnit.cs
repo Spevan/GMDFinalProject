@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class scr_towerUnit : scr_unit
 {
     //public new override scr_tower cardData;
+    public SphereCollider range;
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
@@ -19,7 +20,11 @@ public class scr_towerUnit : scr_unit
         //Set tower position so it sits above ground
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
 
+        range = this.AddComponent<SphereCollider>();
         base.Start();
+        range.radius += towerData.range;
+        range.isTrigger = true;
+
         ammunition = towerData.ammunition;
 
         if (this.GetComponent<NetworkObject>().IsOwner)

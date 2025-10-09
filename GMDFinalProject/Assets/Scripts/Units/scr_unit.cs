@@ -7,20 +7,29 @@ public class scr_unit : NetworkBehaviour
     public scr_card cardData;
 
     public Rigidbody rb;
-    public SphereCollider range;
     public float timer, cooldown, power, health;
     public GameObject target;
 
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        range = this.AddComponent<SphereCollider>();
-        range.radius = cardData.range;
-        range.isTrigger = true;
+        
+        foreach(scr_card.status status in cardData.statuses)
+        {
+            
+            if(status.statusType == scr_card.status.statusTypes.strong)
+            {
+                power += status.statusAmnt;
+            }
+            if(status.statusType == scr_card.status.statusTypes.fortified)
+            {
+                health += status.statusAmnt;
+            }
+        }
 
-        power = cardData.power;
-        cooldown = cardData.maxCooldown;
-        health = cardData.health;
+        power += cardData.power;
+        cooldown += cardData.maxCooldown;
+        health += cardData.health;
     }
 
     public void ChangeHealth(int delta)

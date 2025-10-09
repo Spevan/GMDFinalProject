@@ -56,6 +56,7 @@ public class scr_guiManager : MonoBehaviour
         drawnCard.cardData = nextCard;
         drawnCard.player = thisPlayer;
         drawnCard.GUI = this.gameObject;
+        drawnCard.SetCardTXT();
         UpdateHand();
     }
 

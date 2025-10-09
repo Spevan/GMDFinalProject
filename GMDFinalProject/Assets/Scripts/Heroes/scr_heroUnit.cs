@@ -6,7 +6,7 @@ public class scr_heroUnit : scr_unit
 {
     scr_hero heroData;
 
-    public bool movementLock, ranged;
+    public bool movementLock;
     public float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +18,14 @@ public class scr_heroUnit : scr_unit
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
 
         base.Start();
-        speed  = heroData.speed;
+        foreach (scr_card.status status in cardData.statuses)
+        {
+            if (status.statusType == scr_card.status.statusTypes.swift)
+            {
+                speed += status.statusAmnt;
+            }
+        }
+        speed += heroData.speed;
     }
 
     // Update is called once per frame
@@ -27,14 +34,14 @@ public class scr_heroUnit : scr_unit
         Move(); //Call move function every frame
     }
 
-    public void Move()
+    public virtual void Move()
     {
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
             rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
         }
-        else if(movementLock && !ranged)
+        else
         {
             rb.MovePosition(rb.position + (target.transform.position - rb.position).normalized * speed * Time.deltaTime);
         }
@@ -105,8 +112,8 @@ public class scr_heroUnit : scr_unit
     private void OnTriggerEnter(Collider other)
     {
         //If the range collides with a tower
-        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower")) || other.gameObject.tag.Equals("ProductionPlant") && !other.isTrigger && other.gameObject.activeSelf &&
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !movementLock)
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("ProductionPlant"))
+            && !other.isTrigger && other.gameObject.activeSelf && gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !movementLock)
         {
             //Set movement lock to true and move towards tower position
             movementLock = true;

@@ -2134,7 +2134,9 @@ MonoBehaviour:
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
-  cardData: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  nameTXT: {fileID: 0}
+  costTXT: {fileID: 0}
+  cardData: {fileID: 11400000, guid: b697068eae4648b438927e20ab1e0b97, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
   alertText: {fileID: 0}
@@ -5581,7 +5583,9 @@ MonoBehaviour:
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
-  cardData: {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
+  nameTXT: {fileID: 0}
+  costTXT: {fileID: 0}
+  cardData: {fileID: 11400000, guid: de8954f20d9e94240a4d8b8384729988, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
   alertText: {fileID: 0}
@@ -6019,6 +6023,8 @@ MonoBehaviour:
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
+  nameTXT: {fileID: 0}
+  costTXT: {fileID: 0}
   cardData: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
   deckEditBtns: {fileID: 862113736}
   deckList: {fileID: 160336909}
@@ -6248,6 +6254,12 @@ MonoBehaviour:
   playerData:
     username: 
     currency: 0
+    equippedDeck:
+      name: 
+      loaded: 0
+      deck_id: 0
+      productionPlant: {fileID: 0}
+      cardsInDeck: []
     decksCollected: []
     cardsCollected: []
     productionPlants: []
