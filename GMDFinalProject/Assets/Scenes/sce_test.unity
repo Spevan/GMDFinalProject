@@ -224,6 +224,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -245,6 +247,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -383,17 +386,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!108 &538213360
 Light:
   m_ObjectHideFlags: 0
@@ -801,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
       propertyPath: cardPrefabs.Array.size
-      value: 22
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
       propertyPath: 'cardPrefabs.Array.data[2]'
@@ -883,6 +892,86 @@ PrefabInstance:
       propertyPath: 'cardPrefabs.Array.data[21]'
       value: 
       objectReference: {fileID: 11400000, guid: 0bcb8adb77b5d5a429e38371ee01a1f6, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[22]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e2eaa4e024a1bd46936654e677d69d7, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[23]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a61bc273e2b29140864ac1261066c92, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[24]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9965b30490d50644a82212f39ca66148, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[25]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6bf172df99eaa9c49a94f15baf04a211, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[26]'
+      value: 
+      objectReference: {fileID: 11400000, guid: afc142f132e4b1843ad4f270c3703d0f, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[27]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 49463c232a91a684dbfd6e5961f8fae6, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[28]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 41f8844746f20d946959d737d41e4380, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[29]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e04a209faaf8c74c965d5f78581606c, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[30]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b8dd31b3541774043b26fdeac6532da1, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[31]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f793de7238e378a48b6c27c749926f38, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[32]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 85ceffc22e294c84f837a4b3fedddbd4, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[33]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a4ae5163d4473c14480f10330635c966, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[34]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ff820d6592bea0d4ebb06ead389d6fff, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[35]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ab2b981a309309647ba28f9939d23c9d, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[36]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9038e949ba05cfd47b88b0186eb0e753, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[37]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 821571860cd3d6246b794ffd05d37145, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[38]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ed64ef99960260f4eb3ec3a95a40a9c3, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[39]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bdde32bc2a4813841902ac1897e9987b, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[40]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a4c043985e2320e4e810800b29cbcd25, type: 2}
+    - target: {fileID: 9148912670535135199, guid: a36fbc01ac1f73444b938c5f0d48aa1c, type: 3}
+      propertyPath: 'cardPrefabs.Array.data[41]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 51ba24be6e9b7b341b8fdb76b1ebbedb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
