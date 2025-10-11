@@ -5,12 +5,13 @@ using UnityEngine;
 public class scr_generatorUnit : scr_unit
 {
     scr_productionPlant generatorData;
+    int waterPerLevel = 5;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
-        base.Start();
         generatorData = cardData as scr_productionPlant;
+        base.Start();
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
     }
 
@@ -34,5 +35,18 @@ public class scr_generatorUnit : scr_unit
         {
             scr_player.instance.ChangeWater((int)produceDelta);
         }
-    }    
+    }
+
+    public override void SetStatuses()
+    {
+        base.SetStatuses();
+        foreach (scr_status status in cardData.statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.productive)
+            {
+                statuses.Add(status);
+                power += status.statusAmnt * waterPerLevel;
+            }
+        }
+    }
 }

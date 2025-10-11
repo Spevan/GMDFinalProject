@@ -16,7 +16,7 @@ public class scr_player : NetworkBehaviour
     public Camera cam;
     public scr_guiManager GUI;
     public GameObject plantPrefab, alertText;
-    int timeRemain;
+    int timeRemain, discountPerLevel = 5;
     private void Awake()
     {
         //NetworkManager.Singleton.SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
@@ -93,7 +93,15 @@ public class scr_player : NetworkBehaviour
 
     public void PlayCard(scr_card card)
     {
-        ChangeWater(-card.cost);
+        int discount = 0;
+        foreach (scr_status status in card.statuses)
+        {
+            if(status.statusType == scr_status.statusTypes.frugal)
+            {
+                discount = status.statusAmnt * discountPerLevel;
+            }
+        }
+        ChangeWater(-card.cost + discount);
     }
 
     public void ChangeWater(int waterDelta)

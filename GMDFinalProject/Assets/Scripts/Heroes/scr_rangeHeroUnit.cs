@@ -14,20 +14,11 @@ public class scr_rangeHeroUnit : scr_heroUnit
 
     public override void Start()
     {
-        base.Start();
-        range = this.AddComponent<SphereCollider>();
-        foreach (scr_card.status status in cardData.statuses)
-        {
-            if (status.statusType == scr_card.status.statusTypes.perceptive)
-            {
-                range.radius += status.statusAmnt;
-            }
-        }
         rangeHeroData = cardData as scr_rangeHero;
-        range.radius += rangeHeroData.range;
-        range.isTrigger = true;
-
+        range = this.AddComponent<SphereCollider>();
+        base.Start();
         ammunition = rangeHeroData.ammo;
+
         if (this.GetComponent<NetworkObject>().IsOwner)
         {
             for (int i = 0; i < amountPooledProj; i++)
@@ -116,5 +107,25 @@ public class scr_rangeHeroUnit : scr_heroUnit
     {
         //Debug.Log("tower: " + this.ToString() + " pools obj: " + ammo.ToString());
         pooledProj.Add(ammo);
+    }
+
+    public override void SetDefaultStats()
+    {
+        base.SetDefaultStats();
+        range.radius = rangeHeroData.range;
+        range.isTrigger = true;
+    }
+
+    public override void SetStatuses()
+    {
+        base.SetStatuses();
+        foreach (scr_status status in cardData.statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.perceptive)
+            {
+                statuses.Add(status);
+                range.radius += status.statusAmnt;
+            }
+        }
     }
 }

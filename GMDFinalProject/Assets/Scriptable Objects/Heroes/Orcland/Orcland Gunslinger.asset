@@ -19,10 +19,10 @@ MonoBehaviour:
   power: 15
   health: 25
   description: 
-  range: 1.5
   maxCooldown: 1
   statuses:
   - statusType: 2
     statusAmnt: 1
   speed: 1.25
+  range: 1.5
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

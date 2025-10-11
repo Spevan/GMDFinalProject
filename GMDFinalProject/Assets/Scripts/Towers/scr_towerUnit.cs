@@ -10,7 +10,7 @@ public class scr_towerUnit : scr_unit
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
-    scr_tower towerData;
+    public scr_tower towerData;
     public GameObject ammunition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,9 +22,6 @@ public class scr_towerUnit : scr_unit
 
         range = this.AddComponent<SphereCollider>();
         base.Start();
-        range.radius += towerData.range;
-        range.isTrigger = true;
-
         ammunition = towerData.ammunition;
 
         if (this.GetComponent<NetworkObject>().IsOwner)
@@ -117,6 +114,26 @@ public class scr_towerUnit : scr_unit
         {
             //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
+        }
+    }
+
+    public override void SetDefaultStats()
+    {
+        base.SetDefaultStats();
+        range.radius = towerData.range;
+        range.isTrigger = true;
+    }
+
+    public override void SetStatuses()
+    {
+        base.SetStatuses();
+        foreach (scr_status status in cardData.statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.perceptive)
+            {
+                statuses.Add(status);
+                range.radius += status.statusAmnt;
+            }
         }
     }
 }

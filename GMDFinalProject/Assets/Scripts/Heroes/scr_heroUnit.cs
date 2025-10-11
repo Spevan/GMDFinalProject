@@ -18,14 +18,6 @@ public class scr_heroUnit : scr_unit
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
 
         base.Start();
-        foreach (scr_card.status status in cardData.statuses)
-        {
-            if (status.statusType == scr_card.status.statusTypes.swift)
-            {
-                speed += status.statusAmnt;
-            }
-        }
-        speed += heroData.speed;
     }
 
     // Update is called once per frame
@@ -119,6 +111,25 @@ public class scr_heroUnit : scr_unit
             movementLock = true;
             timer = cooldown;
             target = other.gameObject;
+        }
+    }
+
+    public override void SetDefaultStats()
+    {
+        base.SetDefaultStats();
+        speed = heroData.speed;
+    }
+
+    public override void SetStatuses()
+    {
+        base.SetStatuses();
+        foreach (scr_status status in cardData.statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.swift)
+            {
+                statuses.Add(status);
+                speed += status.statusAmnt;
+            }
         }
     }
 }
