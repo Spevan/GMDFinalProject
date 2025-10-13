@@ -53,10 +53,7 @@ public class scr_guiManager : MonoBehaviour
         //Create a new card prefab
         cardsInHand.Add(Instantiate(cardPrefab, hand.transform));//.position, Quaternion.identity, hand.transform));
         scr_cardsInHand drawnCard = cardsInHand[cardsInHand.Count - 1].GetComponent<scr_cardsInHand>();
-        drawnCard.cardData = nextCard;
-        drawnCard.player = thisPlayer;
-        drawnCard.GUI = this.gameObject;
-        drawnCard.SetCardTXT();
+        drawnCard.CardDrawn(nextCard, thisPlayer, this.gameObject);
         UpdateHand();
     }
 

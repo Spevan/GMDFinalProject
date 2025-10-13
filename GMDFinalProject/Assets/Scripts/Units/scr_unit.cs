@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class scr_unit : NetworkBehaviour
 {
@@ -10,12 +11,14 @@ public class scr_unit : NetworkBehaviour
 
     public Rigidbody rb;
     public float timer, cooldown, power, health;
-    public List<scr_status> statuses;
+    public List<scr_status> statuses; public List<scr_condition> conditions;
     public GameObject target;
+    
 
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        conditions = new List<scr_condition>();
         SetStatuses();
     }
 
@@ -66,14 +69,51 @@ public class scr_unit : NetworkBehaviour
             if (status.statusType == scr_status.statusTypes.strong)
             {
                 statuses.Add(status);
-                power += status.statusAmnt;
+                power += status.statusAmnt * status.powerPerLvl;
             }
             if (status.statusType == scr_status.statusTypes.fortified)
             {
                 statuses.Add(status);
-                health += status.statusAmnt;
+                health += status.statusAmnt * status.healthPerLvl;
+            }
+            if(status.statusType == scr_status.statusTypes.healing || status.statusType == scr_status.statusTypes.frigid
+                || status.statusType == scr_status.statusTypes.heated)
+            {
+                statuses.Add(status);
             }
         }
+
+        foreach (scr_condition condition in conditions)
+        {
+            if (condition.conditionType == scr_condition.conditionTypes.weak)
+            {
+                power -= condition.conditonAmnt * condition.powerPerLvl;
+            }
+            if(condition.conditionType == scr_condition.conditionTypes.brittle)
+            {
+                health -= condition.conditonAmnt * condition.healthPerLvl;
+            }
+            if (condition.conditionType == scr_condition.conditionTypes.burnt)
+            {
+                StartCoroutine(Burning(1, condition.conditonAmnt));
+            }
+            if(condition.conditionType == scr_condition.conditionTypes.frozen)
+            {
+                cooldown += condition.conditonAmnt * condition.cooldownPerLevel;
+            }
+        }
+    }
+
+    IEnumerator Burning(float waitTime, int burnDMG)
+    {
+        ChangeHealth(burnDMG);
+        yield return new WaitForSeconds(waitTime);
+    }
+
+    public void AddCondition(scr_condition condition)
+    {
+        conditions.Add(condition);
+        SetStatuses();
     }
 
     public virtual void Death()

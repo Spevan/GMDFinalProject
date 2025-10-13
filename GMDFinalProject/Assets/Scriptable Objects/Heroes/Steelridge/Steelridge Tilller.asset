@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Steelridge Tilller
   m_EditorClassIdentifier: 
-  card_id: 1
+  rarity: 0
+  type: 3
+  card_id: 0
+  count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 3cbd755563c4ce74ba22ba635776ab92, type: 3}
   cost: 15

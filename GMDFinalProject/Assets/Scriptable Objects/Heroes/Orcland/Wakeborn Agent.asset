@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
   m_Name: Wakeborn Agent
   m_EditorClassIdentifier: 
+  rarity: 3
+  type: 0
   card_id: 1
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 61010280cd9bcc346a1e70381f37839e, type: 3}
@@ -19,10 +21,10 @@ MonoBehaviour:
   power: 10
   health: 35
   description: 
-  range: 2
   maxCooldown: 0.5
   statuses:
   - statusType: 1
     statusAmnt: 1
   speed: 1
+  range: 2
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

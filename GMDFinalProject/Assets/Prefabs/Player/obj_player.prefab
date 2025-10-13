@@ -335,7 +335,7 @@ MonoBehaviour:
   cardCount: {fileID: 7060620051668727748}
   waterCount: {fileID: 5960254868165229143}
   hand: {fileID: 8546463092204891591}
-  cardPrefab: {fileID: 1888845159088792813, guid: 440128e318e88dd40983e11ad2945398, type: 3}
+  cardPrefab: {fileID: 1888845159088792813, guid: 151b8aaf441f5524cb36983c2a1c5f45, type: 3}
   statsTab: {fileID: 713248058006541946}
   fanSpread: 7.5
   cardSpacing: -75
@@ -790,7 +790,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -798,6 +797,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &7248733654934025461
 GameObject:
   m_ObjectHideFlags: 0

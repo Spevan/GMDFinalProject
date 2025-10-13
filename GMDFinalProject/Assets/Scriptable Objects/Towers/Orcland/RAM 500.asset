@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb081a0ca35d7845b0fbe3ea94a46b4, type: 3}
   m_Name: RAM 500
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicle
+  rarity: 1
+  type: 0
   card_id: 0
+  count: 0
   loaded: 0
-  unit: {fileID: 0}
+  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
   cost: 25
   power: 20
   health: 100

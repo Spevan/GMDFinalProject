@@ -77,7 +77,7 @@ public class scr_rangeHeroUnit : scr_heroUnit
             if (!pooledProj[i].activeSelf)
             {
                 Debug.Log("This should show up, no?");
-                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject);
+                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject, this.gameObject);
                 pooledProj[i].transform.position = transform.position;
                 pooledProj[i].SetActive(true);
                 break;
@@ -124,7 +124,15 @@ public class scr_rangeHeroUnit : scr_heroUnit
             if (status.statusType == scr_status.statusTypes.perceptive)
             {
                 statuses.Add(status);
-                range.radius += status.statusAmnt;
+                range.radius += status.statusAmnt * status.rangePerLvl;
+            }
+        }
+
+        foreach (scr_condition condition in conditions)
+        {
+            if(condition.conditionType == scr_condition.conditionTypes.blind)
+            {
+                range.radius -= condition.conditonAmnt * condition.rangePerLvl;
             }
         }
     }

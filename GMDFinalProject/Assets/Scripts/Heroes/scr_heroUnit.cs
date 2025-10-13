@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -83,9 +84,15 @@ public class scr_heroUnit : scr_unit
     {
         if (target.gameObject.tag.Equals("Hero"))
         {
-            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-            target.GetComponent<scr_heroUnit>().ChangeHealth(-cardData.power);
-            //Death();
+            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+            target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
+            foreach (scr_status status in statuses)
+            {
+                if (status.statusType == scr_status.statusTypes.vampiric)
+                {
+                    ChangeHealth(Convert.ToInt32(power));
+                }
+            }
 
         }
         else if (target.gameObject.tag.Equals("Tower"))
@@ -105,12 +112,19 @@ public class scr_heroUnit : scr_unit
     {
         //If the range collides with a tower
         if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("ProductionPlant"))
-            && !other.isTrigger && other.gameObject.activeSelf && gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !movementLock)
+            && !other.isTrigger && other.gameObject.activeSelf && !movementLock)
         {
+            foreach(scr_status status in statuses)
+            {
+                if(status.statusType == scr_status.statusTypes.healing 
+                    && gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+                {
+                    movementLock = true;
+                    timer = cooldown;
+                    target = other.gameObject;
+                }
+            }
             //Set movement lock to true and move towards tower position
-            movementLock = true;
-            timer = cooldown;
-            target = other.gameObject;
         }
     }
 
@@ -129,6 +143,14 @@ public class scr_heroUnit : scr_unit
             {
                 statuses.Add(status);
                 speed += status.statusAmnt;
+            }
+        }
+
+        foreach (scr_condition condition in conditions)
+        {
+            if (condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
+            {
+                speed -= condition.conditonAmnt * condition.speedPerLvl;
             }
         }
     }

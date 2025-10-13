@@ -48,5 +48,13 @@ public class scr_generatorUnit : scr_unit
                 power += status.statusAmnt * waterPerLevel;
             }
         }
+
+        foreach (scr_condition condition in conditions)
+        {
+            if(condition.conditionType == scr_condition.conditionTypes.leaking)
+            {
+                power -= condition.conditonAmnt * waterPerLevel;
+            }
+        }
     }
 }

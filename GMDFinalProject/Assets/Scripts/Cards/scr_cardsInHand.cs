@@ -14,6 +14,14 @@ public class scr_cardsInHand : scr_cards, IDragHandler, IDropHandler
         playerCam = player.GetComponent<Camera>();
     }
 
+    public void CardDrawn(scr_card thisCard, scr_player thisPlayer, GameObject thisGUI)
+    {
+        cardData = thisCard;
+        player = thisPlayer;
+        GUI = thisGUI;
+        SetCardTXT();
+    }
+
     void IDragHandler.OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
     {
         Vector2 pos;

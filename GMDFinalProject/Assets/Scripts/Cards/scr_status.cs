@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -31,4 +32,6 @@ public class scr_status
     }
     public statusTypes statusType;
     public int statusAmnt;
+    [NonSerialized] public float rangePerLvl = 0.5f, speedPerLvl = 0.5f;
+    [NonSerialized] public int healthPerLvl = 10, powerPerLvl = 5;
 }

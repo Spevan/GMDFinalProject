@@ -4,9 +4,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class scr_ammunition : NetworkBehaviour
 {
-    [SerializeField] scr_ammo ammoData;
+    public scr_ammo ammoData;
 
-    public GameObject target;
+    public GameObject target, sourceObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,9 +37,10 @@ public class scr_ammunition : NetworkBehaviour
         }
     }
 
-    public void GetTarget(GameObject newTarget)
+    public void GetTarget(GameObject newTarget, GameObject tower)
     {
         target = newTarget;
+        sourceObj = tower;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +52,17 @@ public class scr_ammunition : NetworkBehaviour
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
+                foreach (scr_status status in sourceObj.GetComponent<scr_heroUnit>().statuses)
+                {
+                    if(status.statusType == scr_status.statusTypes.vampiric && sourceObj.tag.Equals("Hero"))
+                    {
+                        sourceObj.GetComponent<scr_heroUnit>().ChangeHealth(ammoData.damage);
+                    }
+                    else if(status.statusType == scr_status.statusTypes.vampiric && sourceObj.tag.Equals("Tower"))
+                    {
+                        sourceObj.GetComponent<scr_towerUnit>().ChangeHealth(ammoData.damage);
+                    }
+                }
             }
             else if (target.tag.Equals("Tower"))
             {
@@ -61,7 +73,7 @@ public class scr_ammunition : NetworkBehaviour
         Destroy();
     }
 
-    private void Destroy()
+    public void Destroy()
     {
         target = null;
         this.gameObject.SetActive(false);

@@ -100,6 +100,10 @@ public class scr_player : NetworkBehaviour
             {
                 discount = status.statusAmnt * discountPerLevel;
             }
+            else if(status.statusType == scr_status.statusTypes.greedy)
+            {
+                discount = -status.statusAmnt * discountPerLevel;
+            }
         }
         ChangeWater(-card.cost + discount);
     }

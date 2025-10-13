@@ -20,4 +20,9 @@ public class scr_playerData
         cardsCollected = new List<scr_card>();
         productionPlants = new List<scr_productionPlant>();
     }
+
+    public void ChangeCurrnecy(int currencyDelta)
+    {
+        currency += currencyDelta;
+    }
 }

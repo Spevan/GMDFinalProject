@@ -8,7 +8,7 @@ using UnityEngine.Playables;
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public GameObject GUI, details, temp;
-    public TextMeshProUGUI nameTXT, costTXT;
+    public TextMeshProUGUI nameTXT, costTXT, typeTXT, descTXT;
     public scr_card cardData;
 
     public void LoadData(scr_playerData gameData)
@@ -34,6 +34,8 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         nameTXT.text = cardData.name;
         costTXT.text = cardData.cost.ToString();
+        typeTXT.text = cardData.unit.tag;
+        descTXT.text = cardData.description.ToString();
     }
     
     public void SaveData(ref scr_playerData data)
@@ -41,7 +43,12 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         cardData.loaded = false;
         cardData.card_id = data.cardsCollected.Count;
         //data.cardCount.Add(data.cardCount.Count);
-        data.cardsCollected.Add(cardData);
+        if(cardData.count > 0)
+        {
+            data.cardsCollected.Add(cardData);
+            
+        }
+        cardData.count++;
         scr_dataPersistenceManager.instance.SaveGame();
         Debug.Log("Added card: " +  cardData.name + " to collection.");
     }

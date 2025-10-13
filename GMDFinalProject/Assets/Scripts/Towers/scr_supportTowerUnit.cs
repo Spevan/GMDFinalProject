@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -29,14 +30,28 @@ public class scr_towerSupportUnit : scr_towerUnit
         {
             foreach (scr_status status in cardData.statuses)
             {
-                other.gameObject.GetComponent<scr_heroUnit>().GetSupport(status);
+                if (status.statusType != scr_status.statusTypes.healing)
+                { 
+                    other.gameObject.GetComponent<scr_heroUnit>().GetSupport(status);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
+                }
             }
         }
         else if (other.gameObject.tag.Equals("Tower"))
         {
             foreach (scr_status status in cardData.statuses)
             {
-                other.gameObject.GetComponent<scr_towerUnit>().GetSupport(status);
+                if (status.statusType != scr_status.statusTypes.healing)
+                {
+                    other.gameObject.GetComponent<scr_towerUnit>().GetSupport(status);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<scr_towerUnit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
+                }
             }
         }
     }

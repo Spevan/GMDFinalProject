@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4fb252187a583499fae497aa22ae21, type: 3}
+  m_Name: First Pack
+  m_EditorClassIdentifier: Assembly-CSharp::scr_packs
+  commonsPossible:
+  - {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}
+  - {fileID: 11400000, guid: 3fc070ffa42c03f45a11176f87672a28, type: 2}
+  - {fileID: 11400000, guid: d3d7d503d2798924f80b389b4e64821a, type: 2}
+  - {fileID: 11400000, guid: 02c146378ca21ec4480e845a9f382f72, type: 2}
+  - {fileID: 11400000, guid: 6fa98b356062fe849935e933ba1ac2ea, type: 2}
+  - {fileID: 11400000, guid: aff4aeb3fb847ff4f94890764a0c9d3b, type: 2}
+  - {fileID: 11400000, guid: d508522a0a3393840862f53e82d49886, type: 2}
+  - {fileID: 11400000, guid: 6055b8a0a93501545b39484ef76036fc, type: 2}
+  - {fileID: 11400000, guid: 85ceffc22e294c84f837a4b3fedddbd4, type: 2}
+  - {fileID: 11400000, guid: a4ae5163d4473c14480f10330635c966, type: 2}
+  - {fileID: 11400000, guid: 49463c232a91a684dbfd6e5961f8fae6, type: 2}
+  - {fileID: 11400000, guid: 41f8844746f20d946959d737d41e4380, type: 2}
+  - {fileID: 11400000, guid: 821571860cd3d6246b794ffd05d37145, type: 2}
+  - {fileID: 11400000, guid: ed64ef99960260f4eb3ec3a95a40a9c3, type: 2}
+  - {fileID: 11400000, guid: 9e2eaa4e024a1bd46936654e677d69d7, type: 2}
+  - {fileID: 11400000, guid: 9a61bc273e2b29140864ac1261066c92, type: 2}
+  uncommonsPossible:
+  - {fileID: 11400000, guid: de8954f20d9e94240a4d8b8384729988, type: 2}
+  - {fileID: 11400000, guid: 8e9e607d07b394148988eb127fe61114, type: 2}
+  - {fileID: 11400000, guid: 8971a38a0c4458b44bcb5bd4fb03cb8e, type: 2}
+  - {fileID: 11400000, guid: 2dc74670f98b2934d956059ba5c77110, type: 2}
+  - {fileID: 11400000, guid: ff820d6592bea0d4ebb06ead389d6fff, type: 2}
+  - {fileID: 11400000, guid: 5e04a209faaf8c74c965d5f78581606c, type: 2}
+  - {fileID: 11400000, guid: bdde32bc2a4813841902ac1897e9987b, type: 2}
+  - {fileID: 11400000, guid: 9965b30490d50644a82212f39ca66148, type: 2}
+  raresPossible:
+  - {fileID: 11400000, guid: eed7cbbac643bef49964f5c0bfe671a3, type: 2}
+  - {fileID: 11400000, guid: 7bf21c3dc7786594ebdeef1c07bda811, type: 2}
+  - {fileID: 11400000, guid: f6af22f968efa2d43839f9821e81a085, type: 2}
+  - {fileID: 11400000, guid: e5750c31bda917f43a1226d6ce67c633, type: 2}
+  - {fileID: 11400000, guid: ab2b981a309309647ba28f9939d23c9d, type: 2}
+  - {fileID: 11400000, guid: b8dd31b3541774043b26fdeac6532da1, type: 2}
+  - {fileID: 11400000, guid: a4c043985e2320e4e810800b29cbcd25, type: 2}
+  - {fileID: 11400000, guid: 6bf172df99eaa9c49a94f15baf04a211, type: 2}
+  legendariesPossible:
+  - {fileID: 11400000, guid: b697068eae4648b438927e20ab1e0b97, type: 2}
+  - {fileID: 11400000, guid: c7af347c40fc1734a982fd9ce389ae42, type: 2}
+  - {fileID: 11400000, guid: 99c772105f64b8a4ba61d150e6a3768b, type: 2}
+  - {fileID: 11400000, guid: 0bcb8adb77b5d5a429e38371ee01a1f6, type: 2}
+  - {fileID: 11400000, guid: 9038e949ba05cfd47b88b0186eb0e753, type: 2}
+  - {fileID: 11400000, guid: f793de7238e378a48b6c27c749926f38, type: 2}
+  - {fileID: 11400000, guid: 51ba24be6e9b7b341b8fdb76b1ebbedb, type: 2}
+  - {fileID: 11400000, guid: afc142f132e4b1843ad4f270c3703d0f, type: 2}
+  cardsNum: 5
+  packPrice: 0

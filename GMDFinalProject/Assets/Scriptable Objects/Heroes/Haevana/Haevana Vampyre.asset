@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Haevana Vampyre
   m_EditorClassIdentifier: 
+  rarity: 3
+  type: 2
   card_id: 1
+  count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: da184dc6e279ab047bf7f8359faafee0, type: 3}
   cost: 40

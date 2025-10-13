@@ -7,7 +7,23 @@ using System.Collections.Generic;
 [System.Serializable]
 public class scr_card : ScriptableObject
 {
-    public int card_id;
+    public enum rarityType
+    {
+        common,
+        uncommon,
+        rare,
+        legendary
+    }
+    public rarityType rarity;
+    public enum cardType
+    {
+        orcland,
+        hartwood,
+        haevana,
+        steelridge
+    }
+    public cardType type;
+    public int card_id, count;
     public bool loaded;
     public GameObject unit;
     public int cost, power, health;

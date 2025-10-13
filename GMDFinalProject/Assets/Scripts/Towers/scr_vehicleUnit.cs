@@ -46,7 +46,15 @@ public class scr_vehicleUnit : scr_towerUnit
             if (status.statusType == scr_status.statusTypes.swift)
             {
                 statuses.Add(status);
-                speed += status.statusAmnt;
+                speed += status.statusAmnt * status.speedPerLvl;
+            }
+        }
+
+        foreach (scr_condition condition in conditions)
+        {
+            if(condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
+            {
+                speed -= condition.conditonAmnt * condition.speedPerLvl;
             }
         }
     }
