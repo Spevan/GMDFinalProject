@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   type: 3
-  card_id: 1
+  card_id: 0
   count: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}

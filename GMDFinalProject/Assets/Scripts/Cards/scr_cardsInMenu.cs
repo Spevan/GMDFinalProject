@@ -19,16 +19,7 @@ public class scr_cardsInMenu : scr_cards
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        temp = Instantiate(details, GUI.transform);
-        temp.GetComponent<scr_cardDetails>().cardData = cardData;
-        if (this.transform.localPosition.x < (GUI.GetComponentInChildren<Camera>().scaledPixelWidth / 2))
-        {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(80, 0, 5);
-        }
-        else
-        {
-            temp.transform.localPosition = this.transform.localPosition + new Vector3(-80, 0, 5);
-        }
+        base.OnPointerEnter(eventData);
 
         if (menuManager.deckEditMode == true)
         {

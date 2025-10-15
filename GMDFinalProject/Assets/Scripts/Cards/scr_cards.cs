@@ -10,6 +10,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject GUI, details, temp;
     public TextMeshProUGUI nameTXT, costTXT, typeTXT, descTXT;
     public scr_card cardData;
+    Vector3 detailPosDelta = new Vector3(135, 5, 0);
 
     public void LoadData(scr_playerData gameData)
     {
@@ -43,7 +44,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         cardData.loaded = false;
         cardData.card_id = data.cardsCollected.Count;
         //data.cardCount.Add(data.cardCount.Count);
-        if(cardData.count > 0)
+        if(cardData.count <= 0)
         {
             data.cardsCollected.Add(cardData);
             
@@ -55,18 +56,17 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        temp = Instantiate(details, GUI.transform);
-        temp.GetComponent<scr_cardDetails>().cardData = cardData;
-        if (this.transform.localPosition.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
+        if (this.transform.position.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
         {
-            temp.transform.localPosition = this.GetComponent<RectTransform>().anchorMax + new Vector2(100, 0);
+            temp = Instantiate(details, this.GetComponent<RectTransform>().position + detailPosDelta, Quaternion.identity, GUI.transform);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
         }
         else
         {
-            temp.transform.localPosition = this.GetComponent<RectTransform>().anchorMax + new Vector2(-100, 0);
+            temp = Instantiate(details, this.GetComponent<RectTransform>().position - detailPosDelta, Quaternion.identity, GUI.transform);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
         }
+        temp.GetComponent<scr_cardDetails>().cardData = cardData;
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
