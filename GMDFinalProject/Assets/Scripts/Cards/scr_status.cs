@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 
 [System.Serializable]
@@ -7,28 +8,36 @@ public class scr_status
     [System.Serializable]
     public enum statusTypes
     {
-        swift,
-        frugal,
-        perceptive,
-        strong,
-        fortified,
-        recyclable,
-        thief,
-        productive,
-        healing,
-        vampiric,
-        sleepy,
-        greedy,
-        blinding,
-        crushing,
-        heated,
-        frigid,
-        tangled,
-        miraculous,
-        paralyzer,
-        conspiracist,
-        pacifist,
-        grippy
+        [Description("Target moves at a faster speed.")]
+        Swift,
+        [Description("")]
+        Frugal,
+        [Description("")]
+        Perceptive,
+        [Description("")]
+        Strong,
+        [Description("")]
+        Fortified,
+        [Description("")]
+        Recyclable,
+        [Description("")]
+        Thief,
+        Productive,
+        Healing,
+        Vampiric,
+        Sleepy,
+        Greedy,
+        Blinding,
+        Crushing,
+        Heated,
+        Frigid,
+        [Description("Target’s attacks apply the Entangled condition.")]
+        Tangled,
+        Miraculous,
+        Paralyzer,
+        Conspiracist,
+        Pacifist,
+        Grippy
     }
     public statusTypes statusType;
     public int statusAmnt;

@@ -43,7 +43,7 @@ public class scr_vehicleUnit : scr_towerUnit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.swift)
+            if (status.statusType == scr_status.statusTypes.Swift)
             {
                 statuses.Add(status);
                 speed += status.statusAmnt * status.speedPerLvl;

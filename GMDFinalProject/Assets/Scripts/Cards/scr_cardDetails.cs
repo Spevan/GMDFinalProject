@@ -4,7 +4,9 @@ using UnityEngine;
 public class scr_cardDetails : MonoBehaviour
 {
     public scr_card cardData;
-    [SerializeField] TextMeshProUGUI health, power, cooldown, dps, speed, range;
+    [SerializeField] TextMeshProUGUI health, power, cooldown, speed, range;
+    [SerializeField] Transform statusTransform;
+    public GameObject statusPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,8 +36,20 @@ public class scr_cardDetails : MonoBehaviour
         }
         health.text = cardData.health.ToString();
         power.text = cardData.cost.ToString();
-        cooldown.text = cardData.maxCooldown.ToString();
-        dps.text = (cardData.power / cardData.maxCooldown).ToString();
+        if(cardData.maxCooldown <= 0 || cardData.power <= 0)
+        {
+            cooldown.text = 0.ToString();
+        }
+        else
+        {
+            cooldown.text = (cardData.power / cardData.maxCooldown).ToString();
+        }
+
+        foreach(scr_status status in cardData.statuses)
+        {
+            GameObject temp = Instantiate(statusPrefab, statusTransform);
+            temp.GetComponent<scr_statusInMenu>().SetStatus(status);
+        }
     }
 
     // Update is called once per frame

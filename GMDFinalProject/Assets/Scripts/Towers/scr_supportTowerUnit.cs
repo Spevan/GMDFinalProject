@@ -30,7 +30,7 @@ public class scr_towerSupportUnit : scr_towerUnit
         {
             foreach (scr_status status in cardData.statuses)
             {
-                if (status.statusType != scr_status.statusTypes.healing)
+                if (status.statusType != scr_status.statusTypes.Healing)
                 { 
                     other.gameObject.GetComponent<scr_heroUnit>().GetSupport(status);
                 }
@@ -44,7 +44,7 @@ public class scr_towerSupportUnit : scr_towerUnit
         {
             foreach (scr_status status in cardData.statuses)
             {
-                if (status.statusType != scr_status.statusTypes.healing)
+                if (status.statusType != scr_status.statusTypes.Healing)
                 {
                     other.gameObject.GetComponent<scr_towerUnit>().GetSupport(status);
                 }

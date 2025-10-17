@@ -66,18 +66,18 @@ public class scr_unit : NetworkBehaviour
         SetDefaultStats();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.strong)
+            if (status.statusType == scr_status.statusTypes.Strong)
             {
                 statuses.Add(status);
                 power += status.statusAmnt * status.powerPerLvl;
             }
-            if (status.statusType == scr_status.statusTypes.fortified)
+            if (status.statusType == scr_status.statusTypes.Fortified)
             {
                 statuses.Add(status);
                 health += status.statusAmnt * status.healthPerLvl;
             }
-            if(status.statusType == scr_status.statusTypes.healing || status.statusType == scr_status.statusTypes.frigid
-                || status.statusType == scr_status.statusTypes.heated)
+            if(status.statusType == scr_status.statusTypes.Healing || status.statusType == scr_status.statusTypes.Frigid
+                || status.statusType == scr_status.statusTypes.Heated)
             {
                 statuses.Add(status);
             }
@@ -120,7 +120,7 @@ public class scr_unit : NetworkBehaviour
     {
         foreach (scr_status status in statuses)
         {
-            if(status.statusType == scr_status.statusTypes.recyclable)
+            if(status.statusType == scr_status.statusTypes.Recyclable)
             {
                 scr_player.instance.ChangeWater(Convert.ToInt32((float)cardData.cost * ((float)status.statusAmnt * 0.5f)));
             }

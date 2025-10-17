@@ -42,7 +42,7 @@ public class scr_generatorUnit : scr_unit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.productive)
+            if (status.statusType == scr_status.statusTypes.Productive)
             {
                 statuses.Add(status);
                 power += status.statusAmnt * waterPerLevel;

@@ -88,7 +88,7 @@ public class scr_heroUnit : scr_unit
             target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
             foreach (scr_status status in statuses)
             {
-                if (status.statusType == scr_status.statusTypes.vampiric)
+                if (status.statusType == scr_status.statusTypes.Vampiric)
                 {
                     ChangeHealth(Convert.ToInt32(power));
                 }
@@ -116,7 +116,7 @@ public class scr_heroUnit : scr_unit
         {
             foreach(scr_status status in statuses)
             {
-                if(status.statusType == scr_status.statusTypes.healing 
+                if(status.statusType == scr_status.statusTypes.Healing 
                     && gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
                 {
                     movementLock = true;
@@ -139,7 +139,7 @@ public class scr_heroUnit : scr_unit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.swift)
+            if (status.statusType == scr_status.statusTypes.Swift)
             {
                 statuses.Add(status);
                 speed += status.statusAmnt;

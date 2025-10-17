@@ -96,11 +96,11 @@ public class scr_player : NetworkBehaviour
         int discount = 0;
         foreach (scr_status status in card.statuses)
         {
-            if(status.statusType == scr_status.statusTypes.frugal)
+            if(status.statusType == scr_status.statusTypes.Frugal)
             {
                 discount = status.statusAmnt * discountPerLevel;
             }
-            else if(status.statusType == scr_status.statusTypes.greedy)
+            else if(status.statusType == scr_status.statusTypes.Greedy)
             {
                 discount = -status.statusAmnt * discountPerLevel;
             }

@@ -54,11 +54,11 @@ public class scr_ammunition : NetworkBehaviour
                 target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
                 foreach (scr_status status in sourceObj.GetComponent<scr_heroUnit>().statuses)
                 {
-                    if(status.statusType == scr_status.statusTypes.vampiric && sourceObj.tag.Equals("Hero"))
+                    if(status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Hero"))
                     {
                         sourceObj.GetComponent<scr_heroUnit>().ChangeHealth(ammoData.damage);
                     }
-                    else if(status.statusType == scr_status.statusTypes.vampiric && sourceObj.tag.Equals("Tower"))
+                    else if(status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Tower"))
                     {
                         sourceObj.GetComponent<scr_towerUnit>().ChangeHealth(ammoData.damage);
                     }
