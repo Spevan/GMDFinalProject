@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70663599d8df99649b156303824152d6
+guid: fedaf1e826e9031439f5afd15aff32ce
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Water droplet_0
+      name: Card Rarities_0
       rect:
         serializedVersion: 2
         x: 27
-        y: 808
+        y: 807
         width: 266
-        height: 264
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c927764436e09c9499c053a8cae76c16
-      internalID: -1190438082
+      spriteID: 4dcd6d06e297521458b533cca59463d0
+      internalID: -181039391
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 211b48f04285315428532fb459538cf3
+    spriteID: 71a2b88520d440b4fb836af064279bbc
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Water droplet_0: -1190438082
+      Card Rarities_0: -181039391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
