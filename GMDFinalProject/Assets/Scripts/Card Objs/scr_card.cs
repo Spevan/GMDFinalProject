@@ -7,20 +7,21 @@ using System.Collections.Generic;
 [System.Serializable]
 public class scr_card : ScriptableObject
 {
+    public Sprite typeRarity;
     public enum rarityType
     {
-        common,
-        uncommon,
-        rare,
-        legendary
+        Common,
+        Uncommon,
+        Rare,
+        Legendary
     }
     public rarityType rarity;
     public enum cardType
     {
-        orcland,
-        hartwood,
-        haevana,
-        steelridge
+        Orcland,
+        Hartwood,
+        Haevana,
+        Steelridge
     }
     public cardType type;
     public int card_id, count;

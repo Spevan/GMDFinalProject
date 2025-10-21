@@ -1,15 +1,21 @@
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
+using UnityEngine.UIElements;
+using UnityEditor.UI;
 
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public GameObject GUI, details, temp;
+    public UnityEngine.UI.Image typeRarity;
     public TextMeshProUGUI nameTXT, costTXT, typeTXT, descTXT;
     public scr_card cardData;
+    bool detailsON;
     Vector3 detailPosDelta = new Vector3(135, 5, 0);
 
     public void LoadData(scr_playerData gameData)
@@ -37,6 +43,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         costTXT.text = cardData.cost.ToString();
         typeTXT.text = cardData.unit.tag;
         descTXT.text = cardData.description.ToString();
+        typeRarity.sprite = cardData.typeRarity;
     }
     
     public void SaveData(ref scr_playerData data)
@@ -58,20 +65,22 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (this.transform.position.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
         {
-            temp = Instantiate(details, this.GetComponent<RectTransform>().position + detailPosDelta, Quaternion.identity, GUI.transform);
+            temp = Instantiate(details, this.GetComponent<RectTransform>().position + detailPosDelta - new Vector3(0, 0, -100), Quaternion.identity, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
         }
         else
         {
-            temp = Instantiate(details, this.GetComponent<RectTransform>().position - detailPosDelta, Quaternion.identity, GUI.transform);
+            temp = Instantiate(details, this.GetComponent<RectTransform>().position - detailPosDelta - new Vector3(0, 0, -100), Quaternion.identity, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
         }
+        detailsON = temp.GetComponent<scr_cardDetails>().HoveredOver(this.gameObject);
         temp.GetComponent<scr_cardDetails>().cardData = cardData;
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (temp != null)
+        detailsON = false;
+        if (temp != null || !detailsON)
         {
             Destroy(temp);
         }

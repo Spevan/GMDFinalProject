@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
   m_Name: Diplomat's Office
   m_EditorClassIdentifier: 
+  typeRarity: {fileID: -558232809, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
   type: 3
   card_id: 1
+  count: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
   cost: 50

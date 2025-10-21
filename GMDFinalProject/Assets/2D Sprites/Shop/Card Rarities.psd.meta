@@ -118,7 +118,7 @@ TextureImporter:
         width: 266
         height: 266
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -127,6 +127,358 @@ TextureImporter:
       bones: []
       spriteID: 4dcd6d06e297521458b533cca59463d0
       internalID: -181039391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OrclandCommon
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 806
+        width: 270
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef0ff03c637e2e4f914312dcd3932ad
+      internalID: 860304432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OrclandUncommon
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 534
+        width: 268
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624253ff5e4211944b07cc553ba79842
+      internalID: 720597580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OrclandRare
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 266
+        width: 268
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf3a3d0975078144faf791feb5c45e24
+      internalID: -1725997984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OrclandLegendary
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 0
+        width: 269
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bfd3c3b8d9162343aa91e36466e2342
+      internalID: 569894206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HartwoodCommon
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 806
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f78d498b08ad741b887348f7c24de0
+      internalID: -1319179337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HartwoodUncommon
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 535
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16aad7964a18c8c488a51baea9d31dc3
+      internalID: -1879715581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HartwoodRare
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 268
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71f74e424feb1ea43be54dd9df654188
+      internalID: 1475676829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HartwoodLegendary
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 1
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79603f8113944844893c24b0c1563162
+      internalID: -1191198114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaevanaCommon
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 806
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d3ca10f8d073c1489f7e9a75b565226
+      internalID: 621695595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaevanaUncommon
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 537
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 374c11edc83485341b6eaaa9886c62a6
+      internalID: -1445759010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaevanaRare
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 269
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a78809ac68d18b24280ac29c634aa3fd
+      internalID: 1776656472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaevanaLegendary
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 2
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7a6d2548b728e43aab005557a3a367
+      internalID: -621302571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteelridgeCommon
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 807
+        width: 269
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66503d467cde9dc43bb9c7c33a81ae4b
+      internalID: -780782579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteelridgeUncommon
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 540
+        width: 268
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f48e6361b849ab41970f95ef1fd12a2
+      internalID: -1900378344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteelridgeRare
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 271
+        width: 268
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 337552fe045173b46ac51fdbe73a1699
+      internalID: -558232809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteelridgeLegendary
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 4
+        width: 267
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ebb5ccbb689db418f279b990720cc3
+      internalID: 1664191111
       vertices: []
       indices: 
       edges: []
@@ -146,6 +498,22 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Card Rarities_0: -181039391
+      HaevanaCommon: 621695595
+      HaevanaLegendary: -621302571
+      HaevanaRare: 1776656472
+      HaevanaUncommon: -1445759010
+      HartwoodCommon: -1319179337
+      HartwoodLegendary: -1191198114
+      HartwoodRare: 1475676829
+      HartwoodUncommon: -1879715581
+      OrclandCommon: 860304432
+      OrclandLegendary: 569894206
+      OrclandRare: -1725997984
+      OrclandUncommon: 720597580
+      SteelridgeCommon: -780782579
+      SteelridgeLegendary: 1664191111
+      SteelridgeRare: -558232809
+      SteelridgeUncommon: -1900378344
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,12 +1,14 @@
 using TMPro;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class scr_cardDetails : MonoBehaviour
+public class scr_cardDetails : MonoBehaviour, IPointerExitHandler
 {
     public scr_card cardData;
     [SerializeField] TextMeshProUGUI health, power, cooldown, speed, range;
     [SerializeField] Transform statusTransform;
-    public GameObject statusPrefab;
+    public GameObject statusPrefab, cardOrigin;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +51,20 @@ public class scr_cardDetails : MonoBehaviour
         {
             GameObject temp = Instantiate(statusPrefab, statusTransform);
             temp.GetComponent<scr_statusInMenu>().SetStatus(status);
+        }
+    }
+
+    public bool HoveredOver(GameObject card)
+    {
+        cardOrigin = card;
+        return true;
+    }
+
+    public virtual void OnPointerExit(PointerEventData eventData)
+    {
+        if (cardOrigin != null)
+        {
+            Destroy(this.gameObject);
         }
     }
 

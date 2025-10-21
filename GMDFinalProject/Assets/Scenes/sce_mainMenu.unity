@@ -1563,9 +1563,9 @@ RectTransform:
   - {fileID: 1704214421}
   m_Father: {fileID: 263588552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 480, y: -155}
   m_SizeDelta: {x: 120, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &426855783
@@ -1948,7 +1948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &475632742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3425,7 +3425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.5, y: -25.000021}
+  m_AnchoredPosition: {x: -12.5, y: -25.000023}
   m_SizeDelta: {x: 799, y: 258.29562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &760520203
@@ -3596,7 +3596,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 466172536}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5692,6 +5692,7 @@ MonoBehaviour:
   GUI: {fileID: 774256017}
   details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
   temp: {fileID: 0}
+  typeRarity: {fileID: 0}
   nameTXT: {fileID: 0}
   costTXT: {fileID: 0}
   typeTXT: {fileID: 0}
@@ -7834,10 +7835,10 @@ RectTransform:
   m_Father: {fileID: 760520202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 449.5, y: -189.14735}
-  m_SizeDelta: {x: 899, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1997286089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7855,13 +7856,13 @@ MonoBehaviour:
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
-  m_StartAxis: 1
+  m_StartAxis: 0
   m_CellSize: {x: 170, y: 200}
   m_Spacing: {x: 14, y: 20}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 5
 --- !u!114 &1997286090
 MonoBehaviour:
   m_ObjectHideFlags: 0

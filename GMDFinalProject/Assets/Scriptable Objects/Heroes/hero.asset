@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: hero
   m_EditorClassIdentifier: 
+  typeRarity: {fileID: -181039391, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  rarity: 0
+  type: 0
   card_id: 1
+  count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 324d4fd6501f588499960ec51c3fbe05, type: 3}
   cost: 1
   power: 5
   health: 10
   description: 
-  range: 2
   maxCooldown: 2
   statuses: []
   speed: 2

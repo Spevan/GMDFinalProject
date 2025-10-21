@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
   m_Name: Tripmine
   m_EditorClassIdentifier: 
+  typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   type: 1
   card_id: 0

@@ -12,15 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
   m_Name: Orcland Rifleman
   m_EditorClassIdentifier: 
-  card_id: 0
+  typeRarity: {fileID: 860304432, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  rarity: 0
+  type: 0
+  card_id: 19
+  count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 18dd8ad9d8825a74c8c139115cda5563, type: 3}
   cost: 5
   power: 5
   health: 20
   description: 
-  range: 1
   maxCooldown: 0.5
   statuses: []
   speed: 1
+  range: 1
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

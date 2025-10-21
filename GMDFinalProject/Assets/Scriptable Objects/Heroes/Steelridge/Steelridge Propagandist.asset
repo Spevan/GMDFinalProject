@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Steelridge Propagandist
   m_EditorClassIdentifier: 
+  typeRarity: {fileID: -558232809, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
   type: 3
   card_id: 1

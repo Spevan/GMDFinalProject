@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb081a0ca35d7845b0fbe3ea94a46b4, type: 3}
   m_Name: RAM 500
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicle
+  typeRarity: {fileID: 720597580, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 1
   type: 0
   card_id: 0

@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
   m_Name: rangeHero
   m_EditorClassIdentifier: 
+  typeRarity: {fileID: -181039391, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  rarity: 0
+  type: 0
   card_id: 0
+  count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: b8c9a06d64c1fcd4897fb79331803a47, type: 3}
   cost: 2
   power: 10
   health: 5
-  range: 5
   description: A dummy stupidhead (with range).
   maxCooldown: 2
-  status: 
-  statusAmnt: 
+  statuses: []
   speed: 1
-  ranged: 1
+  range: 5
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
