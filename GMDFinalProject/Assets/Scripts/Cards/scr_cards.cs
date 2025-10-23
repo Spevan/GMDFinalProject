@@ -39,9 +39,9 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void SetCardTXT()
     {
-        nameTXT.text = cardData.name;
+        nameTXT.text = "[" + cardData.name + "]";
         costTXT.text = cardData.cost.ToString();
-        typeTXT.text = cardData.unit.tag;
+        typeTXT.text = "[" + cardData.unit.tag + "]";
         descTXT.text = cardData.description.ToString();
         typeRarity.sprite = cardData.typeRarity;
     }
