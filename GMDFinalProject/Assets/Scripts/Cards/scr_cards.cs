@@ -25,7 +25,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             for(int i = 0; i < gameData.cardsCollected.Count; i++)
             {
                 Debug.Log(gameData.cardsCollected[i].name + " loaded: " + gameData.cardsCollected[i].loaded);
-                if (card.card_id == i && !card.loaded)
+                if (/*card.card_id == i &&*/ !card.loaded)
                 {
                     cardData = card;
                     card.loaded = true;
@@ -49,7 +49,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void SaveData(ref scr_playerData data)
     {
         cardData.loaded = false;
-        cardData.card_id = data.cardsCollected.Count;
+        //cardData.card_id = data.cardsCollected.Count;
         //data.cardCount.Add(data.cardCount.Count);
         if(cardData.count <= 0)
         {

@@ -29,7 +29,7 @@ public class scr_guiManager : MonoBehaviour
         CreateAnalytics();
         canvas = GetComponent<Canvas>();
         //Find all player objects to reference
-        analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
+        //analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
         UpdateAnalytics();
     }
 
@@ -116,15 +116,18 @@ public class scr_guiManager : MonoBehaviour
 
     public void UpdateAnalytics()
     {
-        for(int i = 0; i < playersList.Count; i++)
+        switch(playersList.Count)
         {
-            for (int j = 0; j < waterList.Count; j++)
-            {
-                //water updated
-                waterList[j].GetComponent<TextMeshProUGUI>().text = playersList[j].GetComponent<scr_player>().NetworkObject.NetworkObjectId.ToString();
-                waterList[j].GetComponentInChildren<TextMeshProUGUI>().text = playersList[j].GetComponent<scr_player>().water.Value.ToString();
-                //Debug.Log("player " + (j + 1) + "'s water text updated on player " + (i + 1) + "'s screen");
-            }
+            default:
+            case 0:
+                analyticsManager.UpdateAnalytics(new scr_player(), new scr_player());
+                break;
+            case 1:
+                analyticsManager.UpdateAnalytics(playersList[0].GetComponent<scr_player>(), new scr_player()); 
+                break;
+            case 2:
+                analyticsManager.UpdateAnalytics(playersList[0].GetComponent<scr_player>(), playersList[1].GetComponent<scr_player>());
+                break;
         }
     }
 }

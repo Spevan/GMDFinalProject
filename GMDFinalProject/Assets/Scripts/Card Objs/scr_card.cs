@@ -24,7 +24,7 @@ public class scr_card : ScriptableObject
         Steelridge
     }
     public cardType type;
-    public int card_id, count;
+    public int /*card_id,*/ count;
     public bool loaded;
     public GameObject unit;
     public int cost, power, health;

@@ -12,7 +12,14 @@ public class scr_homeScreen : MonoBehaviour
     {
         await InitializeUnityServices();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        await AuthenticationService.Instance.UpdatePlayerNameAsync(scr_dataPersistenceManager.instance.playerData.username);
+        if (scr_dataPersistenceManager.instance.playerData.username == "")
+        {
+            scr_dataPersistenceManager.instance.playerData.username = await AuthenticationService.Instance.GetPlayerNameAsync();
+        }
+        else
+        {
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(scr_dataPersistenceManager.instance.playerData.username);
+        }
     }
 
     async Task InitializeUnityServices()

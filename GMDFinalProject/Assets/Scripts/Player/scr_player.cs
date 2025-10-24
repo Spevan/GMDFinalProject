@@ -9,6 +9,7 @@ public class scr_player : NetworkBehaviour
 {
     public static scr_player instance { get; private set; }
 
+    public string playerName;
     public NetworkVariable<int> water = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         //steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public List<scr_card> Deck;
@@ -16,7 +17,7 @@ public class scr_player : NetworkBehaviour
     public Camera cam;
     public scr_guiManager GUI;
     public GameObject plantPrefab, alertText;
-    int timeRemain, discountPerLevel = 5;
+    public int timeRemain, discountPerLevel = 5, cardsPlayed;
     private void Awake()
     {
         //NetworkManager.Singleton.SceneManager.LoadScene("sce_gui", LoadSceneMode.Additive);
@@ -48,6 +49,7 @@ public class scr_player : NetworkBehaviour
         }
         //gameObject.AddComponent<Camera>();
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
+        playerName = scr_dataPersistenceManager.instance.playerData.username;
         GUI.ChangeCardCount(Deck.Count);
         ChangeWater(10);
         //GUI.UpdateWater(water.Value);
@@ -106,6 +108,7 @@ public class scr_player : NetworkBehaviour
             }
         }
         ChangeWater(-card.cost + discount);
+        cardsPlayed++;
     }
 
     public void ChangeWater(int waterDelta)
