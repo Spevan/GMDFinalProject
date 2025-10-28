@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
@@ -7,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
-using UnityEditor.UI;
 
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
