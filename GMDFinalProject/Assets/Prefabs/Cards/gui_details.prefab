@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -242,6 +242,8 @@ MonoBehaviour:
   statusTransform: {fileID: 978461964597720440}
   statusPrefab: {fileID: 5036703574078449090, guid: 5ece2e37f09429c4f9566733434308a4, type: 3}
   cardOrigin: {fileID: 0}
+  detailLock: 0
+  cardLock: 0
 --- !u!1 &2466738262389045609
 GameObject:
   m_ObjectHideFlags: 0

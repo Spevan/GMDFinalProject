@@ -61,27 +61,31 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        
         if (this.transform.position.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
         {
-            temp = Instantiate(details, this.GetComponent<RectTransform>().position + detailPosDelta - new Vector3(0, 0, -100), Quaternion.identity, this.transform.parent.parent);
+            Vector3 spawnPos = new Vector3(gameObject.transform.position.x + gameObject.GetComponent<RectTransform>().rect.width, gameObject.transform.position.y, gameObject.transform.position.z);
+            temp = Instantiate(details, spawnPos, Quaternion.identity, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
         }
         else
         {
-            temp = Instantiate(details, this.GetComponent<RectTransform>().position - detailPosDelta - new Vector3(0, 0, -100), Quaternion.identity, this.transform.parent.parent);
+            Vector3 spawnPos = new Vector3(gameObject.transform.position.x - gameObject.GetComponent<RectTransform>().rect.width, gameObject.transform.position.y, gameObject.transform.position.z);
+            temp = Instantiate(details, spawnPos, Quaternion.identity, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
         }
-        detailsON = temp.GetComponent<scr_cardDetails>().HoveredOver(this.gameObject);
+        //temp.GetComponent<scr_cardDetails>().LockCard(true);
         temp.GetComponent<scr_cardDetails>().cardData = cardData;
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        detailsON = false;
-        if (temp != null || !detailsON)
+        if (temp != null)
         {
             Destroy(temp);
         }
+
+        //temp.GetComponent<scr_cardDetails>().LockCard(false);
     }
 
     private void OnDestroy()
