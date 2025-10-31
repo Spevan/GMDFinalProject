@@ -17,7 +17,7 @@ public class scr_guiManager : MonoBehaviour
     public List<GameObject> cardsInHand, playersList;
 
     public scr_analyticsManager analyticsManager;
-    public TextMeshProUGUI cardsPlayed, timeElapsed;
+    public TextMeshProUGUI timeElapsed;
 
     public GameObject playerStatPrefab;
     public List<GameObject> waterList;
@@ -30,7 +30,7 @@ public class scr_guiManager : MonoBehaviour
         canvas = GetComponent<Canvas>();
         //Find all player objects to reference
         //analyticsManager = GameObject.Find("obj_analyticsManager").GetComponent<scr_analyticsManager>();
-        UpdateAnalytics();
+        //UpdateAnalytics();
     }
 
     private void Update()

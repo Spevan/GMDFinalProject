@@ -969,7 +969,6 @@ MonoBehaviour:
   cardsInHand: []
   playersList: []
   analyticsManager: {fileID: 6257954629310079784}
-  cardsPlayed: {fileID: 0}
   timeElapsed: {fileID: 571748879341144905}
   playerStatPrefab: {fileID: 248350555369265371, guid: 3f08fcde7f411834b931ff428b4d17e5, type: 3}
   waterList: []
@@ -985,7 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30d3dbfc6ca3f84d83eab1b0c492341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_analyticsManager
-  playerName: {fileID: 0}
+  playerName: {fileID: 3922627141612316250}
   deckSize: {fileID: 1658377853115002882}
   cardsPlayed: {fileID: 6996650452415585440}
   waterTotal: {fileID: 393709114362325405}
@@ -2887,6 +2886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  playerName: 
   water:
     m_InternalValue: 0
   Deck: []

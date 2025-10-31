@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
+using System.Collections;
 
 public class scr_player : NetworkBehaviour
 {
@@ -127,7 +128,8 @@ public class scr_player : NetworkBehaviour
         alertText.GetComponent<scr_alertText>().ChangeText("You won! Thanks for all your help General.\n" +
             "Please collect your reward and return to the barracks.");
         Time.timeScale = 0;
-        //SceneManager.LoadScene("sce_mainMenu");
+        WaitForSeconds(5);
+        SceneManager.LoadScene("sce_mainMenu");
     }
 
     [ClientRpc]
@@ -139,6 +141,12 @@ public class scr_player : NetworkBehaviour
         alertText.GetComponent<scr_alertText>().ChangeText("You lost... what a disgrace.\n" +
             "Your pay will be docked. Return to the barracks ashamed.");
         Time.timeScale = 0;
-        //SceneManager.LoadScene("sce_mainMenu");
+        WaitForSeconds(5);
+        SceneManager.LoadScene("sce_mainMenu");
+    }
+
+    IEnumerator WaitForSeconds(int time)
+    {
+        yield return new WaitForSeconds(time);
     }
 }
