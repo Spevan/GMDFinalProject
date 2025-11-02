@@ -10,8 +10,6 @@ public class scr_cardsInMenu : scr_cards
     scr_mainMenuManager menuManager; 
     public GameObject deckEditBtns, deckList, alertText;
 
-    string deckPath = "Assets/Scriptable Objects/Decks/";
-
     private void Start()
     {
         menuManager = GameObject.Find("gui_mainMenuButtons").GetComponent<scr_mainMenuManager>();

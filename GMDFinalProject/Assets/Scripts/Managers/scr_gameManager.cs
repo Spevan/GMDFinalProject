@@ -53,7 +53,7 @@ public class scr_gameManager : NetworkBehaviour
 
                 players[i].GetComponent<scr_player>().ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
                 GameObject obj = NetworkManager.Instantiate(players[i].GetComponent<scr_player>().ProductionPlant.unit,
-                    players[i].GetComponent<scr_player>().plantPrefab.transform.position, Quaternion.identity);
+                    players[i].GetComponent<scr_player>().plantPrefab.transform.position, new Quaternion(0, playerSpawns[i].rotation.y, 0, 0));
                 obj.GetComponent<scr_prodPlantUnit>().cardData = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
                 obj.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
             }

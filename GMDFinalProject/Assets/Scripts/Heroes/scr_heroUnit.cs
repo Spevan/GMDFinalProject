@@ -114,16 +114,22 @@ public class scr_heroUnit : scr_unit
         if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("ProductionPlant"))
             && !other.isTrigger && other.gameObject.activeSelf && !movementLock)
         {
-            foreach(scr_status status in statuses)
+            if(gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
             {
-                if(status.statusType == scr_status.statusTypes.Healing 
-                    && gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+                foreach (scr_status status in statuses)
                 {
-                    movementLock = true;
-                    timer = cooldown;
-                    target = other.gameObject;
+                    if (status.statusType == scr_status.statusTypes.Healing)
+                    {
+
+                    }
                 }
             }
+            else
+            {
+                movementLock = true;
+                timer = cooldown;
+                target = other.gameObject;
+            } 
             //Set movement lock to true and move towards tower position
         }
     }

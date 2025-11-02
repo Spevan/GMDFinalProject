@@ -11,7 +11,6 @@ public class scr_deckSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public scr_mainMenuManager menuManager;
     public scr_deck deckData;
     public GameObject nameField, options, deckList;
-    string path = "Assets/Scriptable Objects/Decks/";
 
     public scr_deck SetData(scr_deck newData, GameObject newList)
     {

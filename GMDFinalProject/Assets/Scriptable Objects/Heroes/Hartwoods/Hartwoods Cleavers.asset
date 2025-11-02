@@ -15,7 +15,6 @@ MonoBehaviour:
   typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   type: 1
-  card_id: 2
   count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: cff389bbd7b86214e8ce79bd99e2b37a, type: 3}

@@ -7,7 +7,6 @@ public class scr_deckCollection : scr_collection
     public scr_deck temp;
     public GameObject newDeck;
     public int total;
-    string path = "Assets/Scriptable Objects/Decks/";
 
     private new void OnEnable()
     {

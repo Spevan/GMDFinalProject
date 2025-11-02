@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4640057384263600510}
   - component: {fileID: -7389392417467665142}
   - component: {fileID: 6190789866291367191}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: obj_productionPlant
   m_TagString: ProductionPlant
   m_Icon: {fileID: 0}
