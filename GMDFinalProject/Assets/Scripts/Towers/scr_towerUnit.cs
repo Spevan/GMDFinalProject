@@ -6,10 +6,8 @@ using System.Collections.Generic;
 public class scr_towerUnit : scr_unit
 {
     //public new override scr_tower cardData;
-    public SphereCollider range;
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
-
     public scr_tower towerData;
     public GameObject ammunition;
 

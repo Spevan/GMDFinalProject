@@ -16,19 +16,19 @@ public class scr_card : ScriptableObject
         Legendary
     }
     public rarityType rarity;
-    public enum cardType
+    public enum cardColor
     {
         Orcland,
         Hartwood,
         Haevana,
         Steelridge
     }
-    public cardType type;
+    public cardColor color;
     public int /*card_id,*/ count;
     public bool loaded;
     public GameObject unit;
     public int cost, power, health;
     public string description;
-    public float maxCooldown;
+    public float range, maxCooldown;
     public List<scr_status> statuses = new List<scr_status>();
 }

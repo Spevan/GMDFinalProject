@@ -43,10 +43,9 @@ public class scr_ammunition : NetworkBehaviour
         sourceObj = tower;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (!other.isTrigger && 
-            gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+        if (gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             if (target.tag.Equals("Hero"))
             {
@@ -68,6 +67,11 @@ public class scr_ammunition : NetworkBehaviour
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+            }
+            else if (target.tag.Equals("ProductionPlant"))
+            {
+                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
+                target.GetComponent<scr_prodPlantUnit>().ChangeHealth(-ammoData.damage);
             }
         }
         Destroy();

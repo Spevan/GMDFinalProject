@@ -7,15 +7,12 @@ public class scr_rangeHeroUnit : scr_heroUnit
 {
     scr_rangeHero rangeHeroData;
     public GameObject ammunition;
-    public SphereCollider range;
-
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
 
     public override void Start()
     {
         rangeHeroData = cardData as scr_rangeHero;
-        range = this.AddComponent<SphereCollider>();
         base.Start();
         ammunition = rangeHeroData.ammo;
 

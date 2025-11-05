@@ -8,7 +8,7 @@ using UnityEngine;
 public class scr_unit : NetworkBehaviour
 {
     public scr_card cardData;
-
+    public SphereCollider range;
     public Rigidbody rb;
     public float timer, cooldown, power, health;
     public List<scr_status> statuses; public List<scr_condition> conditions;
@@ -19,6 +19,7 @@ public class scr_unit : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         conditions = new List<scr_condition>();
+        range = this.AddComponent<SphereCollider>();
         SetStatuses();
     }
 
