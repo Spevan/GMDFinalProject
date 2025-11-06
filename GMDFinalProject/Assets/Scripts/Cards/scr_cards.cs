@@ -91,6 +91,11 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void OnDestroy()
     {
         cardData.loaded = false;
+
+        /*---------------------------------------------
+         * REMOVE FOLLOWING SECTION BEFORE FINAL BUILD
+         ---------------------------------------------*/
+        cardData.count = 0;
     }
 
     private void OnApplicationQuit()

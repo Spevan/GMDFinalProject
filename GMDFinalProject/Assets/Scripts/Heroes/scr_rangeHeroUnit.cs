@@ -106,13 +106,6 @@ public class scr_rangeHeroUnit : scr_heroUnit
         pooledProj.Add(ammo);
     }
 
-    public override void SetDefaultStats()
-    {
-        base.SetDefaultStats();
-        range.radius = rangeHeroData.range;
-        range.isTrigger = true;
-    }
-
     public override void SetStatuses()
     {
         base.SetStatuses();

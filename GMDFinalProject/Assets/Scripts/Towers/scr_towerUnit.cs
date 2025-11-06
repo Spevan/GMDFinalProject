@@ -115,13 +115,6 @@ public class scr_towerUnit : scr_unit
         }
     }
 
-    public override void SetDefaultStats()
-    {
-        base.SetDefaultStats();
-        range.radius = towerData.range;
-        range.isTrigger = true;
-    }
-
     public override void SetStatuses()
     {
         base.SetStatuses();

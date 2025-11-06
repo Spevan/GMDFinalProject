@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4640057384263600510}
   - component: {fileID: -7389392417467665142}
   - component: {fileID: 6190789866291367191}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: obj_productionPlant
   m_TagString: ProductionPlant
   m_Icon: {fileID: 0}
@@ -33,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 6070432198559468909}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8646339, y: 3, z: 0.17287223}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: -1.8646339, y: 0.9, z: 0.17287223}
+  m_LocalScale: {x: 10, y: 3, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,8 +114,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-8258937146839427456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   cardData: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
+  range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0
   cooldown: 0

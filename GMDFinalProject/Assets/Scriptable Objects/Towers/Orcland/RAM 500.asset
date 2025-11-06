@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicle
   typeRarity: {fileID: 720597580, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 1
-  type: 0
+  color: 0
   count: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
@@ -22,11 +22,11 @@ MonoBehaviour:
   power: 20
   health: 100
   description: 
+  range: 1
   maxCooldown: 0
   statuses:
   - statusType: 6
     statusAmnt: 1
-  range: 0
   ammunition: {fileID: 0}
   speed: 2
   unitEquipped: {fileID: 0}

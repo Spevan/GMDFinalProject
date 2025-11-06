@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeRarity: {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
-  type: 3
+  color: 3
   count: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 4c545bcc814c1ee4894195176c0e401a, type: 3}
@@ -22,6 +22,7 @@ MonoBehaviour:
   power: 15
   health: 50
   description: 
+  range: 1
   maxCooldown: 1.25
   statuses:
   - statusType: 18

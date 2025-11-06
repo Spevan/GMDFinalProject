@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
-  type: 1
-  card_id: 0
+  color: 0
   count: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
@@ -23,7 +22,7 @@ MonoBehaviour:
   power: 100
   health: 0
   description: A silly little tower
+  range: 0.25
   maxCooldown: 0
   statuses: []
-  range: 0.25
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

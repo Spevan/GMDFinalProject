@@ -60,6 +60,8 @@ public class scr_unit : NetworkBehaviour
         power = cardData.power;
         cooldown = cardData.maxCooldown;
         health = cardData.health;
+        range.radius = cardData.range;
+        range.isTrigger = true;
     }
 
     public virtual void SetStatuses()
