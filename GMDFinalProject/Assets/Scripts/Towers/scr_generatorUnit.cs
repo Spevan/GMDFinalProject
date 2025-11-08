@@ -33,7 +33,7 @@ public class scr_generatorUnit : scr_unit
     {
         if (generatorData != null && NetworkManager.Singleton.LocalClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
-            scr_player.instance.ChangeWater((int)produceDelta);
+            target.GetComponent<scr_player>().ChangeWater((int)produceDelta);
         }
     }
 
@@ -56,5 +56,11 @@ public class scr_generatorUnit : scr_unit
                 power -= condition.conditonAmnt * waterPerLevel;
             }
         }
+    }
+
+    public override void Death()
+    {
+        scr_gameManager.instance.EndGameServerRpc(this.NetworkObject.OwnerClientId);
+        base.Death();
     }
 }

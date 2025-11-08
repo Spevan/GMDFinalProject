@@ -68,10 +68,10 @@ public class scr_ammunition : NetworkBehaviour
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
             }
-            else if (target.tag.Equals("ProductionPlant"))
+            else if (target.tag.Equals("Generator"))
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-                target.GetComponent<scr_prodPlantUnit>().ChangeHealth(-ammoData.damage);
+                target.GetComponent<scr_generatorUnit>().ChangeHealth(-ammoData.damage);
             }
         }
         Destroy();

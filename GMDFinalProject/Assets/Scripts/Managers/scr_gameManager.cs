@@ -1,10 +1,12 @@
-using NUnit.Framework;
-using Unity.Netcode;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using NUnit.Framework;
+using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 public class scr_gameManager : NetworkBehaviour
 {
@@ -21,7 +23,7 @@ public class scr_gameManager : NetworkBehaviour
     //List of all ammo data
     public List<GameObject> ammoPrefabs;
     //List of all clients connected
-    List<NetworkClient> clients;
+    public List<NetworkClient> clients;
 
     //Ensuring that this is the only singleton instance
     private void Awake()
@@ -36,26 +38,54 @@ public class scr_gameManager : NetworkBehaviour
         }
     }
 
+    private void OnConnectedToServer()
+    {
+        Debug.Log("Connected to server");
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        
+        
+    }
+
+    private void OnServerInitialized()
+    {
+        
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //If this is the server
+        //NetworkManager.Singleton.StartHost();
+
         if (NetworkManager.Singleton.IsServer)
         {
+            Debug.Log("GameManager Initialized");
             //Create client list
             clients = NetworkManager.Singleton.ConnectedClientsList.ToList();
+            foreach (var client in clients)
+            {
+                Debug.Log("The following clients are connected to the server: ");
+                Debug.Log(client.ToString());
+            }
 
             //For each client, create a player list
-            for (int i = 0; i < clients.Count; ++i)
+            //if (scr_dataPersistenceManager.instance != null)
             {
-                players.Add(NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation));
-                players[i].GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
+                for (int i = 0; i < clients.Count; ++i)
+                {
+                    GameObject tempPlayer = NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation);
+                    tempPlayer.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
 
-                players[i].GetComponent<scr_player>().ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
-                GameObject obj = NetworkManager.Instantiate(players[i].GetComponent<scr_player>().ProductionPlant.unit,
-                    players[i].GetComponent<scr_player>().plantPrefab.transform.position, new Quaternion(0, playerSpawns[i].rotation.y, 0, 0));
-                obj.GetComponent<scr_prodPlantUnit>().cardData = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
-                obj.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
+                    /*players[i].GetComponent<scr_player>().ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
+                    GameObject obj = NetworkManager.Instantiate(players[i].GetComponent<scr_player>().ProductionPlant.unit,
+                        players[i].GetComponent<scr_player>().plantPrefab.transform.position, new Quaternion(0, playerSpawns[i].rotation.y, 0, 0));
+                    obj.GetComponent<scr_prodPlantUnit>().cardData = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
+                    obj.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);*/
+                }
             }
         }
     }
@@ -70,8 +100,13 @@ public class scr_gameManager : NetworkBehaviour
             if(cardPrefabs[i].name == (cardName))
             {
                 //Instantiate and spawn the network object of that card's unit value
-                GameObject unit = Instantiate(cardPrefabs[i].unit, pos, rot);
+                GameObject unit = NetworkManager.Instantiate(cardPrefabs[i].unit, pos, rot);
                 unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+                Debug.Log("Spawned " +  cardName);
+                if (unit.tag.Equals("Generator"))
+                {
+                    SpawnGeneratorClientRpc(unit, i, clientID);
+                }
             }
         }
     }
@@ -82,6 +117,23 @@ public class scr_gameManager : NetworkBehaviour
     {
         //Spawn a new network obj based on parameters
         SpawnNetworkCard(cardName, pos, rot, clientID);
+    }
+
+    [ClientRpc]
+    public void SpawnGeneratorClientRpc(NetworkObjectReference unitRef, int cardPrefab, ulong clientID)
+    {
+        if (unitRef.TryGet(out NetworkObject unit))
+        {
+            Debug.Log("Assigning card data: " + cardPrefabs[cardPrefab].name + " to " + unit.name);
+            unit.GetComponent<scr_generatorUnit>().cardData = cardPrefabs[cardPrefab];
+            foreach (var player in players)
+            {
+                if (player.GetComponent<NetworkObject>().OwnerClientId == clientID)
+                {
+                    unit.GetComponent<scr_generatorUnit>().GetTarget(player);
+                }
+            }
+        }
     }
 
     [ServerRpc (RequireOwnership = false)]

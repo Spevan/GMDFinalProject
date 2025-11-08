@@ -17,6 +17,10 @@ public class scr_unit : NetworkBehaviour
 
     public virtual void Start()
     {
+        if(cardData == null)
+        {
+            cardData = ScriptableObject.CreateInstance<scr_card>();
+        }
         rb = GetComponent<Rigidbody>();
         conditions = new List<scr_condition>();
         range = this.AddComponent<SphereCollider>();
@@ -117,6 +121,11 @@ public class scr_unit : NetworkBehaviour
     {
         conditions.Add(condition);
         SetStatuses();
+    }
+
+    public void GetTarget(GameObject newTarget)
+    {
+        target = newTarget;
     }
 
     public virtual void Death()

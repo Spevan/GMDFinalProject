@@ -82,36 +82,39 @@ public class scr_heroUnit : scr_unit
     [ClientRpc]
     public void AttackClientRpc()
     {
-        if (target.gameObject.tag.Equals("Hero"))
+        if (NetworkManager.Singleton.IsServer)
         {
-            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-            target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
-            foreach (scr_status status in statuses)
+            if (target.gameObject.tag.Equals("Hero"))
             {
-                if (status.statusType == scr_status.statusTypes.Vampiric)
+                Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+                target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
+                foreach (scr_status status in statuses)
                 {
-                    ChangeHealth(Convert.ToInt32(power));
+                    if (status.statusType == scr_status.statusTypes.Vampiric)
+                    {
+                        ChangeHealth(Convert.ToInt32(power));
+                    }
                 }
-            }
 
-        }
-        else if (target.gameObject.tag.Equals("Tower"))
-        {
-            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-            target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
-            //Death();
-        }
-        else if (target.gameObject.tag.Equals("ProductionPlant"))
-        {
-            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-            target.GetComponent<scr_prodPlantUnit>().ChangeHealth(-cardData.power);
+            }
+            else if (target.gameObject.tag.Equals("Tower"))
+            {
+                Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
+                target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
+                //Death();
+            }
+            else if (target.gameObject.tag.Equals("Generator"))
+            {
+                Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
+                target.GetComponent<scr_generatorUnit>().ChangeHealth(-cardData.power);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //If the range collides with a tower
-        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("ProductionPlant"))
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("Generator"))
             && !other.isTrigger && other.gameObject.activeSelf && !movementLock)
         {
             if(gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)

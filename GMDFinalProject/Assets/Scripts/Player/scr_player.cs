@@ -27,30 +27,59 @@ public class scr_player : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(!IsOwner)
+        /*scr_gameManager.instance.players.Add(this.gameObject);
+        if (IsServer)
+        {
+            Debug.Log("Server should start here.");
+            //NetworkManager.Singleton.StartHost();
+        }
+        else
+        {
+            NetworkManager.Singleton.StartClient();
+        }*/
+
+        scr_gameManager.instance.players.Add(this.gameObject);
+
+        if (!IsOwner)
         {
             cam.enabled = false;
             return;
         }
         else
         {
-            if (instance == null)
+            /*if (instance == null)
             {
                 instance = this;
             }
             else
             {
                 Destroy(this);
-            }
+            }*/
 
-            foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
+            if (scr_dataPersistenceManager.instance != null)
             {
-                Deck.Add(card);
+                foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
+                {
+                    Deck.Add(card);
+                }
+                playerName = scr_dataPersistenceManager.instance.playerData.username;
+                ProductionPlant = scr_dataPersistenceManager.instance.playerData.equippedDeck.productionPlant;
             }
         }
         //gameObject.AddComponent<Camera>();
         //GUI = GameObject.Find("gui_canvas").GetComponent<scr_guiManager>();
-        playerName = scr_dataPersistenceManager.instance.playerData.username;
+        if(NetworkManager.Singleton.IsServer)
+        {
+            scr_gameManager.instance.SpawnNetworkCard(ProductionPlant.name, plantPrefab.transform.position, plantPrefab.transform.rotation, OwnerClientId);
+            Debug.Log("Spawned Generator on Server-side.");
+        }
+        else
+        {
+            scr_gameManager.instance.SpawnNetworkCardServerRpc(ProductionPlant.name, plantPrefab.transform.position, plantPrefab.transform.rotation, OwnerClientId);
+            Debug.Log("Spawned Generator on Client-side.");
+        }
+
+
         GUI.ChangeCardCount(Deck.Count);
         ChangeWater(10);
         //GUI.UpdateWater(water.Value);
@@ -127,9 +156,9 @@ public class scr_player : NetworkBehaviour
         alertText.SetActive(true);
         alertText.GetComponent<scr_alertText>().ChangeText("You won! Thanks for all your help General.\n" +
             "Please collect your reward and return to the barracks.");
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         WaitForSeconds(5);
-        SceneManager.LoadScene("sce_mainMenu");
+        //SceneManager.LoadScene("sce_mainMenu");
     }
 
     [ClientRpc]
@@ -140,9 +169,9 @@ public class scr_player : NetworkBehaviour
         alertText.SetActive(true);
         alertText.GetComponent<scr_alertText>().ChangeText("You lost... what a disgrace.\n" +
             "Your pay will be docked. Return to the barracks ashamed.");
-        Time.timeScale = 0;
-        WaitForSeconds(5);
-        SceneManager.LoadScene("sce_mainMenu");
+        //Time.timeScale = 0;
+        WaitForSeconds(10);
+        //SceneManager.LoadScene("sce_mainMenu");
     }
 
     IEnumerator WaitForSeconds(int time)
