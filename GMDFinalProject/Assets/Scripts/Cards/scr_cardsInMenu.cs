@@ -7,12 +7,19 @@ using UnityEngine.UI;
 
 public class scr_cardsInMenu : scr_cards
 {
-    scr_mainMenuManager menuManager; 
+    scr_mainMenuManager menuManager;
+    public TextMeshProUGUI countTXT;
     public GameObject deckEditBtns, deckList, alertText;
 
     private void Start()
     {
         menuManager = GameObject.Find("gui_mainMenuButtons").GetComponent<scr_mainMenuManager>();
+    }
+
+    public override void SetCardTXT()
+    {
+        base.SetCardTXT();
+        countTXT.text = "X" + cardData.count.ToString();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -60,20 +67,6 @@ public class scr_cardsInMenu : scr_cards
                 editList.HideDeck();
                 editList.DisplayDeck();
             }
-        }
-    }
-
-    public void RemoveCard(scr_deck tempDeck)
-    {
-        scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
-        //scr_deck tempDeck = Resources.Load<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
-        if (tempDeck != null)
-        {
-            OnPointerExit(null);
-            tempDeck.cardsInDeck.Remove(cardData);
-            //Resources.UnloadAsset(tempDeck);
-            editList.HideDeck();
-            editList.DisplayDeck();
         }
     }
 }

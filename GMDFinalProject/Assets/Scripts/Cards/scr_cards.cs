@@ -35,7 +35,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    public void SetCardTXT()
+    public virtual void SetCardTXT()
     {
         nameTXT.text = "[" + cardData.name + "]";
         costTXT.text = cardData.cost.ToString();
@@ -91,15 +91,14 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void OnDestroy()
     {
         cardData.loaded = false;
-
-        /*---------------------------------------------
-         * REMOVE FOLLOWING SECTION BEFORE FINAL BUILD
-         ---------------------------------------------*/
-        cardData.count = 0;
     }
 
     private void OnApplicationQuit()
     {
+        /*---------------------------------------------
+         * REMOVE FOLLOWING SECTION BEFORE FINAL BUILD
+         ---------------------------------------------*/
+        cardData.count = 0;
         OnDestroy();
     }
 }

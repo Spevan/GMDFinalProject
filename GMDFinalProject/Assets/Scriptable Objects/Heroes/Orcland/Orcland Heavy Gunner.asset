@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeRarity: {fileID: 860304432, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
-  type: 0
-  card_id: 4
+  color: 0
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 554f3b8803de017448ce1576e7295821, type: 3}
   cost: 25
   power: 5
   health: 75
   description: 
+  range: 1.5
   maxCooldown: 0.1
   statuses: []
   speed: 0.5
-  range: 1.5
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
