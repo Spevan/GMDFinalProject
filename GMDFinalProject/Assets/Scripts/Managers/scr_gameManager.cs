@@ -103,10 +103,10 @@ public class scr_gameManager : NetworkBehaviour
                 GameObject unit = NetworkManager.Instantiate(cardPrefabs[i].unit, pos, rot);
                 unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
                 Debug.Log("Spawned " +  cardName);
-                if (unit.tag.Equals("Generator"))
+                /*if (unit.tag.Equals("Generator") && unit.GetComponent<NetworkObject>().IsSpawned)
                 {
                     SpawnGeneratorClientRpc(unit, i, clientID);
-                }
+                }*/
             }
         }
     }
@@ -133,6 +133,10 @@ public class scr_gameManager : NetworkBehaviour
                     unit.GetComponent<scr_generatorUnit>().GetTarget(player);
                 }
             }
+        }
+        else
+        {
+            Debug.Log("Could not get data for this generator.");
         }
     }
 

@@ -18,6 +18,9 @@ public class scr_player : NetworkBehaviour
     public Camera cam;
     public scr_guiManager GUI;
     public GameObject plantPrefab, alertText;
+    const string winMsg = "You won! Thanks for all your help General.\n" +
+            "Please collect your reward and return to the barracks.", loseMsg = "You lost... what a disgrace.\n" +
+            "Your pay will be docked. Return to the barracks ashamed.";
     public int timeRemain, discountPerLevel = 5, cardsPlayed;
     private void Awake()
     {
@@ -58,6 +61,7 @@ public class scr_player : NetworkBehaviour
 
             if (scr_dataPersistenceManager.instance != null)
             {
+                Deck.Clear();
                 foreach (scr_card card in scr_dataPersistenceManager.instance.playerData.equippedDeck.cardsInDeck)
                 {
                     Deck.Add(card);
@@ -152,12 +156,15 @@ public class scr_player : NetworkBehaviour
     public void WinGameClientRpc()
     {
         //GameObject temp = Instantiate(alertText, GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.gameObject.transform);
-        alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
-        alertText.SetActive(true);
-        alertText.GetComponent<scr_alertText>().ChangeText("You won! Thanks for all your help General.\n" +
-            "Please collect your reward and return to the barracks.");
-        //Time.timeScale = 0;
-        WaitForSeconds(5);
+        //alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
+        GUI.endingTab.gameObject.SetActive(true);
+        GUI.endingTab.GetComponent<scr_ending>().Ending(winMsg, water.Value, 0, true);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+        Time.timeScale = 0;
+        //WaitForSeconds(5);
         //SceneManager.LoadScene("sce_mainMenu");
     }
 
@@ -165,12 +172,15 @@ public class scr_player : NetworkBehaviour
     public void LoseGameClientRpc()
     {
         //GameObject temp = Instantiate(alertText, GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.gameObject.transform);
-        alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
-        alertText.SetActive(true);
-        alertText.GetComponent<scr_alertText>().ChangeText("You lost... what a disgrace.\n" +
-            "Your pay will be docked. Return to the barracks ashamed.");
-        //Time.timeScale = 0;
-        WaitForSeconds(10);
+        //alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
+        GUI.GetComponent<scr_guiManager>().endingTab.gameObject.SetActive(true);
+        GUI.GetComponent<scr_guiManager>().endingTab.gameObject.GetComponent<scr_ending>().Ending(winMsg, water.Value, 0, false);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+        Time.timeScale = 0;
+        //WaitForSeconds(10);
         //SceneManager.LoadScene("sce_mainMenu");
     }
 

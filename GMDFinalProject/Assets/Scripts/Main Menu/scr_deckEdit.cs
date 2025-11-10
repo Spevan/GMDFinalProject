@@ -11,11 +11,13 @@ public class scr_deckEdit : MonoBehaviour
     public scr_deck selectedDeck; public scr_mainMenuManager menuManager;
     public GridLayoutGroup deckList;
     public TextMeshProUGUI deckName;
+    Canvas canvas;
 
     private void OnEnable()
     {
         ChangeDisplayName();
         DisplayDeck();
+        canvas = GameObject.Find("gui_canvas").GetComponent<Canvas>();
     }
 
     private void OnDisable()

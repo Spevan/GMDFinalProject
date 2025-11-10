@@ -6,7 +6,10 @@ public class scr_sceneManager : MonoBehaviour
 {
     public void ChangeSceneNetwork(string sceneName)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        }
         //SceneManager.LoadScene(sceneName);
     }
 

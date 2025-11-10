@@ -10,6 +10,7 @@ public class scr_homeScreen : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     async void Start()
     {
+        await UnityServices.InitializeAsync();
         if(!AuthenticationService.Instance.IsSignedIn)
         {
             await InitializeUnityServices();

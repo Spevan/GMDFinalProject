@@ -24,11 +24,11 @@ public class scr_vehicleUnit : scr_towerUnit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
         else
         {
-            rb.MovePosition(rb.position + (target.transform.position - rb.position).normalized * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.deltaTime);
         }
     }
 

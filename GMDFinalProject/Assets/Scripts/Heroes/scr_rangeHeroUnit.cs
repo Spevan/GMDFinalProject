@@ -39,7 +39,11 @@ public class scr_rangeHeroUnit : scr_heroUnit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+        }
+        else
+        {
+            rb.SleepRigidbody();
         }
     }
 

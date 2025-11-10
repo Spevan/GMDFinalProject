@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class scr_unit : NetworkBehaviour
 {
     public scr_card cardData;
     public SphereCollider range;
-    public Rigidbody rb;
+    public NetworkRigidbody rb;
     public float timer, cooldown, power, health;
     public List<scr_status> statuses; public List<scr_condition> conditions;
     public GameObject target;
@@ -21,7 +22,7 @@ public class scr_unit : NetworkBehaviour
         {
             cardData = ScriptableObject.CreateInstance<scr_card>();
         }
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<NetworkRigidbody>();
         conditions = new List<scr_condition>();
         range = this.AddComponent<SphereCollider>();
         SetStatuses();

@@ -1,16 +1,19 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class scr_ammunition : NetworkBehaviour
 {
     public scr_ammo ammoData;
+    NetworkRigidbody rb;
 
     public GameObject target, sourceObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponent<NetworkRigidbody>();
         Destroy();
     }
 
@@ -27,12 +30,12 @@ public class scr_ammunition : NetworkBehaviour
             Debug.Log("Tracking " +  target.name);
             Vector3 direction = (target.transform.position - transform.position).normalized;
 
-            transform.position = transform.position + direction * ammoData.speed * Time.deltaTime;
+            rb.MovePosition(transform.position + direction * ammoData.speed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(direction);
         }
         else
         {
-            transform.position = transform.position + gameObject.transform.forward * ammoData.speed * Time.deltaTime;
+            rb.MovePosition(transform.position + gameObject.transform.forward * ammoData.speed * Time.deltaTime);
             Debug.Log("Target lost.");
         }
     }
@@ -43,9 +46,9 @@ public class scr_ammunition : NetworkBehaviour
         sourceObj = tower;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+        if (gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !other.isTrigger)
         {
             if (target.tag.Equals("Hero"))
             {
@@ -53,28 +56,30 @@ public class scr_ammunition : NetworkBehaviour
                 target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
                 foreach (scr_status status in sourceObj.GetComponent<scr_heroUnit>().statuses)
                 {
-                    if(status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Hero"))
+                    if (status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Hero"))
                     {
                         sourceObj.GetComponent<scr_heroUnit>().ChangeHealth(ammoData.damage);
                     }
-                    else if(status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Tower"))
+                    else if (status.statusType == scr_status.statusTypes.Vampiric && sourceObj.tag.Equals("Tower"))
                     {
                         sourceObj.GetComponent<scr_towerUnit>().ChangeHealth(ammoData.damage);
                     }
                 }
+                Destroy();
             }
             else if (target.tag.Equals("Tower"))
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+                Destroy();
             }
             else if (target.tag.Equals("Generator"))
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_generatorUnit>().ChangeHealth(-ammoData.damage);
+                Destroy();
             }
         }
-        Destroy();
     }
 
     public void Destroy()

@@ -32,11 +32,11 @@ public class scr_heroUnit : scr_unit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            rb.MovePosition(rb.position + transform.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
         else
         {
-            rb.MovePosition(rb.position + (target.transform.position - rb.position).normalized * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.deltaTime);
         }
     }
 
@@ -53,14 +53,7 @@ public class scr_heroUnit : scr_unit
             else
             {
                 //Set movement lock to true and move towards tower position
-                if (NetworkManager.Singleton.IsServer)
-                {
-                    AttackClientRpc();
-                }
-                else
-                {
-                    AttackServerRpc();
-                }    
+                Attack();
                 timer = 0;
             }
         }
@@ -76,38 +69,35 @@ public class scr_heroUnit : scr_unit
     public void AttackServerRpc()
     {
         Debug.Log("bullshit");
-        AttackClientRpc();
+        //AttackClientRpc();
     }
 
-    [ClientRpc]
-    public void AttackClientRpc()
+    //[ClientRpc]
+    public void Attack()
     {
-        if (NetworkManager.Singleton.IsServer)
+        if (target.gameObject.tag.Equals("Hero"))
         {
-            if (target.gameObject.tag.Equals("Hero"))
+            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+            target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
+            foreach (scr_status status in statuses)
             {
-                Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-                target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
-                foreach (scr_status status in statuses)
+                if (status.statusType == scr_status.statusTypes.Vampiric)
                 {
-                    if (status.statusType == scr_status.statusTypes.Vampiric)
-                    {
-                        ChangeHealth(Convert.ToInt32(power));
-                    }
+                    ChangeHealth(Convert.ToInt32(power));
                 }
+            }
 
-            }
-            else if (target.gameObject.tag.Equals("Tower"))
-            {
-                Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-                target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
-                //Death();
-            }
-            else if (target.gameObject.tag.Equals("Generator"))
-            {
-                Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-                target.GetComponent<scr_generatorUnit>().ChangeHealth(-cardData.power);
-            }
+        }
+        else if (target.gameObject.tag.Equals("Tower"))
+        {
+            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
+            target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
+            //Death();
+        }
+        else if (target.gameObject.tag.Equals("Generator"))
+        {
+            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
+            target.GetComponent<scr_generatorUnit>().ChangeHealth(-cardData.power);
         }
     }
 
@@ -131,7 +121,7 @@ public class scr_heroUnit : scr_unit
             {
                 movementLock = true;
                 timer = cooldown;
-                target = other.gameObject;
+                GetTarget(other.gameObject);
             } 
             //Set movement lock to true and move towards tower position
         }

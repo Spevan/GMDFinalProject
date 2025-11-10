@@ -8,7 +8,7 @@ using Unity.Netcode;
 public class scr_guiManager : MonoBehaviour
 {
     public TextMeshProUGUI cardCount, waterCount;
-    public GameObject hand, cardPrefab, statsTab;
+    public GameObject hand, cardPrefab, statsTab, endingTab;
 
     public float fanSpread;
     public int cardSpacing, verticalSpacing;

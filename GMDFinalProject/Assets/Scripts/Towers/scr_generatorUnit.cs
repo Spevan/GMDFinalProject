@@ -10,6 +10,14 @@ public class scr_generatorUnit : scr_unit
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
+        //scr_gameManager.instance.SpawnGeneratorClientRpc(this.gameObject, 1, OwnerClientId);
+        foreach(GameObject player in scr_gameManager.instance.players)
+        {
+            if(player.GetComponent<NetworkObject>().OwnerClientId == OwnerClientId)
+            {
+                GetTarget(player);
+            }
+        }
         generatorData = cardData as scr_productionPlant;
         base.Start();
         transform.position = transform.position + new Vector3(0, 0.5f, 0);

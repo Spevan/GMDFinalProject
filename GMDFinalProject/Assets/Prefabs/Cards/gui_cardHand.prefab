@@ -470,7 +470,7 @@ MonoBehaviour:
   m_text: '[CardType]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
-  m_sharedMaterial: {fileID: -481332754774645681, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
+  m_sharedMaterial: {fileID: -29661196780431972, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_text: '[CardName]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
-  m_sharedMaterial: {fileID: -481332754774645681, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
+  m_sharedMaterial: {fileID: -29661196780431972, guid: a542671ba9342b345bd2e0a765f16f15, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
