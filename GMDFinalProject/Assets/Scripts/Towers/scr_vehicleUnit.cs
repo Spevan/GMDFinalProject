@@ -61,4 +61,17 @@ public class scr_vehicleUnit : scr_towerUnit
             }
         }
     }
+
+    public override void Death()
+    {
+        if(NetworkManager.IsServer)
+        {
+            scr_gameManager.instance.SpawnNetworkCard(vehicleData.unitEquipped.name, transform.position, transform.rotation, OwnerClientId);
+        }
+        else
+        {
+            scr_gameManager.instance.SpawnNetworkCardServerRpc(vehicleData.unitEquipped.name, transform.position, transform.rotation, OwnerClientId);
+        }
+        base.Death();
+    }
 }

@@ -22,10 +22,8 @@ public class scr_towerUnit : scr_unit
         {
             towerData = (scr_vehicle)cardData;
         }
-            //Set tower position so it sits above ground
-            transform.position = transform.position + new Vector3(0, 0.5f, 0);
-
-        range = this.AddComponent<SphereCollider>();
+        //Set tower position so it sits above ground
+        transform.position = transform.position + new Vector3(0, 0.5f, 0);
         base.Start();
         ammunition = towerData.ammunition;
 

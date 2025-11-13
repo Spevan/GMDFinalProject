@@ -28,4 +28,4 @@ MonoBehaviour:
   statuses: []
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
   speed: 2
-  unitEquipped: {fileID: 0}
+  unitEquipped: {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}

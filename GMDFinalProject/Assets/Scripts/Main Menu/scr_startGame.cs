@@ -9,15 +9,28 @@ public class scr_startGame : MonoBehaviour
     [SerializeField] GameObject startGameBTN;
     private void Start()
     {
-        startGameBTN.SetActive(false);
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsServer)
+        {
+            ServerSetup();
+        }
+        else
+        {
+            startGameBTN.SetActive(false);
+        }
     }
 
     private void Update()
     {
         NetworkManager.Singleton.OnServerStarted += ServerSetup;
+        NetworkManager.Singleton.OnSessionOwnerPromoted += ServerSetup;
     }
 
     void ServerSetup()
+    {
+        startGameBTN.SetActive(true);
+    }
+
+    void ServerSetup(ulong ownerClientID)
     {
         startGameBTN.SetActive(true);
     }
