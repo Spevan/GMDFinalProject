@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2815323269
+  GlobalObjectIdHash: 2300779595
   InScenePlacedSourceGlobalObjectIdHash: 2815323269
   DeferredDespawnTick: 0
   Ownership: 1
@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
   - {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
+  - {fileID: 11400000, guid: 06e63ef895fef4f459c57f1392260e11, type: 2}
   - {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
   - {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}
   - {fileID: 11400000, guid: 3fc070ffa42c03f45a11176f87672a28, type: 2}

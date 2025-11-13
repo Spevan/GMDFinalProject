@@ -9,7 +9,10 @@ public class scr_vehicleUnit : scr_towerUnit
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
-        vehicleData = towerData as scr_vehicle;
+        if (cardData.GetType() == typeof(scr_vehicle))
+        {
+            vehicleData = cardData as scr_vehicle;
+        }
         base.Start();
     }
 

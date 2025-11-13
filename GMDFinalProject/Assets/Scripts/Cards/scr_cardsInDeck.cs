@@ -41,17 +41,22 @@ public class scr_cardsInDeck : scr_cards
         deckEditBtns.SetActive(false);
     }
 
-    public void RemoveCard(scr_deck tempDeck)
+    public void RemoveCard()
     {
         scr_deckEdit editList = deckList.GetComponent<scr_deckEdit>();
         //scr_deck tempDeck = Resources.Load<scr_deck>(deckPath + editList.selectedDeck.name + ".asset");
-        if (tempDeck != null)
+        if (editList != null)
         {
             OnPointerExit(null);
-            tempDeck.cardsInDeck.Remove(cardData);
+            editList.selectedDeck.cardsInDeck.Remove(cardData);
+            deckCount--;
             //Resources.UnloadAsset(tempDeck);
             editList.HideDeck();
             editList.DisplayDeck();
+            if(deckCount <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

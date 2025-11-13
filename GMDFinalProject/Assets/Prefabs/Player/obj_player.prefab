@@ -4304,6 +4304,7 @@ MonoBehaviour:
   water:
     m_InternalValue: 0
   Deck:
+  - {fileID: 11400000, guid: 06e63ef895fef4f459c57f1392260e11, type: 2}
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}

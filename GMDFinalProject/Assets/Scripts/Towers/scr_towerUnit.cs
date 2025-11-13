@@ -8,15 +8,22 @@ public class scr_towerUnit : scr_unit
     //public new override scr_tower cardData;
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
-    public scr_tower towerData;
+    scr_tower towerData;
     public GameObject ammunition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
-        towerData = (scr_tower)cardData;
-        //Set tower position so it sits above ground
-        transform.position = transform.position + new Vector3(0, 0.5f, 0);
+        if (cardData.GetType() == typeof(scr_tower))
+        {
+            towerData = (scr_tower)cardData;
+        }
+        else if(cardData.GetType() == typeof(scr_vehicle))
+        {
+            towerData = (scr_vehicle)cardData;
+        }
+            //Set tower position so it sits above ground
+            transform.position = transform.position + new Vector3(0, 0.5f, 0);
 
         range = this.AddComponent<SphereCollider>();
         base.Start();

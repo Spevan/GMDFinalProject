@@ -174,7 +174,7 @@ public class scr_player : NetworkBehaviour
         //GameObject temp = Instantiate(alertText, GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center), Quaternion.identity, GUI.gameObject.transform);
         //alertText.transform.localPosition = GUI.gameObject.GetComponent<RectTransform>().TransformPoint(GUI.gameObject.GetComponent<RectTransform>().rect.center);
         GUI.GetComponent<scr_guiManager>().endingTab.gameObject.SetActive(true);
-        GUI.GetComponent<scr_guiManager>().endingTab.gameObject.GetComponent<scr_ending>().Ending(winMsg, water.Value, 0, false);
+        GUI.GetComponent<scr_guiManager>().endingTab.gameObject.GetComponent<scr_ending>().Ending(loseMsg, water.Value, 0, false);
         if (NetworkManager.Singleton.IsServer)
         {
             NetworkManager.Singleton.Shutdown();
