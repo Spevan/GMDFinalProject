@@ -448,6 +448,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139515482}
   m_CullTransparentMesh: 1
+--- !u!1 &140986702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 140986703}
+  - component: {fileID: 140986705}
+  - component: {fileID: 140986704}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &140986703
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140986702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1293702835}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &140986704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140986702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &140986705
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140986702}
+  m_CullTransparentMesh: 1
 --- !u!1 &143927410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,13 +2694,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1592085851}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1592085853}
+        m_TargetAssemblyTypeName: scr_vendingMachine, Assembly-CSharp
+        m_MethodName: Roll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3470,9 +3545,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: scr_addCard, Assembly-CSharp
-        m_MethodName: AddCard
+      - m_Target: {fileID: 550165379}
+        m_TargetAssemblyTypeName: scr_buttonToggle, Assembly-CSharp
+        m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3533,7 +3608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_buttonToggle
   objOff:
-  - {fileID: 426855781}
+  - {fileID: 263588551}
+  - {fileID: 884031195}
   objOn:
   - {fileID: 1592085851}
 --- !u!1 &564716733
@@ -7965,7 +8041,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 140986703}
   m_Father: {fileID: 884031196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9473,8 +9550,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe78549fb1bae564c952d92b71c8b1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_vendingMachine
-  cardsPossible: []
-  cardPrefab: {fileID: 0}
+  cardsPossible:
+  - {fileID: 11400000, guid: 8e9e607d07b394148988eb127fe61114, type: 2}
+  - {fileID: 11400000, guid: 02c146378ca21ec4480e845a9f382f72, type: 2}
+  - {fileID: 11400000, guid: d3d7d503d2798924f80b389b4e64821a, type: 2}
+  - {fileID: 11400000, guid: 7bf21c3dc7786594ebdeef1c07bda811, type: 2}
+  - {fileID: 11400000, guid: c7af347c40fc1734a982fd9ce389ae42, type: 2}
+  packPrefab: {fileID: 137136726316195929, guid: c9e5415fed09f434191205e4410a6ea9, type: 3}
+  cardPrefab: {fileID: 1888845159088792813, guid: d1f3767c5cb82534cb37aba51d11bdd9, type: 3}
   canvas: {fileID: 0}
 --- !u!114 &1592085854
 MonoBehaviour:
@@ -10920,9 +11003,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: scr_addCard, Assembly-CSharp
-        m_MethodName: AddCard
+      - m_Target: {fileID: 1787508025}
+        m_TargetAssemblyTypeName: scr_buttonToggle, Assembly-CSharp
+        m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10984,6 +11067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::scr_buttonToggle
   objOff:
   - {fileID: 1592085851}
+  - {fileID: 884031195}
   objOn:
   - {fileID: 263588551}
 --- !u!1 &1797753626
@@ -11648,6 +11732,7 @@ GameObject:
   - component: {fileID: 1920332262}
   - component: {fileID: 1920332261}
   - component: {fileID: 1920332260}
+  - component: {fileID: 1920332263}
   m_Layer: 5
   m_Name: gui_rationLine
   m_TagString: Untagged
@@ -11770,6 +11855,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920332257}
   m_CullTransparentMesh: 1
+--- !u!114 &1920332263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920332257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728adf57ec8e1c9429bf0afe3fc49adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::scr_buttonToggle
+  objOff:
+  - {fileID: 263588551}
+  - {fileID: 1592085851}
+  objOn:
+  - {fileID: 884031195}
 --- !u!1 &1947627321
 GameObject:
   m_ObjectHideFlags: 0
