@@ -64,6 +64,26 @@ public class scr_ammunition : NetworkBehaviour
                     {
                         sourceObj.GetComponent<scr_towerUnit>().ChangeHealth(ammoData.damage);
                     }
+                    if (status.statusType == scr_status.statusTypes.Sleepy)
+                    {
+                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Blinding)
+                    {
+                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Crushing)
+                    {
+                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Heated)
+                    {
+                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Frigid)
+                    {
+                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                    }
                 }
                 Destroy();
             }
@@ -71,6 +91,25 @@ public class scr_ammunition : NetworkBehaviour
             {
                 Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
                 target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
+                foreach (scr_status status in sourceObj.GetComponent<scr_towerUnit>().statuses)
+                {
+                    if (status.statusType == scr_status.statusTypes.Blinding)
+                    {
+                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Crushing)
+                    {
+                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Heated)
+                    {
+                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                    }
+                    if (status.statusType == scr_status.statusTypes.Frigid)
+                    {
+                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                    }
+                }
                 Destroy();
             }
             else if (target.tag.Equals("Generator"))

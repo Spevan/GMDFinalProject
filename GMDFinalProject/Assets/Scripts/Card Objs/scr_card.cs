@@ -7,7 +7,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class scr_card : ScriptableObject
 {
-    public Sprite typeRarity;
+    public Sprite unitSprite, typeRarity;
     public enum rarityType
     {
         Common,

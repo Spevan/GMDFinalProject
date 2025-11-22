@@ -126,7 +126,7 @@ public class scr_rangeHeroUnit : scr_heroUnit
         {
             if(condition.conditionType == scr_condition.conditionTypes.blind)
             {
-                range.radius -= condition.conditonAmnt * condition.rangePerLvl;
+                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
             }
         }
     }

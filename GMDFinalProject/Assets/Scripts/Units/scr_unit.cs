@@ -14,7 +14,6 @@ public class scr_unit : NetworkBehaviour
     public float timer, cooldown, power, health;
     public List<scr_status> statuses; public List<scr_condition> conditions;
     public GameObject target;
-    
 
     public virtual void Start()
     {
@@ -85,7 +84,7 @@ public class scr_unit : NetworkBehaviour
                 health += status.statusAmnt * status.healthPerLvl;
             }
             if(status.statusType == scr_status.statusTypes.Healing || status.statusType == scr_status.statusTypes.Frigid
-                || status.statusType == scr_status.statusTypes.Heated)
+                || status.statusType == scr_status.statusTypes.Heated || status.statusType == scr_status.statusTypes.Thief)
             {
                 statuses.Add(status);
             }
@@ -95,19 +94,30 @@ public class scr_unit : NetworkBehaviour
         {
             if (condition.conditionType == scr_condition.conditionTypes.weak)
             {
-                power -= condition.conditonAmnt * condition.powerPerLvl;
+                power -= condition.conditionAmnt * condition.powerPerLvl;
             }
-            if(condition.conditionType == scr_condition.conditionTypes.brittle)
+            if(condition.conditionType == scr_condition.conditionTypes.brittle || condition.conditionType == scr_condition.conditionTypes.leaking)
             {
-                health -= condition.conditonAmnt * condition.healthPerLvl;
+                health -= condition.conditionAmnt * condition.healthPerLvl;
             }
             if (condition.conditionType == scr_condition.conditionTypes.burnt)
             {
-                StartCoroutine(Burning(1, condition.conditonAmnt));
+                StartCoroutine(Burning(1, condition.conditionAmnt));
             }
             if(condition.conditionType == scr_condition.conditionTypes.frozen)
             {
-                cooldown += condition.conditonAmnt * condition.cooldownPerLevel;
+                cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
+            }
+        }
+    }
+
+    public void GetLeaking(int waterAmnt)
+    {
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            if (player.GetComponent<NetworkObject>().OwnerClientId == OwnerClientId)
+            {
+                player.GetComponent<scr_player>().ChangeWater(waterAmnt);
             }
         }
     }
@@ -119,6 +129,12 @@ public class scr_unit : NetworkBehaviour
     }
 
     public void AddCondition(scr_condition condition)
+    {
+        conditions.Add(condition);
+        SetStatuses();
+    }
+
+    public void AddCondition(scr_condition condition, scr_unit origin)
     {
         conditions.Add(condition);
         SetStatuses();

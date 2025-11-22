@@ -42,6 +42,14 @@ public class scr_generatorUnit : scr_unit
         if (generatorData != null && NetworkManager.Singleton.LocalClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             target.GetComponent<scr_player>().ChangeWater((int)produceDelta);
+
+            foreach (scr_condition condition in conditions)
+            {
+                if (condition.conditionType == scr_condition.conditionTypes.leaking)
+                {
+                    condition.conditionOrigin.GetComponent<scr_unit>().GetLeaking(condition.conditionAmnt);
+                }
+            }
         }
     }
 
@@ -59,9 +67,9 @@ public class scr_generatorUnit : scr_unit
 
         foreach (scr_condition condition in conditions)
         {
-            if(condition.conditionType == scr_condition.conditionTypes.leaking)
+            if (condition.conditionType == scr_condition.conditionTypes.leaking)
             {
-                power -= condition.conditonAmnt * waterPerLevel;
+                power -= condition.conditionAmnt * waterPerLevel;
             }
         }
     }

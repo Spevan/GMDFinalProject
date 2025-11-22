@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2c0cff2d2d32043b4982c13399ee3a, type: 3}
   m_Name: Haevana Necromancer
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: 1562278218, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
   typeRarity: {fileID: 1776656472, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
-  type: 2
-  card_id: 0
+  color: 0
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: fe3182394f929824795a702751c69434, type: 3}
   cost: 25
   power: 5
-  health: 100
-  description: A dummy stupidhead (with range).
+  health: 200
+  description: '"RISE MY COMRADES AND KILL FOR THE EMPEROR."'
+  range: 8
   maxCooldown: 2
   statuses:
   - statusType: 17
     statusAmnt: 1
-  speed: 0.5
-  range: 2
+  speed: 2
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

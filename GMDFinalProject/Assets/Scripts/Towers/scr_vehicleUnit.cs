@@ -57,7 +57,7 @@ public class scr_vehicleUnit : scr_towerUnit
         {
             if(condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
             {
-                speed -= condition.conditonAmnt * condition.speedPerLvl;
+                speed -= condition.conditionAmnt * condition.speedPerLvl;
             }
         }
     }

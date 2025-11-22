@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Steelridge Tilller
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: -541942633, guid: aa98317c710104f48afdf935461f2130, type: 3}
   typeRarity: {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 3
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 3cbd755563c4ce74ba22ba635776ab92, type: 3}
   cost: 15
   power: 10
-  health: 25
-  description: 
-  range: 1
+  health: 100
+  description: '"Stay off my field and we won''t have a problem..."'
+  range: 5
   maxCooldown: 1
   statuses: []
-  speed: 1
+  speed: 3

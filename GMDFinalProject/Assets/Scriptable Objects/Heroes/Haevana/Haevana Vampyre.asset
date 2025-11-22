@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Haevana Vampyre
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: 986977980, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
   typeRarity: {fileID: -621302571, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 3
   color: 2
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: da184dc6e279ab047bf7f8359faafee0, type: 3}
   cost: 40
   power: 5
-  health: 75
-  description: 
-  range: 1.75
+  health: 150
+  description: '"THEIR BLOOD MAKES ME POWERFUL!!"'
+  range: 2
   maxCooldown: 0.25
   statuses:
   - statusType: 9
     statusAmnt: 1
-  speed: 1.25
+  speed: 5

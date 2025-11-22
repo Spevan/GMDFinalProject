@@ -85,6 +85,26 @@ public class scr_heroUnit : scr_unit
                 {
                     ChangeHealth(Convert.ToInt32(power));
                 }
+                if(status.statusType == scr_status.statusTypes.Sleepy)
+                {
+                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
+                }
+                if(status.statusType == scr_status.statusTypes.Blinding)
+                {
+                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                }
+                if(status.statusType == scr_status.statusTypes.Crushing)
+                {
+                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Heated)
+                {
+                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Frigid)
+                {
+                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                }    
             }
 
         }
@@ -92,12 +112,38 @@ public class scr_heroUnit : scr_unit
         {
             Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
             target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
+            foreach (scr_status status in statuses)
+            {
+                if (status.statusType == scr_status.statusTypes.Blinding)
+                {
+                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Crushing)
+                {
+                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                }
+                if(status.statusType == scr_status.statusTypes.Heated)
+                {
+                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Frigid)
+                {
+                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                }
+            }
             //Death();
         }
         else if (target.gameObject.tag.Equals("Generator"))
         {
             Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
             target.GetComponent<scr_generatorUnit>().ChangeHealth(-cardData.power);
+            foreach (scr_status status in statuses)
+            {
+                if (status.statusType == scr_status.statusTypes.Thief)
+                {
+                    target.GetComponent<scr_generatorUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.leaking, status.statusAmnt, this.gameObject));
+                }
+            }
         }
     }
 
@@ -149,7 +195,7 @@ public class scr_heroUnit : scr_unit
         {
             if (condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
             {
-                speed -= condition.conditonAmnt * condition.speedPerLvl;
+                speed -= condition.conditionAmnt * condition.speedPerLvl;
             }
         }
     }

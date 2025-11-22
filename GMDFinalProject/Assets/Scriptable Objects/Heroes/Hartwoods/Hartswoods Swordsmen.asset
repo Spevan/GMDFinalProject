@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4835319a8b31d49835df1d72acb7a5, type: 3}
   m_Name: Hartswoods Swordsmen
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: -1287585658, guid: c0d329274d7ec614ba6dd135682f7a83, type: 3}
   typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 1
@@ -21,9 +22,9 @@ MonoBehaviour:
   unit: {fileID: 4841726575583476779, guid: cc48ea548bafa384abdf89f1701ede69, type: 3}
   cost: 15
   power: 5
-  health: 50
-  description: 
-  range: 1.5
+  health: 100
+  description: '"Cutting through..! heh.."'
+  range: 7
   maxCooldown: 0.25
   statuses: []
-  speed: 2
+  speed: 6

@@ -136,7 +136,7 @@ public class scr_towerUnit : scr_unit
         {
             if (condition.conditionType == scr_condition.conditionTypes.blind)
             {
-                range.radius -= condition.conditonAmnt * condition.rangePerLvl;
+                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
             }
         }
     }

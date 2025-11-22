@@ -21,7 +21,21 @@ public class scr_condition
         grapped
     }
     public conditionTypes conditionType;
-    public int conditonAmnt;
+    public int conditionAmnt;
     public float rangePerLvl = 0.5f, speedPerLvl = 0.5f, cooldownPerLevel = 0.1f;
     public int healthPerLvl = 10, powerPerLvl = 5;
+    public GameObject conditionOrigin;
+
+    public scr_condition(conditionTypes condition, int amnt)
+    {
+        conditionType = condition;
+        conditionAmnt = amnt;
+    }
+
+    public scr_condition(conditionTypes condition, int amnt, GameObject origin)
+    {
+        conditionType = condition;
+        conditionAmnt = amnt;
+        conditionOrigin = origin;
+    }
 }

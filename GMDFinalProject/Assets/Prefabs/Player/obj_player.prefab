@@ -4308,6 +4308,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  - {fileID: 11400000, guid: 7bf21c3dc7786594ebdeef1c07bda811, type: 2}
   ProductionPlant: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
   cam: {fileID: 3645341287546304988}
   GUI: {fileID: 8531002893481407077}

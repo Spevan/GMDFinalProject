@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public GameObject GUI, details, temp;
-    public UnityEngine.UI.Image typeRarity;
+    public UnityEngine.UI.Image unitSprite, typeRarity;
     public TextMeshProUGUI nameTXT, costTXT, typeTXT, descTXT;
     public scr_card cardData;
     bool detailsON;
@@ -41,6 +41,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         costTXT.text = cardData.cost.ToString();
         typeTXT.text = "[" + cardData.unit.tag + "]";
         descTXT.text = cardData.description.ToString();
+        unitSprite.sprite = cardData.unitSprite;
         typeRarity.sprite = cardData.typeRarity;
     }
     
@@ -98,7 +99,7 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         /*---------------------------------------------
          * REMOVE FOLLOWING SECTION BEFORE FINAL BUILD
          ---------------------------------------------*/
-        cardData.count = 0;
+        //cardData.count = 0;
         OnDestroy();
     }
 }
