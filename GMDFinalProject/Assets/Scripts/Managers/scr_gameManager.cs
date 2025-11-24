@@ -4,8 +4,8 @@ using System.Linq;
 using NUnit.Framework;
 using Unity.Netcode;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.UI.CanvasScaler;
 
 public class scr_gameManager : NetworkBehaviour
@@ -38,21 +38,20 @@ public class scr_gameManager : NetworkBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
+    }
+
     private void OnConnectedToServer()
     {
         Debug.Log("Connected to server");
+        
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        
-        
-    }
-
-    private void OnServerInitialized()
-    {
-        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -77,9 +76,9 @@ public class scr_gameManager : NetworkBehaviour
             {
                 for (int i = 0; i < clients.Count; ++i)
                 {
-                    GameObject tempPlayer = NetworkManager.Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation);
+                    GameObject tempPlayer = Instantiate(player, playerSpawns[i].position, playerSpawns[i].rotation);
                     tempPlayer.GetComponent<NetworkObject>().SpawnWithOwnership(clients[i].ClientId);
-                    players.Add(tempPlayer);
+                    //players.Add(tempPlayer);
                 }
 
                /* int count = 0;
@@ -125,7 +124,7 @@ public class scr_gameManager : NetworkBehaviour
         SpawnNetworkCard(cardName, pos, rot, clientID);
     }
 
-    [ClientRpc]
+    /*[ClientRpc]
     public void SpawnGeneratorClientRpc(NetworkObjectReference unitRef, int cardPrefab, ulong clientID)
     {
         if (unitRef.TryGet(out NetworkObject unit))
@@ -144,7 +143,7 @@ public class scr_gameManager : NetworkBehaviour
         {
             Debug.Log("Could not get data for this generator.");
         }
-    }
+    }*/
 
     [ServerRpc (RequireOwnership = false)]
     public void EndGameServerRpc(ulong losingClient)
@@ -160,5 +159,27 @@ public class scr_gameManager : NetworkBehaviour
                 players[i].GetComponent<scr_player>().WinGameClientRpc();
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
+    }
+
+    void OnClientDisconnect(ulong clientId)
+    {
+        if (this.gameObject.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.ServerClientId)
+        {
+            Debug.Log("You are now disconnecting the server");
+            //SceneManager.LoadScene("sce_mainMenu");
+        }
+    }
+
+    [ClientRpc (RequireOwnership = false)]
+    void HostDisconnectedClientRpc()
+    {
+        Debug.Log("Host Disconnected");
+        
+        Destroy(NetworkManager.Singleton.gameObject);
     }
 }

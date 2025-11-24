@@ -68,6 +68,7 @@ public class scr_rangeHeroUnit : scr_heroUnit
         {
             Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
+            movementLock = false;
         }
     }
 

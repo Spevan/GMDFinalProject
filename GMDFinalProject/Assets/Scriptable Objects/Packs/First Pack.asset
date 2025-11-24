@@ -57,4 +57,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51ba24be6e9b7b341b8fdb76b1ebbedb, type: 2}
   - {fileID: 11400000, guid: afc142f132e4b1843ad4f270c3703d0f, type: 2}
   cardsNum: 5
-  packPrice: 0
+  packPrice: 10

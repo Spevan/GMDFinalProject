@@ -42,6 +42,7 @@ public class scr_generatorUnit : scr_unit
         if (generatorData != null && NetworkManager.Singleton.LocalClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
             target.GetComponent<scr_player>().ChangeWater((int)produceDelta);
+            target.GetComponent<scr_player>().DrawCard();
 
             foreach (scr_condition condition in conditions)
             {

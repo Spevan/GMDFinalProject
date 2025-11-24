@@ -38,17 +38,19 @@ public class scr_analyticsManager : MonoBehaviour
         if (player1 != null)
         {
             playerName.text = player1.playerName;
-            deckSize.text = player1.Deck.Count.ToString();
-            cardsPlayed.text = player1.cardsPlayed.ToString();
+            deckSize.text = player1.deckCount.Value.ToString();
+            cardsPlayed.text = player1.cardsPlayed.Value.ToString();
             waterTotal.text = player1.water.Value.ToString();
+            targetsDestroyed.text = player1.destroyCount.Value.ToString();
         }
 
         if (player2 != null)
         {
             enemyPlayerName.text = player2.playerName;
-            enemyDeckSize.text = player2.Deck.Count.ToString();
-            enemyCardsPlayed.text = player2.cardsPlayed.ToString();
+            enemyDeckSize.text = player2.deckCount.Value.ToString();
+            enemyCardsPlayed.text = player2.cardsPlayed.Value.ToString();
             enemyWaterTotal.text = player2.water.Value.ToString();
+            enemyTargetsDestroyed.text = player2.destroyCount.Value.ToString();
         }
     }
 }

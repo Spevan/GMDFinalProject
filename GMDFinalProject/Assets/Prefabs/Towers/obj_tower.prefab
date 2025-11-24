@@ -165,7 +165,6 @@ MonoBehaviour:
   target: {fileID: 0}
   pooledProj: []
   amountPooledProj: 5
-  towerData: {fileID: 0}
   ammunition: {fileID: 0}
 --- !u!114 &9060199011452161778
 MonoBehaviour:

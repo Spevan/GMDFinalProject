@@ -154,6 +154,22 @@ public class scr_unit : NetworkBehaviour
                 scr_player.instance.ChangeWater(Convert.ToInt32((float)cardData.cost * ((float)status.statusAmnt * 0.5f)));
             }
         }
+
+        foreach(GameObject player in scr_gameManager.instance.players)
+        {
+            if (player.GetComponent<NetworkObject>().OwnerClientId != this.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+            {
+                if (NetworkManager.IsServer)
+                {
+                    player.GetComponent<scr_player>().AddKillCount();
+                }
+                else
+                {
+                    player.GetComponent<scr_player>().AddKillCountServerRpc();
+                }
+            }
+        }
+
         this.gameObject.SetActive(false);
     }
 }

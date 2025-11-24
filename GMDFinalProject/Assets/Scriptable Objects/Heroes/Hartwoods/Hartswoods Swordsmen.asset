@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   color: 1
   count: 0
-  deckCount: 4
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: cc48ea548bafa384abdf89f1701ede69, type: 3}
   cost: 15

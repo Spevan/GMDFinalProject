@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 4218285781164175412}
   - component: {fileID: 8298488715434275764}
   - component: {fileID: 8455534900628582731}
+  - component: {fileID: 8594061197754820570}
   m_Layer: 5
   m_Name: gui_returnBTN
   m_TagString: Untagged
@@ -835,6 +836,18 @@ MonoBehaviour:
           m_StringArgument: sce_mainMenu
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8594061197754820570}
+        m_TargetAssemblyTypeName: scr_disconnectHandler, Assembly-CSharp
+        m_MethodName: Disconnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8455534900628582731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,6 +860,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5858ef4b5b832b4eb0cc3b8f3facd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_sceneManager
+--- !u!114 &8594061197754820570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266569853718955799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea55cfbf8a866584d8926f805bbbc57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::scr_disconnectHandler
 --- !u!1 &1366409996319165250
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,7 +4329,7 @@ MonoBehaviour:
   water:
     m_InternalValue: 0
   Deck:
-  - {fileID: 11400000, guid: 06e63ef895fef4f459c57f1392260e11, type: 2}
+  - {fileID: 11400000, guid: 6fa98b356062fe849935e933ba1ac2ea, type: 2}
   - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
   - {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
   - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
@@ -5496,7 +5521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2903258844884218169, guid: 2e3dcc2aa8c312241b6a1a22402f952e, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474863427272789647, guid: 2e3dcc2aa8c312241b6a1a22402f952e, type: 3}
       propertyPath: m_text

@@ -14,7 +14,7 @@ public class scr_playerData
     public scr_playerData()
     {
         username = "";
-        currency = 0;
+        currency = 100;
         equippedDeck = new scr_deck();
         decksCollected = new List<scr_deck>();
         cardsCollected = new List<scr_card>();

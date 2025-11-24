@@ -3878,6 +3878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obj_networkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3764309318901543796, guid: acd45c137157efb42b116415fee68785, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8328441023849442520, guid: acd45c137157efb42b116415fee68785, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

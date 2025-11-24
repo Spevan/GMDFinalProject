@@ -29,4 +29,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: faf992527d8337448a82d342bd633f50, type: 2}
   - {fileID: 11400000, guid: 33dcedcfec12b3c4884381276003bd99, type: 2}
   cardsNum: 1
-  packPrice: 0
+  packPrice: 5

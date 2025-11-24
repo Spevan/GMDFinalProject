@@ -16,8 +16,8 @@ MonoBehaviour:
   typeRarity: {fileID: -1900378344, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 1
   color: 3
-  count: 4
-  deckCount: 1
+  count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 3f7114b0827e89f4d8428a48b52bb9b9, type: 3}
   cost: 25
