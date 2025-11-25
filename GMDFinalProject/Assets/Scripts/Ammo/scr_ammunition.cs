@@ -18,7 +18,7 @@ public class scr_ammunition : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         Move();
     }
@@ -30,12 +30,12 @@ public class scr_ammunition : NetworkBehaviour
             Debug.Log("Tracking " +  target.name);
             Vector3 direction = (target.transform.position - transform.position).normalized;
 
-            rb.MovePosition(transform.position + direction * ammoData.speed * Time.deltaTime);
+            rb.MovePosition(transform.position + direction * ammoData.speed * Time.fixedDeltaTime);
             transform.rotation = Quaternion.LookRotation(direction);
         }
         else
         {
-            rb.MovePosition(transform.position + gameObject.transform.forward * ammoData.speed * Time.deltaTime);
+            rb.MovePosition(transform.position + gameObject.transform.forward * ammoData.speed * Time.fixedDeltaTime);
             Debug.Log("Target lost.");
         }
     }

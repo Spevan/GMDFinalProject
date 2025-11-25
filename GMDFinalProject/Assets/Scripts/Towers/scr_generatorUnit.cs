@@ -24,7 +24,7 @@ public class scr_generatorUnit : scr_unit
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(timer <= cooldown)
         {

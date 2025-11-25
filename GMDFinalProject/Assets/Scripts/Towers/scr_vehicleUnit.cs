@@ -17,7 +17,7 @@ public class scr_vehicleUnit : scr_towerUnit
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
@@ -27,11 +27,11 @@ public class scr_vehicleUnit : scr_towerUnit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
         }
         else
         {
-            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.fixedDeltaTime);
         }
     }
 

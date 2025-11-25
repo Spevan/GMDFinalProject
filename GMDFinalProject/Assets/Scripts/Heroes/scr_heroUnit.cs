@@ -22,7 +22,7 @@ public class scr_heroUnit : scr_unit
     }
 
     // Update is called once per frame
-    public void Update()
+    public void FixedUpdate()
     {
         Move(); //Call move function every frame
     }
@@ -32,11 +32,11 @@ public class scr_heroUnit : scr_unit
         if (!movementLock) //If the movement lock is false
         {
             //Hero moves forward
-            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
         }
         else
         {
-            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.deltaTime);
+            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.fixedDeltaTime);
         }
     }
 

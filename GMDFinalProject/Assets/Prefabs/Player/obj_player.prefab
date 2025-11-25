@@ -4328,20 +4328,40 @@ MonoBehaviour:
   playerName: Newb
   water:
     m_InternalValue: 0
+  cardsPlayed:
+    m_InternalValue: 0
+  destroyCount:
+    m_InternalValue: 0
+  deckCount:
+    m_InternalValue: 0
   Deck:
-  - {fileID: 11400000, guid: 6fa98b356062fe849935e933ba1ac2ea, type: 2}
-  - {fileID: 11400000, guid: 4075cd14b9121c84083fc447ac407e82, type: 2}
-  - {fileID: 11400000, guid: 3f64c9db39fef76498b8e06fc14c20ef, type: 2}
-  - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  - {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}
+  - {fileID: 11400000, guid: 3fc070ffa42c03f45a11176f87672a28, type: 2}
+  - {fileID: 11400000, guid: de8954f20d9e94240a4d8b8384729988, type: 2}
+  - {fileID: 11400000, guid: eed7cbbac643bef49964f5c0bfe671a3, type: 2}
+  - {fileID: 11400000, guid: b697068eae4648b438927e20ab1e0b97, type: 2}
+  - {fileID: 11400000, guid: d3d7d503d2798924f80b389b4e64821a, type: 2}
+  - {fileID: 11400000, guid: 8e9e607d07b394148988eb127fe61114, type: 2}
+  - {fileID: 11400000, guid: 02c146378ca21ec4480e845a9f382f72, type: 2}
   - {fileID: 11400000, guid: 7bf21c3dc7786594ebdeef1c07bda811, type: 2}
-  ProductionPlant: {fileID: 11400000, guid: 62be60e5cf9c14c44ad2e7d8ba836128, type: 2}
+  - {fileID: 11400000, guid: c7af347c40fc1734a982fd9ce389ae42, type: 2}
+  - {fileID: 11400000, guid: 6fa98b356062fe849935e933ba1ac2ea, type: 2}
+  - {fileID: 11400000, guid: aff4aeb3fb847ff4f94890764a0c9d3b, type: 2}
+  - {fileID: 11400000, guid: 8971a38a0c4458b44bcb5bd4fb03cb8e, type: 2}
+  - {fileID: 11400000, guid: f6af22f968efa2d43839f9821e81a085, type: 2}
+  - {fileID: 11400000, guid: 99c772105f64b8a4ba61d150e6a3768b, type: 2}
+  - {fileID: 11400000, guid: d508522a0a3393840862f53e82d49886, type: 2}
+  - {fileID: 11400000, guid: 6055b8a0a93501545b39484ef76036fc, type: 2}
+  - {fileID: 11400000, guid: 2dc74670f98b2934d956059ba5c77110, type: 2}
+  - {fileID: 11400000, guid: e5750c31bda917f43a1226d6ce67c633, type: 2}
+  - {fileID: 11400000, guid: 0bcb8adb77b5d5a429e38371ee01a1f6, type: 2}
+  ProductionPlant: {fileID: 11400000, guid: a4ed5a99f93656640a3ee724fa4fc00b, type: 2}
   cam: {fileID: 3645341287546304988}
   GUI: {fileID: 8531002893481407077}
   plantPrefab: {fileID: 9202403203659460438}
   alertText: {fileID: 2885243069454003088}
   timeRemain: 0
   discountPerLevel: 5
-  cardsPlayed: 0
 --- !u!20 &3645341287546304988
 Camera:
   m_ObjectHideFlags: 0

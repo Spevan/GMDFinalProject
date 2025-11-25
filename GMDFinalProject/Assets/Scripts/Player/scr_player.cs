@@ -166,7 +166,7 @@ public class scr_player : NetworkBehaviour
         GUI.UpdateAnalytics();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void AddKillCountServerRpc()
     {
         AddKillCount();
