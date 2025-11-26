@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
   m_Name: Scorched Earth
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: 0}
   typeRarity: {fileID: 1475676829, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
-  type: 1
-  card_id: 22
+  color: 1
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
   cost: 40
-  power: 5
   health: 50
-  description: A silly little tower
+  description: 'Leaves a burning trail that leaves enemies unable to access resources. '
+  power: 3
+  range: 3
   maxCooldown: 0.25
   statuses:
   - statusType: 14
-    statusAmnt: 1
-  range: 0.75
-  ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
+    statusAmnt: 2
+  ammunition: {fileID: 0}

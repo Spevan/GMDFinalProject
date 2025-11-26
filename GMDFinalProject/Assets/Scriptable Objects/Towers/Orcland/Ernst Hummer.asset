@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb081a0ca35d7845b0fbe3ea94a46b4, type: 3}
   m_Name: Ernst Hummer
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicle
+  unitSprite: {fileID: 0}
   typeRarity: {fileID: 860304432, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 0
@@ -19,13 +20,14 @@ MonoBehaviour:
   deckCount: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: 2df1f893d75da774bb5d54e22778f06f, type: 3}
-  cost: 15
-  power: 10
-  health: 75
-  description: 
-  range: 1
-  maxCooldown: 0.75
+  cost: 25
+  health: 100
+  description: A small truck that holds two Rifleman heroes, one armed with a mounted
+    rifle.
+  power: 5
+  range: 6
+  maxCooldown: 0.5
   statuses: []
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
-  speed: 1.5
-  unitEquipped: {fileID: 0}
+  speed: 4
+  unitEquipped: {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}

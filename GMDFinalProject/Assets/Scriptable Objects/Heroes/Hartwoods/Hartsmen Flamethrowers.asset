@@ -21,13 +21,13 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: ec2def53edd927044b10b02220d2e50a, type: 3}
   cost: 15
-  power: 3
-  health: 70
+  health: 50
   description: '"Have you ever had a flaming knife thrown at you?"'
+  power: 3
   range: 6
-  maxCooldown: 0.1
+  maxCooldown: 0.5
   statuses:
   - statusType: 14
     statusAmnt: 1
-  speed: 7
+  speed: 5
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

@@ -21,12 +21,12 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 4c545bcc814c1ee4894195176c0e401a, type: 3}
   cost: 20
-  power: 15
   health: 150
   description: '"Get near the water and I''m going to smash you!"'
+  power: 10
   range: 6
   maxCooldown: 1.5
   statuses:
   - statusType: 18
     statusAmnt: 1
-  speed: 5
+  speed: 2

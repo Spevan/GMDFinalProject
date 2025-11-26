@@ -21,12 +21,12 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: da184dc6e279ab047bf7f8359faafee0, type: 3}
   cost: 40
-  power: 5
-  health: 150
-  description: '"THEIR BLOOD MAKES ME POWERFUL!!"'
+  health: 75
+  description: '"THEIR BLOOD GIVES ME STRENGTH!!"'
+  power: 30
   range: 2
-  maxCooldown: 0.25
+  maxCooldown: 1.5
   statuses:
   - statusType: 9
-    statusAmnt: 1
-  speed: 5
+    statusAmnt: 2
+  speed: 4

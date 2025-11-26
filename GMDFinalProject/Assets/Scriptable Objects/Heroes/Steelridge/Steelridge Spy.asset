@@ -21,12 +21,12 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: baf3a4ed9605aef4093d52286a4ebc41, type: 3}
   cost: 40
-  power: 1
   health: 50
   description: '"Hey friend, don''t you love the Secretary?! Join the Special Forces!"'
+  power: 1
   range: 3
-  maxCooldown: 5
+  maxCooldown: 10
   statuses:
   - statusType: 19
-    statusAmnt: 1
+    statusAmnt: 2
   speed: 4

@@ -27,7 +27,7 @@ public class scr_unit : NetworkBehaviour
         SetStatuses();
     }
 
-    public void ChangeHealth(int delta)
+    public void ChangeHealth(float delta)
     {
         health += delta;
 

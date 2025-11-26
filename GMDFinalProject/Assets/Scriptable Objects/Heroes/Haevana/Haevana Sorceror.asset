@@ -21,10 +21,10 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 78a0fc5226d962340b1f30d30c1d3c5f, type: 3}
   cost: 20
-  power: 10
   health: 100
   description: '"My ki beads help channel my spells into my punches." '
+  power: 20
   range: 4
-  maxCooldown: 0.5
+  maxCooldown: 2
   statuses: []
-  speed: 6
+  speed: 5

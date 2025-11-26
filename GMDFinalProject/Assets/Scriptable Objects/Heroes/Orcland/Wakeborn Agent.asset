@@ -21,11 +21,11 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 61010280cd9bcc346a1e70381f37839e, type: 3}
   cost: 50
-  power: 10
-  health: 100
+  health: 125
   description: '"Y0U C4Nt E5C4P3 N0W"'
+  power: 5
   range: 10
-  maxCooldown: 0.5
+  maxCooldown: 0.25
   statuses:
   - statusType: 1
     statusAmnt: 1

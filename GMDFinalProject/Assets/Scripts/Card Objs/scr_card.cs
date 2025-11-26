@@ -27,8 +27,8 @@ public class scr_card : ScriptableObject
     public int /*card_id,*/ count, deckCount;
     public bool loaded;
     public GameObject unit;
-    public int cost, power, health;
+    public int cost, health;
     public string description;
-    public float range, maxCooldown;
+    public float power, range, maxCooldown;
     public List<scr_status> statuses = new List<scr_status>();
 }

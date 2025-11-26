@@ -21,13 +21,13 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 3cad9b0e0519dbf499fe6569b9138afd, type: 3}
   cost: 10
-  power: 15
-  health: 50
+  health: 75
   description: '"New Protocol: Rob you for all you''re worth"'
+  power: 2.5
   range: 7
-  maxCooldown: 1
+  maxCooldown: 0.5
   statuses:
   - statusType: 2
     statusAmnt: 1
-  speed: 5
+  speed: 4
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

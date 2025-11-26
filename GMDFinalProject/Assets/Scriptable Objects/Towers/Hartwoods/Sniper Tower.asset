@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
   m_Name: Sniper Tower
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: 0}
   typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
-  type: 1
+  color: 1
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
-  cost: 15
-  power: 5
-  health: 50
-  description: A silly little tower
+  cost: 25
+  health: 75
+  description: 'A tall tower with a sniper that has long-range and medium power. '
+  power: 10
+  range: 6
   maxCooldown: 2
   statuses: []
-  range: 0.5
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

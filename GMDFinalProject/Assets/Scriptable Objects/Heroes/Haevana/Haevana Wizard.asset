@@ -21,11 +21,11 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 80d831bc4de649744a093f7a1722b7cd, type: 3}
   cost: 30
-  power: 15
-  health: 80
+  health: 50
   description: '"My pure blood allows me to cast powerful spells!"'
+  power: 15
   range: 6
-  maxCooldown: 0.75
+  maxCooldown: 1
   statuses: []
-  speed: 3
+  speed: 4
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

@@ -21,10 +21,10 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: a11e330589227d34c88422aa45b35b5b, type: 3}
   cost: 50
-  power: 20
   health: 300
   description: '"My honor used to lie with the King but now Steilmael is my boss..."'
+  power: 20
   range: 4
   maxCooldown: 1.25
   statuses: []
-  speed: 2
+  speed: 1

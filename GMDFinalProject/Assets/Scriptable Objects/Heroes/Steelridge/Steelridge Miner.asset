@@ -21,13 +21,13 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 3f7114b0827e89f4d8428a48b52bb9b9, type: 3}
   cost: 25
-  power: 5
   health: 200
   description: '"Mining jobs are down since the mines went public, gotta do this
     now..."'
+  power: 5
   range: 5
-  maxCooldown: 1.25
+  maxCooldown: 3
   statuses:
   - statusType: 21
     statusAmnt: 1
-  speed: 3
+  speed: 4

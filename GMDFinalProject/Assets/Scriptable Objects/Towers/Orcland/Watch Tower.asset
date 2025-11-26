@@ -21,10 +21,11 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
   cost: 20
-  power: 15
-  health: 50
-  description: A silly little tower
-  range: 2
+  health: 150
+  description: Eliminates all enemies within range, and boosts productivity of nearby
+    towers.
+  power: 10
+  range: 10
   maxCooldown: 0.75
   statuses:
   - statusType: 7

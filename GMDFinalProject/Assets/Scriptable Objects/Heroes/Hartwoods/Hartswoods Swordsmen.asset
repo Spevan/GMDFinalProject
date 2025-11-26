@@ -21,10 +21,10 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: cc48ea548bafa384abdf89f1701ede69, type: 3}
   cost: 15
-  power: 5
-  health: 100
+  health: 75
   description: '"Cutting through..! heh.."'
-  range: 7
-  maxCooldown: 0.25
+  power: 5
+  range: 8
+  maxCooldown: 1.5
   statuses: []
-  speed: 6
+  speed: 8

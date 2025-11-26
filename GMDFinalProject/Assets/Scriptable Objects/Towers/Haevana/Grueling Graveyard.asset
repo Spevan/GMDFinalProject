@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
   m_Name: Grueling Graveyard
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: 0}
   typeRarity: {fileID: -621302571, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 3
-  type: 2
+  color: 2
   count: 0
+  deckCount: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
-  cost: 50
+  cost: 65
+  health: 50
+  description: Resurrects heroes who fall within its range
   power: 0
-  health: 100
-  description: A silly little tower
+  range: 8
   maxCooldown: 3
   statuses:
   - statusType: 17
     statusAmnt: 1
-  range: 2
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}
