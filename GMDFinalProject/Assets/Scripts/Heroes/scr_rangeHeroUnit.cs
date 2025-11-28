@@ -110,25 +110,4 @@ public class scr_rangeHeroUnit : scr_heroUnit
         //Debug.Log("tower: " + this.ToString() + " pools obj: " + ammo.ToString());
         pooledProj.Add(ammo);
     }
-
-    public override void SetStatuses()
-    {
-        base.SetStatuses();
-        foreach (scr_status status in cardData.statuses)
-        {
-            if (status.statusType == scr_status.statusTypes.Perceptive)
-            {
-                statuses.Add(status);
-                range.radius += status.statusAmnt * status.rangePerLvl;
-            }
-        }
-
-        foreach (scr_condition condition in conditions)
-        {
-            if(condition.conditionType == scr_condition.conditionTypes.blind)
-            {
-                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
-            }
-        }
-    }
 }

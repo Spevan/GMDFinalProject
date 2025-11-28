@@ -144,10 +144,6 @@ public class scr_player : NetworkBehaviour
             {
                 discount = status.statusAmnt * discountPerLevel;
             }
-            else if(status.statusType == scr_status.statusTypes.Greedy)
-            {
-                discount = -status.statusAmnt * discountPerLevel;
-            }
         }
         ChangeWater(-card.cost + discount);
         cardsPlayed.Value += 1;

@@ -83,7 +83,12 @@ public class scr_unit : NetworkBehaviour
                 statuses.Add(status);
                 health += status.statusAmnt * status.healthPerLvl;
             }
-            if(status.statusType == scr_status.statusTypes.Healing || status.statusType == scr_status.statusTypes.Frigid
+            if (status.statusType == scr_status.statusTypes.Perceptive)
+            {
+                statuses.Add(status);
+                range.radius += status.statusAmnt * status.rangePerLvl;
+            }
+            if (status.statusType == scr_status.statusTypes.Healing || status.statusType == scr_status.statusTypes.Frigid
                 || status.statusType == scr_status.statusTypes.Heated || status.statusType == scr_status.statusTypes.Thief)
             {
                 statuses.Add(status);
@@ -107,6 +112,10 @@ public class scr_unit : NetworkBehaviour
             if(condition.conditionType == scr_condition.conditionTypes.frozen)
             {
                 cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
+            }
+            if (condition.conditionType == scr_condition.conditionTypes.blind)
+            {
+                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
             }
         }
     }
