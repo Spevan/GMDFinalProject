@@ -44,13 +44,14 @@ public class scr_generatorUnit : scr_unit
             target.GetComponent<scr_player>().ChangeWater((int)produceDelta);
             target.GetComponent<scr_player>().DrawCard();
 
-            foreach (scr_condition condition in conditions)
+            //Consider a rework, far too OP
+            /*foreach (scr_condition condition in conditions) 
             {
                 if (condition.conditionType == scr_condition.conditionTypes.leaking)
                 {
                     condition.conditionOrigin.GetComponent<scr_unit>().GetLeaking(condition.conditionAmnt);
                 }
-            }
+            }*/ 
         }
     }
 

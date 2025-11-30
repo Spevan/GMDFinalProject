@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -7389392417467665142}
   - component: {fileID: -4335197963295105716}
   m_Layer: 0
-  m_Name: obj_tower
+  m_Name: obj_tower 1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 127365023
+  GlobalObjectIdHash: 3627456103
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_towerUnit
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  cardData: {fileID: 11400000, guid: d297f16d2ce6d8e4ea677a2dc187ed7c, type: 2}
   range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0

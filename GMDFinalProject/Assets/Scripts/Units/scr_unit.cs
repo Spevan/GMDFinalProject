@@ -27,6 +27,39 @@ public class scr_unit : NetworkBehaviour
         SetStatuses();
     }
 
+    public virtual void Attack()
+    {
+        Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+        target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
+        foreach (scr_status status in statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
+            }
+            if (status.statusType == scr_status.statusTypes.Blinding)
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+            }
+            if (status.statusType == scr_status.statusTypes.Crushing)
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+            }
+            if (status.statusType == scr_status.statusTypes.Heated)
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+            }
+            if (status.statusType == scr_status.statusTypes.Frigid)
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+            }
+            if (status.statusType == scr_status.statusTypes.Tangled && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+            {
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
+            }
+        }
+    }
+
     public void ChangeHealth(float delta)
     {
         health += delta;
@@ -41,7 +74,7 @@ public class scr_unit : NetworkBehaviour
         }
     }
 
-    public void GetSupport(scr_status newStatus)
+    public void GetStatus(scr_status newStatus)
     {
         int count = 0;
         foreach (scr_status oldStatus in statuses)
@@ -107,7 +140,7 @@ public class scr_unit : NetworkBehaviour
             }
             if (condition.conditionType == scr_condition.conditionTypes.burnt)
             {
-                StartCoroutine(Burning(1, condition.conditionAmnt));
+                StartCoroutine(DamageOverTime(condition.burnDuration * condition.conditionAmnt, condition.fireDmgTick, condition.conditionAmnt));
             }
             if(condition.conditionType == scr_condition.conditionTypes.frozen)
             {
@@ -120,7 +153,8 @@ public class scr_unit : NetworkBehaviour
         }
     }
 
-    public void GetLeaking(int waterAmnt)
+    //Under reconsideration
+    /*public void GetLeaking(int waterAmnt)
     {
         foreach (GameObject player in scr_gameManager.instance.players)
         {
@@ -129,12 +163,17 @@ public class scr_unit : NetworkBehaviour
                 player.GetComponent<scr_player>().ChangeWater(waterAmnt);
             }
         }
-    }
+    }*/
 
-    IEnumerator Burning(float waitTime, int burnDMG)
+    public IEnumerator DamageOverTime(float duration, float tickTime, int damage)
     {
-        ChangeHealth(burnDMG);
-        yield return new WaitForSeconds(waitTime);
+        float timer = 0f;
+        while(timer < duration)
+        {
+            ChangeHealth(damage);
+            yield return new WaitForSeconds(tickTime);
+            timer += tickTime;
+        }
     }
 
     public void AddCondition(scr_condition condition)

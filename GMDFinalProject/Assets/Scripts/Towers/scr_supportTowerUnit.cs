@@ -26,32 +26,17 @@ public class scr_towerSupportUnit : scr_towerUnit
 
     public void Support(Collider other)
     {
-        if (other.gameObject.tag.Equals("Hero"))
+        foreach (scr_status status in cardData.statuses)
         {
-            foreach (scr_status status in cardData.statuses)
-            {
-                if (status.statusType != scr_status.statusTypes.Healing)
-                { 
-                    other.gameObject.GetComponent<scr_heroUnit>().GetSupport(status);
-                }
-                else
-                {
-                    other.gameObject.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
-                }
+            //If the status found is not healing, this unit provides the other with that status
+            if (status.statusType != scr_status.statusTypes.Healing)
+            { 
+                other.gameObject.GetComponent<scr_unit>().GetStatus(status);
             }
-        }
-        else if (other.gameObject.tag.Equals("Tower"))
-        {
-            foreach (scr_status status in cardData.statuses)
+            //If the status found is healing, heal that unit
+            else
             {
-                if (status.statusType != scr_status.statusTypes.Healing)
-                {
-                    other.gameObject.GetComponent<scr_towerUnit>().GetSupport(status);
-                }
-                else
-                {
-                    other.gameObject.GetComponent<scr_towerUnit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
-                }
+                other.gameObject.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
             }
         }
     }

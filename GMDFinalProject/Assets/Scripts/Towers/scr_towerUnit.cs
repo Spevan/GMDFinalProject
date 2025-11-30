@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class scr_towerUnit : scr_unit
 {
@@ -26,62 +27,13 @@ public class scr_towerUnit : scr_unit
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
         base.Start();
         ammunition = towerData.ammunition;
+    }
 
-        if (this.GetComponent<NetworkObject>().IsOwner)
+    public override void Attack()
+    {
+        if (target.gameObject.tag.Equals("Hero"))
         {
-            for (int i = 0; i < amountPooledProj; i++)
-            {
-                if (NetworkManager.Singleton.IsServer)
-                {
-                    SpawnNetworkAmmo(ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
-                        this.GetComponent<NetworkObject>().OwnerClientId);
-                }
-                else
-                {
-                    SpawnNetworkAmmoServerRpc(ammunition.name, transform.position, new Quaternion(0, transform.rotation.y, 0, 0), 
-                        this.GetComponent<NetworkObject>().OwnerClientId);
-                }
-            }
-        }
-    }
-
-    //Spawn a new network object based on parameters
-    public void SpawnNetworkAmmo(string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
-    {
-        //Debug.Log("Spawning ammo");
-        //Instantiate and spawn the network object of that card's unit value
-        GameObject unit = Instantiate(ammunition, pos, rot);
-        unit.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
-        ReturnAmmoClientRpc(unit);
-    }
-
-    //Request the server to...
-    [ServerRpc(RequireOwnership = false)]
-    public void SpawnNetworkAmmoServerRpc(string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
-    {
-        SpawnNetworkAmmo(ammoName, pos, rot, clientID);
-    }
-
-    //BULLSHIT!!!!
-    [ClientRpc(RequireOwnership = false)]
-    public void ReturnAmmoClientRpc(NetworkObjectReference ammo)
-    {
-        //Debug.Log("tower: " + this.ToString() + " pools obj: " + ammo.ToString());
-        pooledProj.Add(ammo);
-    }
-
-    void Attack()
-    {
-        for (int i = 0; i < pooledProj.Count; i++)
-        {
-            if (!pooledProj[i].activeSelf)
-            {
-                //Debug.Log("This should show up, no?");
-                pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject, this.gameObject);
-                pooledProj[i].transform.position = transform.position;
-                pooledProj[i].SetActive(true);
-                break;
-            }
+            base.Attack();
         }
     }
 

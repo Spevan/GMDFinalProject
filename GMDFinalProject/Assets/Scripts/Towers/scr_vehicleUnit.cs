@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class scr_vehicleUnit : scr_towerUnit
@@ -59,7 +60,17 @@ public class scr_vehicleUnit : scr_towerUnit
             {
                 speed -= condition.conditionAmnt * condition.speedPerLvl;
             }
+            if (condition.conditionType == scr_condition.conditionTypes.entangled)
+            {
+                StartCoroutine(Entangled(condition.entangledDuration));
+            }
         }
+    }
+
+    public IEnumerator Entangled(int duration)
+    {
+        movementLock = true;
+        yield return new WaitForSeconds(duration);
     }
 
     public override void Death()

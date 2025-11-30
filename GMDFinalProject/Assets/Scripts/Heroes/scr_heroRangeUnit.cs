@@ -3,7 +3,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class scr_rangeHeroUnit : scr_heroUnit
+public class scr_heroRangeUnit : scr_heroUnit
 {
     scr_rangeHero rangeHeroData;
     public GameObject ammunition;
@@ -60,7 +60,7 @@ public class scr_rangeHeroUnit : scr_heroUnit
             {
                 //Set movement lock to true and move towards tower position
                 //Debug.Log(this.cardData.name + " is attacking " + other.name);
-                RangeAttack();
+                Attack();
                 timer = 0;
             }
         }
@@ -72,7 +72,7 @@ public class scr_rangeHeroUnit : scr_heroUnit
         }
     }
 
-    public void RangeAttack()
+    public override void Attack()
     {
         for (int i = 0; i < pooledProj.Count; i++)
         {

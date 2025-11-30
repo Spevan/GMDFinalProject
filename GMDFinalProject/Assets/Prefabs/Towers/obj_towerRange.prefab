@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 9060199011452161778}
   - component: {fileID: 4640057384263600510}
   - component: {fileID: -7389392417467665142}
-  - component: {fileID: -4335197963295105716}
+  - component: {fileID: 3849925351659176763}
   m_Layer: 0
-  m_Name: obj_tower
+  m_Name: obj_towerRange
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 127365023
+  GlobalObjectIdHash: 2290921711
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -221,7 +221,7 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!114 &-4335197963295105716
+--- !u!114 &3849925351659176763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,11 +230,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6070432198559468909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eef2e92d6045b84c832f7acee183d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 14b64f0b1aa5fac4da47495c136e79ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::scr_towerUnit
+  m_EditorClassIdentifier: Assembly-CSharp::scr_towerRangeUnit
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  cardData: {fileID: 11400000, guid: 4017241cb45479a4a89180329236fdcf, type: 2}
   range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0

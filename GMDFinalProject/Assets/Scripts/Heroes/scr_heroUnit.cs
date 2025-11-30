@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -65,84 +66,21 @@ public class scr_heroUnit : scr_unit
         }
     }
 
-    [ServerRpc]
+    /*[ServerRpc]
     public void AttackServerRpc()
     {
         Debug.Log("bullshit");
         //AttackClientRpc();
-    }
+    }*/
 
-    //[ClientRpc]
-    public void Attack()
+    public override void Attack()
     {
-        if (target.gameObject.tag.Equals("Hero"))
+        base.Attack();
+        foreach (scr_status status in statuses)
         {
-            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-            target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
-            foreach (scr_status status in statuses)
+            if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
             {
-                if (status.statusType == scr_status.statusTypes.Vampiric)
-                {
-                    ChangeHealth(Convert.ToInt32(power));
-                }
-                if(status.statusType == scr_status.statusTypes.Sleepy)
-                {
-                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
-                }
-                if(status.statusType == scr_status.statusTypes.Blinding)
-                {
-                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-                }
-                if(status.statusType == scr_status.statusTypes.Crushing)
-                {
-                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Heated)
-                {
-                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Frigid)
-                {
-                    target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-                }    
-            }
-
-        }
-        else if (target.gameObject.tag.Equals("Tower"))
-        {
-            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-            target.GetComponent<scr_towerUnit>().ChangeHealth(-cardData.power);
-            foreach (scr_status status in statuses)
-            {
-                if (status.statusType == scr_status.statusTypes.Blinding)
-                {
-                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Crushing)
-                {
-                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-                }
-                if(status.statusType == scr_status.statusTypes.Heated)
-                {
-                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Frigid)
-                {
-                    target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-                }
-            }
-            //Death();
-        }
-        else if (target.gameObject.tag.Equals("Generator"))
-        {
-            Debug.Log(this.cardData.name + " dealt " + cardData.power + " damage to " + target.name);
-            target.GetComponent<scr_generatorUnit>().ChangeHealth(-cardData.power);
-            foreach (scr_status status in statuses)
-            {
-                if (status.statusType == scr_status.statusTypes.Thief)
-                {
-                    target.GetComponent<scr_generatorUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.leaking, status.statusAmnt, this.gameObject));
-                }
+                ChangeHealth(Convert.ToInt32(power * (0.1 * status.statusAmnt)));
             }
         }
     }
@@ -197,6 +135,16 @@ public class scr_heroUnit : scr_unit
             {
                 speed -= condition.conditionAmnt * condition.speedPerLvl;
             }
+            if(condition.conditionType == scr_condition.conditionTypes.entangled)
+            {
+                StartCoroutine(Entangled(condition.entangledDuration));
+            }
         }
+    }
+
+    public IEnumerator Entangled(int duration)
+    {
+        movementLock = true;
+        yield return new WaitForSeconds(duration);
     }
 }

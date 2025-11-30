@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -48,68 +49,42 @@ public class scr_ammunition : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !other.isTrigger)
+        if (other.gameObject == target)//gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !other.isTrigger)
         {
-            if (target.tag.Equals("Hero"))
+            Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
+            target.GetComponent<scr_unit>().ChangeHealth(-sourceObj.GetComponent<scr_unit>().power);
+            foreach (scr_status status in sourceObj.GetComponent<scr_unit>().statuses)
             {
-                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-                target.GetComponent<scr_heroUnit>().ChangeHealth(-ammoData.damage);
-                foreach (scr_status status in sourceObj.GetComponent<scr_heroUnit>().statuses)
+                if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
                 {
-                    if (status.statusType == scr_status.statusTypes.Sleepy)
-                    {
-                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Blinding)
-                    {
-                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Crushing)
-                    {
-                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Heated)
-                    {
-                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Frigid)
-                    {
-                        target.GetComponent<scr_heroUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-                    }
+                    sourceObj.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(sourceObj.GetComponent<scr_unit>().power * (0.1 * status.statusAmnt)));
                 }
-                Destroy();
-            }
-            else if (target.tag.Equals("Tower"))
-            {
-                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-                target.GetComponent<scr_towerUnit>().ChangeHealth(-ammoData.damage);
-                foreach (scr_status status in sourceObj.GetComponent<scr_towerUnit>().statuses)
+                if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
                 {
-                    if (status.statusType == scr_status.statusTypes.Blinding)
-                    {
-                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Crushing)
-                    {
-                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Heated)
-                    {
-                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-                    }
-                    if (status.statusType == scr_status.statusTypes.Frigid)
-                    {
-                        target.GetComponent<scr_towerUnit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-                    }
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
                 }
-                Destroy();
+                if (status.statusType == scr_status.statusTypes.Blinding)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Crushing)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Heated)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Frigid)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                }
+                if(status.statusType == scr_status.statusTypes.Tangled && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
+                }
             }
-            else if (target.tag.Equals("Generator"))
-            {
-                Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-                target.GetComponent<scr_generatorUnit>().ChangeHealth(-ammoData.damage);
-                Destroy();
-            }
+            Destroy();
         }
     }
 
