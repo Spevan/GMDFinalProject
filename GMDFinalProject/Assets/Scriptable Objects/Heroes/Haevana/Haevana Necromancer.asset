@@ -15,7 +15,7 @@ MonoBehaviour:
   unitSprite: {fileID: 1562278218, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
   typeRarity: {fileID: 1776656472, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
-  color: 0
+  color: 2
   count: 0
   deckCount: 0
   loaded: 0
