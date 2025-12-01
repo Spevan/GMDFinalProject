@@ -62,17 +62,16 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        
         if (this.transform.position.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
         {
             Vector3 spawnPos = new Vector3(gameObject.transform.position.x + gameObject.GetComponent<RectTransform>().rect.width, gameObject.transform.position.y, gameObject.transform.position.z);
-            temp = Instantiate(details, spawnPos, Quaternion.identity, this.transform.parent.parent);
+            temp = Instantiate(details, spawnPos, this.transform.parent.parent.rotation, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
         }
         else
         {
             Vector3 spawnPos = new Vector3(gameObject.transform.position.x - gameObject.GetComponent<RectTransform>().rect.width, gameObject.transform.position.y, gameObject.transform.position.z);
-            temp = Instantiate(details, spawnPos, Quaternion.identity, this.transform.parent.parent);
+            temp = Instantiate(details, spawnPos, this.transform.parent.parent.rotation, this.transform.parent.parent);
             //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
         }
         //temp.GetComponent<scr_cardDetails>().LockCard(true);

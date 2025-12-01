@@ -19,7 +19,7 @@ public class scr_player : NetworkBehaviour
         //steel = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public List<scr_card> Deck;
     public scr_productionPlant ProductionPlant;
-    public const int STARTING_WATER = 10;
+    public const int STARTING_WATER = 10, MAX_HAND_SIZE = 7;
 
     public Camera cam;
     public scr_guiManager GUI;
@@ -126,7 +126,7 @@ public class scr_player : NetworkBehaviour
 
     public void DrawCard()
     {
-        if (Deck.Count > 0)
+        if (Deck.Count > 0 && GUI.cardsInHand.Count < MAX_HAND_SIZE)
         {
             GUI.DrawCard(Deck[0], this);
             Deck.RemoveAt(0);

@@ -22,6 +22,24 @@ public class scr_cardsInHand : scr_cards, IDragHandler, IDropHandler
         SetCardTXT();
     }
 
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        if (this.transform.position.x < (GUI.GetComponentInParent<Camera>().scaledPixelWidth / 2))
+        {
+            Vector3 spawnPos = new Vector3(gameObject.transform.position.x + (gameObject.transform.right.x / 2), gameObject.transform.position.y, gameObject.transform.position.z);
+            temp = Instantiate(details, spawnPos, this.transform.parent.parent.rotation, this.transform.parent.parent);
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
+        }
+        else
+        {
+            Vector3 spawnPos = new Vector3(gameObject.transform.position.x - (gameObject.transform.right.x / 2), gameObject.transform.position.y, gameObject.transform.position.z);
+            temp = Instantiate(details, spawnPos, this.transform.parent.parent.rotation, this.transform.parent.parent);
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
+        }
+        //temp.GetComponent<scr_cardDetails>().LockCard(true);
+        temp.GetComponent<scr_cardDetails>().cardData = cardData;
+    }
+
     void IDragHandler.OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
     {
         Vector2 pos;
