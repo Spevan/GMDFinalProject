@@ -20,7 +20,7 @@ public class scr_disconnectHandler : MonoBehaviour
 
     private IEnumerator WaitForNetworkShutdownAndLoadScene()
     {
-        while (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening)
+        while (NetworkManager.Singleton.ShutdownInProgress)
         {
             yield return null;
         }
@@ -30,6 +30,6 @@ public class scr_disconnectHandler : MonoBehaviour
     [ClientRpc]
     public void ReturnToMenuClientRpc()
     {
-        //SceneManager.LoadScene("sce_mainMenu");
+        SceneManager.LoadScene("sce_mainMenu");
     }
 }
