@@ -21,9 +21,9 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: 94516fcb5f2e0074f9b6d263c7d422c5, type: 3}
   cost: 0
-  power: 6
   health: 1000
   description: Rapid, regular production.
+  power: 6
   range: 0
   maxCooldown: 6
   statuses: []

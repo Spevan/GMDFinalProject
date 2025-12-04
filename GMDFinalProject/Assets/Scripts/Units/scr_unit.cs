@@ -30,7 +30,7 @@ public class scr_unit : NetworkBehaviour
     public virtual void Attack()
     {
         Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-        target.GetComponent<scr_heroUnit>().ChangeHealth(Convert.ToInt32(-power));
+        target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
         foreach (scr_status status in statuses)
         {
             if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
@@ -218,6 +218,11 @@ public class scr_unit : NetworkBehaviour
             }
         }
 
-        this.gameObject.SetActive(false);
+        this.GetComponent<BoxCollider>().enabled = false;
+        if (gameObject.transform.childCount > 0)
+        {
+            this.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        }
+        //this.gameObject.SetActive(false);
     }
 }

@@ -16,14 +16,14 @@ MonoBehaviour:
   typeRarity: {fileID: 621695595, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 2
-  count: 1
+  count: 0
   deckCount: 0
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: 181ac771140c35a4bb0aafc4a0d8f7e0, type: 3}
   cost: 0
-  power: 9
   health: 1000
   description: Slow, but steady production.
+  power: 9
   range: 0
   maxCooldown: 9
   statuses: []

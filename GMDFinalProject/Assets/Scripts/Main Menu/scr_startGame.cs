@@ -9,6 +9,16 @@ public class scr_startGame : MonoBehaviour
     [SerializeField] GameObject startGameBTN;
     private void Start()
     {
+        CheckStartServer();
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    public void CheckStartServer()
+    {
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsServer)
         {
             ServerSetup();
@@ -17,12 +27,6 @@ public class scr_startGame : MonoBehaviour
         {
             startGameBTN.SetActive(false);
         }
-    }
-
-    private void Update()
-    {
-        NetworkManager.Singleton.OnServerStarted += ServerSetup;
-        NetworkManager.Singleton.OnSessionOwnerPromoted += ServerSetup;
     }
 
     void ServerSetup()

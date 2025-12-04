@@ -43,8 +43,11 @@ public class scr_ammunition : NetworkBehaviour
 
     public void GetTarget(GameObject newTarget, GameObject tower)
     {
+        transform.position = tower.transform.position;
         target = newTarget;
         sourceObj = tower;
+        this.GetComponent<BoxCollider>().enabled = true;
+        this.GetComponent<MeshRenderer>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,6 +94,8 @@ public class scr_ammunition : NetworkBehaviour
     public void Destroy()
     {
         target = null;
-        this.gameObject.SetActive(false);
+        this.GetComponent<BoxCollider>().enabled = false;
+        this.GetComponent<MeshRenderer>().enabled = false;
+        //this.gameObject.SetActive(false);
     }
 }

@@ -21,9 +21,9 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: cadde850c92da92448ee855472aa0e82, type: 3}
   cost: 0
-  power: 10
   health: 1250
   description: Slightly less productive, but tankier drill.
+  power: 10
   range: 0
   maxCooldown: 10
   statuses: []

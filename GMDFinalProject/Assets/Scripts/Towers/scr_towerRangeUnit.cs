@@ -66,8 +66,8 @@ public class scr_towerRangeUnit : scr_towerUnit
             {
                 //Debug.Log("This should show up, no?");
                 pooledProj[i].GetComponent<scr_ammunition>().GetTarget(target.gameObject, this.gameObject);
-                pooledProj[i].transform.position = transform.position;
-                pooledProj[i].SetActive(true);
+                //pooledProj[i].transform.position = transform.position;
+                //pooledProj[i].SetActive(true);
                 break;
             }
         }

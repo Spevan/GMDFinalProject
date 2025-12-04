@@ -2,6 +2,12 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Services.Multiplayer;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+using WebSocketSharp.Server;
 
 public class scr_disconnectHandler : MonoBehaviour
 {
@@ -22,13 +28,14 @@ public class scr_disconnectHandler : MonoBehaviour
     {
         while (NetworkManager.Singleton.ShutdownInProgress)
         {
-            yield return null;
+            Debug.Log("Something is preventing the server from shutting down.");
+            yield return null;            
         }
-        ReturnToMenuClientRpc();
+        ReturnToMenu();
     }
 
-    [ClientRpc]
-    public void ReturnToMenuClientRpc()
+    //[ClientRpc]
+    public void ReturnToMenu()
     {
         SceneManager.LoadScene("sce_mainMenu");
     }

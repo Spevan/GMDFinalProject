@@ -715,6 +715,7 @@ GameObject:
   - component: {fileID: 8298488715434275764}
   - component: {fileID: 8455534900628582731}
   - component: {fileID: 8594061197754820570}
+  - component: {fileID: 9055031336555047291}
   m_Layer: 5
   m_Name: gui_returnBTN
   m_TagString: Untagged
@@ -824,18 +825,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8455534900628582731}
-        m_TargetAssemblyTypeName: scr_sceneManager, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 5
+      - m_Target: {fileID: 9055031336555047291}
+        m_TargetAssemblyTypeName: Unity.Multiplayer.Widgets.LeaveSession, Unity.Multiplayer.Widgets.Session
+        m_MethodName: OnSessionLeft
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: sce_mainMenu
+          m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
       - m_Target: {fileID: 8594061197754820570}
         m_TargetAssemblyTypeName: scr_disconnectHandler, Assembly-CSharp
         m_MethodName: Disconnect
@@ -846,6 +847,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8455534900628582731}
+        m_TargetAssemblyTypeName: scr_sceneManager, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sce_mainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &8455534900628582731
@@ -872,6 +885,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea55cfbf8a866584d8926f805bbbc57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_disconnectHandler
+--- !u!114 &9055031336555047291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266569853718955799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa833722b0cb66a4da0056deab9be836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Multiplayer.Widgets.Session::Unity.Multiplayer.Widgets.LeaveSession
+  SessionLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1366409996319165250
 GameObject:
   m_ObjectHideFlags: 0
