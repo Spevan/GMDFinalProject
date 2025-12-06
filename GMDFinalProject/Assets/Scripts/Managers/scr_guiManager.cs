@@ -134,10 +134,10 @@ public class scr_guiManager : MonoBehaviour
 
     public void DisplayCardDetails(scr_card cardData, float health, float cooldown, float power, float range, float speed)
     {
-        cardDetails.GetComponentInChildren<scr_cardDetails>().cardData = cardData;
-        cardDetails.GetComponentInChildren<scr_cardDetails>().DetailUpdate(health, cooldown, power, range, speed);
         cardDetails.SetActive(true);
-        
+        cardDetails.GetComponentInChildren<scr_cardDetails>().cardData = cardData;
+        //cardDetails.GetComponentInChildren<scr_cardDetails>().Start();
+        cardDetails.GetComponentInChildren<scr_cardDetails>().DetailUpdate(health, cooldown, power, range, speed);
     }
 
     public void HideCardDetails()

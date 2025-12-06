@@ -28,7 +28,7 @@ public class scr_ammunition : NetworkBehaviour
     {
         if (target != null && target.activeSelf)
         {
-            Debug.Log("Tracking " +  target.name);
+            //Debug.Log("Tracking " +  target.name);
             Vector3 direction = (target.transform.position - transform.position).normalized;
 
             rb.MovePosition(transform.position + direction * ammoData.speed * Time.fixedDeltaTime);
@@ -37,7 +37,7 @@ public class scr_ammunition : NetworkBehaviour
         else
         {
             rb.MovePosition(transform.position + gameObject.transform.forward * ammoData.speed * Time.fixedDeltaTime);
-            Debug.Log("Target lost.");
+            //Debug.Log("Target lost.");
         }
     }
 
@@ -46,8 +46,9 @@ public class scr_ammunition : NetworkBehaviour
         transform.position = tower.transform.position;
         target = newTarget;
         sourceObj = tower;
-        this.GetComponent<BoxCollider>().enabled = true;
-        this.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.SetActive(true);
+        /*this.GetComponent<BoxCollider>().enabled = true;
+        this.GetComponent<MeshRenderer>().enabled = true;*/
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,8 +95,9 @@ public class scr_ammunition : NetworkBehaviour
     public void Destroy()
     {
         target = null;
-        this.GetComponent<BoxCollider>().enabled = false;
-        this.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.SetActive(false);
+        /*this.GetComponent<BoxCollider>().enabled = false;
+        this.GetComponent<MeshRenderer>().enabled = false;*/
         //this.gameObject.SetActive(false);
     }
 }

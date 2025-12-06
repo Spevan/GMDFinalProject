@@ -16,7 +16,7 @@ public class scr_cardDetails : MonoBehaviour
     {
         RangeAndSpeedCheck();
         HealthCheck();
-        PowerCheck();
+        //PowerCheck();
         CooldownCheck();
 
         foreach(scr_status status in cardData.statuses)
@@ -35,7 +35,7 @@ public class scr_cardDetails : MonoBehaviour
     {
         RangeAndSpeedCheck(currentRange, currentSpeed);
         HealthCheck(currentHealth);
-        PowerCheck(currentPower);
+        //PowerCheck(currentPower);
         CooldownCheck(currentPower, currentCooldown);
     }
 
@@ -44,14 +44,7 @@ public class scr_cardDetails : MonoBehaviour
         if (cardData.unit.tag.Equals("Hero"))
         {
             speed.text = (cardData as scr_hero).speed.ToString();
-            if (cardData is scr_rangeHero)
-            {
-                range.text = (cardData as scr_rangeHero).range.ToString();
-            }
-            else
-            {
-                range.text = 0.ToString();
-            }
+            range.text = cardData.range.ToString();
         }
         else if (cardData.unit.tag.Equals("Tower"))
         {
@@ -65,6 +58,11 @@ public class scr_cardDetails : MonoBehaviour
                 speed.text = 0.ToString();
             }
         }
+        else
+        {
+            speed.text = 0.ToString();
+            range.text = cardData.range.ToString();
+        }
     }
 
     public void RangeAndSpeedCheck(float currentRange, float currentSpeed)
@@ -72,14 +70,7 @@ public class scr_cardDetails : MonoBehaviour
         if (cardData.unit.tag.Equals("Hero"))
         {
             speed.text = currentSpeed.ToString();
-            if (cardData is scr_rangeHero)
-            {
-                range.text = currentRange.ToString();
-            }
-            else
-            {
-                range.text = 0.ToString();
-            }
+            range.text = currentRange.ToString();
         }
         else if (cardData.unit.tag.Equals("Tower"))
         {
@@ -92,6 +83,11 @@ public class scr_cardDetails : MonoBehaviour
             {
                 speed.text = 0.ToString();
             }
+        }
+        else
+        {
+            speed.text = 0.ToString();
+            range.text = cardData.range.ToString();
         }
     }
 
@@ -113,7 +109,8 @@ public class scr_cardDetails : MonoBehaviour
 
     void HealthCheck(float currentHealth)
     {
-        if (currentHealth >= 1000000)
+
+        /*if (currentHealth >= 1000000)
         {
             health.text = ((double)currentHealth / 1000000).ToString() + "M";
         }
@@ -122,9 +119,9 @@ public class scr_cardDetails : MonoBehaviour
             health.text = ((double)currentHealth / 1000).ToString() + "K";
         }
         else
-        {
+        {*/
             health.text = currentHealth.ToString();
-        }
+        //}
     }
 
     void PowerCheck()

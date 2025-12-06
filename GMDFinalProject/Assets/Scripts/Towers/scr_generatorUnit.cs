@@ -1,8 +1,9 @@
 using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class scr_generatorUnit : scr_unit
+public class scr_generatorUnit : scr_unit, IPointerEnterHandler
 {
     scr_productionPlant generatorData;
     int waterPerLevel = 5;
@@ -77,6 +78,15 @@ public class scr_generatorUnit : scr_unit
                     break;
             }
             RemoveConditionOnTimer(condition, condition.conditionTimer);
+        }
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + 0);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(generatorData, health, cooldown, power, range.radius, 0);
         }
     }
 

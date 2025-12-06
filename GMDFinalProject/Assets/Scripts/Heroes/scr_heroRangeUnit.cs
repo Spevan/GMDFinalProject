@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class scr_heroRangeUnit : scr_heroUnit
 {
@@ -66,7 +67,7 @@ public class scr_heroRangeUnit : scr_heroUnit
         }
         else if (target == null || !target.gameObject.activeSelf)
         {
-            Debug.Log(this.cardData.name + " has terminated " + other.name);
+            //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
             movementLock = false;
         }
@@ -109,5 +110,14 @@ public class scr_heroRangeUnit : scr_heroUnit
     {
         //Debug.Log("tower: " + this.ToString() + " pools obj: " + ammo.ToString());
         pooledProj.Add(ammo);
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + speed);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(rangeHeroData, health, cooldown, power, range.radius, speed);
+        }
     }
 }

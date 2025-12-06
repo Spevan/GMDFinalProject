@@ -274,11 +274,11 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
 
-        this.GetComponent<BoxCollider>().enabled = false;
+        /*this.GetComponent<BoxCollider>().enabled = false;
         if (gameObject.transform.childCount > 0)
         {
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        }
-        //this.gameObject.SetActive(false);
+        }*/
+        this.gameObject.SetActive(false);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class scr_towerUnit : scr_unit
 {
@@ -69,6 +70,15 @@ public class scr_towerUnit : scr_unit
         {
             //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
+        }
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + 0);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(towerData, health, cooldown, power, range.radius, 0);
         }
     }
 
