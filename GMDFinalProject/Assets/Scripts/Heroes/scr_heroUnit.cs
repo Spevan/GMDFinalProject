@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class scr_heroUnit : scr_unit
 {
@@ -43,7 +44,6 @@ public class scr_heroUnit : scr_unit
 
     private void OnCollisionStay(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         //If the range collides with a tower
         if (target != null && target.Equals(collision.gameObject))
         {
@@ -113,8 +113,8 @@ public class scr_heroUnit : scr_unit
 
     public override void SetDefaultStats()
     {
-        base.SetDefaultStats();
         speed = heroData.speed;
+        base.SetDefaultStats();
     }
 
     public override void SetStatuses()
@@ -122,23 +122,27 @@ public class scr_heroUnit : scr_unit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.Swift)
+            switch (status.statusType)
             {
-                statuses.Add(status);
-                speed += status.statusAmnt;
+                case scr_status.statusTypes.Swift:
+                    speed += status.statusAmnt * status.speedPerLvl;
+                    break;
             }
         }
 
         foreach (scr_condition condition in conditions)
         {
-            if (condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
+            switch (condition.conditionType)
             {
-                speed -= condition.conditionAmnt * condition.speedPerLvl;
+                case scr_condition.conditionTypes.frozen:
+                case scr_condition.conditionTypes.exhausted:
+                    speed -= condition.conditionAmnt * condition.speedPerLvl;
+                    break;
+                case scr_condition.conditionTypes.entangled:
+                    StartCoroutine(Entangled(condition.entangledDuration));
+                    break;
             }
-            if(condition.conditionType == scr_condition.conditionTypes.entangled)
-            {
-                StartCoroutine(Entangled(condition.entangledDuration));
-            }
+            RemoveConditionOnTimer(condition, condition.conditionTimer);
         }
     }
 
@@ -146,5 +150,15 @@ public class scr_heroUnit : scr_unit
     {
         movementLock = true;
         yield return new WaitForSeconds(duration);
+        movementLock = false;
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + speed);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(heroData, health, cooldown, power, range.radius, speed);
+        }
     }
 }

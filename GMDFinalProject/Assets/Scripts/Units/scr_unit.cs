@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class scr_unit : NetworkBehaviour
+public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public scr_card cardData;
     public SphereCollider range;
     public NetworkRigidbody rb;
     public float timer, cooldown, power, health;
     public List<scr_status> statuses; public List<scr_condition> conditions;
-    public GameObject target;
+    public GameObject target, details, temp, owner;
 
     public virtual void Start()
     {
@@ -24,7 +26,15 @@ public class scr_unit : NetworkBehaviour
         rb = GetComponent<NetworkRigidbody>();
         conditions = new List<scr_condition>();
         range = this.AddComponent<SphereCollider>();
-        SetStatuses();
+        SetDefaultStats();
+
+        foreach(GameObject player in scr_gameManager.instance.players)
+        {
+            if(player.GetComponent<NetworkObject>().OwnerClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
+            {
+                owner = player;
+            }
+        }
     }
 
     public virtual void Attack()
@@ -89,7 +99,7 @@ public class scr_unit : NetworkBehaviour
                 statuses.Add(newStatus);
             }
         }
-        SetStatuses();
+        
     }
 
     public virtual void SetDefaultStats()
@@ -99,57 +109,50 @@ public class scr_unit : NetworkBehaviour
         health = cardData.health;
         range.radius = cardData.range;
         range.isTrigger = true;
+        SetStatuses();
     }
 
     public virtual void SetStatuses()
     {
-        SetDefaultStats();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.Strong)
+            statuses.Add(status);
+            switch (status.statusType)
             {
-                statuses.Add(status);
-                power += status.statusAmnt * status.powerPerLvl;
-            }
-            if (status.statusType == scr_status.statusTypes.Fortified)
-            {
-                statuses.Add(status);
-                health += status.statusAmnt * status.healthPerLvl;
-            }
-            if (status.statusType == scr_status.statusTypes.Perceptive)
-            {
-                statuses.Add(status);
-                range.radius += status.statusAmnt * status.rangePerLvl;
-            }
-            if (status.statusType == scr_status.statusTypes.Healing || status.statusType == scr_status.statusTypes.Frigid
-                || status.statusType == scr_status.statusTypes.Heated || status.statusType == scr_status.statusTypes.Thief)
-            {
-                statuses.Add(status);
+                case scr_status.statusTypes.Strong:
+                    power += status.statusAmnt * status.powerPerLvl;
+                    break;
+                case scr_status.statusTypes.Fortified:
+                    health += status.statusAmnt * status.healthPerLvl;
+                    break;
+                case scr_status.statusTypes.Perceptive:
+                    range.radius += status.statusAmnt * status.rangePerLvl;
+                    break;
             }
         }
 
         foreach (scr_condition condition in conditions)
         {
-            if (condition.conditionType == scr_condition.conditionTypes.weak)
+            switch(condition.conditionType)
             {
-                power -= condition.conditionAmnt * condition.powerPerLvl;
+                case scr_condition.conditionTypes.weak:
+                    power -= condition.conditionAmnt * condition.powerPerLvl;
+                    break;
+                case scr_condition.conditionTypes.brittle:
+                case scr_condition.conditionTypes.leaking:
+                    health -= condition.conditionAmnt * condition.healthPerLvl;
+                    break;
+                case scr_condition.conditionTypes.burnt:
+                    StartCoroutine(DamageOverTime(condition.burnDuration * condition.conditionAmnt, condition.fireDmgTick, condition.conditionAmnt));
+                    break;
+                case scr_condition.conditionTypes.frozen:
+                    cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
+                    break;
+                case scr_condition.conditionTypes.blind:
+                    range.radius -= condition.conditionAmnt * condition.rangePerLvl;
+                    break;
             }
-            if(condition.conditionType == scr_condition.conditionTypes.brittle || condition.conditionType == scr_condition.conditionTypes.leaking)
-            {
-                health -= condition.conditionAmnt * condition.healthPerLvl;
-            }
-            if (condition.conditionType == scr_condition.conditionTypes.burnt)
-            {
-                StartCoroutine(DamageOverTime(condition.burnDuration * condition.conditionAmnt, condition.fireDmgTick, condition.conditionAmnt));
-            }
-            if(condition.conditionType == scr_condition.conditionTypes.frozen)
-            {
-                cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
-            }
-            if (condition.conditionType == scr_condition.conditionTypes.blind)
-            {
-                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
-            }
+            RemoveConditionOnTimer(condition, condition.conditionTimer);
         }
     }
 
@@ -188,9 +191,62 @@ public class scr_unit : NetworkBehaviour
         SetStatuses();
     }
 
+    public void RemoveCondition(scr_condition condition)
+    {
+        conditions.Remove(condition);
+        SetStatuses();
+    }
+
+    public IEnumerator RemoveConditionOnTimer(scr_condition condition, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        conditions.Remove(condition);
+        SetStatuses();
+    }
+
     public void GetTarget(GameObject newTarget)
     {
         target = newTarget;
+    }
+
+    public virtual void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + 0);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(cardData, health, cooldown, power, range.radius, 0);
+        }
+        /* spawnPos;
+        if (this.transform.position.x < (owner.GetComponent<Camera>().scaledPixelWidth / 2))
+        {
+            spawnPos = owner.GetComponent<Camera>().WorldToScreenPoint(new Vector3
+                (gameObject.transform.position.x + gameObject.GetComponentInChildren<SpriteRenderer>().size.x, gameObject.transform.position.y, gameObject.transform.position.z));
+            //, this.transform.parent.parent.rotation, this.transform.parent.parent);
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(100, 0, 5);
+        }
+        else
+        {
+            spawnPos = owner.GetComponent<Camera>().WorldToScreenPoint(new Vector3
+                (gameObject.transform.position.x - gameObject.GetComponentInChildren<RectTransform>().rect.width, gameObject.transform.position.y, gameObject.transform.position.z));
+            //temp.transform.localPosition = this.transform.localPosition + new Vector3(-100, 0, 5);
+        }
+        temp = Instantiate(details, gameObject.transform.position, Quaternion.identity, owner.GetComponentInChildren<Canvas>().transform);
+        //temp.GetComponent<scr_cardDetails>().LockCard(true);
+        temp.GetComponent<scr_cardDetails>().cardData = cardData;*/
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().HideCardDetails();
+        }
+        /*if (temp != null)
+        {
+            Destroy(temp);
+        }*/
+
+        //temp.GetComponent<scr_cardDetails>().LockCard(false);
     }
 
     public virtual void Death()

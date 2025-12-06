@@ -60,19 +60,23 @@ public class scr_generatorUnit : scr_unit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.Productive)
+            switch(status.statusType)
             {
-                statuses.Add(status);
-                power += status.statusAmnt * waterPerLevel;
+                case scr_status.statusTypes.Productive:
+                    power += status.statusAmnt * waterPerLevel;
+                    break;
             }
         }
 
         foreach (scr_condition condition in conditions)
         {
-            if (condition.conditionType == scr_condition.conditionTypes.leaking)
+            switch(condition.conditionType)
             {
-                power -= condition.conditionAmnt * waterPerLevel;
+                case scr_condition.conditionTypes.leaking:
+                    power -= condition.conditionAmnt * waterPerLevel;
+                    break;
             }
+            RemoveConditionOnTimer(condition, condition.conditionTimer);
         }
     }
 

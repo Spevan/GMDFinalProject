@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class scr_vehicleUnit : scr_towerUnit
 {
@@ -38,8 +39,8 @@ public class scr_vehicleUnit : scr_towerUnit
 
     public override void SetDefaultStats()
     {
-        base.SetDefaultStats();
         speed = vehicleData.speed;
+        base.SetDefaultStats();
     }
 
     public override void SetStatuses()
@@ -47,23 +48,27 @@ public class scr_vehicleUnit : scr_towerUnit
         base.SetStatuses();
         foreach (scr_status status in cardData.statuses)
         {
-            if (status.statusType == scr_status.statusTypes.Swift)
+            switch(status.statusType)
             {
-                statuses.Add(status);
-                speed += status.statusAmnt * status.speedPerLvl;
+                case scr_status.statusTypes.Swift:
+                    speed += status.statusAmnt * status.speedPerLvl;
+                    break;
             }
         }
 
         foreach (scr_condition condition in conditions)
         {
-            if(condition.conditionType == scr_condition.conditionTypes.exhausted || condition.conditionType == scr_condition.conditionTypes.frozen)
+            switch(condition.conditionType)
             {
-                speed -= condition.conditionAmnt * condition.speedPerLvl;
+                case scr_condition.conditionTypes.frozen:
+                case scr_condition.conditionTypes.exhausted:
+                    speed -= condition.conditionAmnt * condition.speedPerLvl;
+                    break;
+                case scr_condition.conditionTypes.entangled:
+                    StartCoroutine(Entangled(condition.entangledDuration));
+                    break;
             }
-            if (condition.conditionType == scr_condition.conditionTypes.entangled)
-            {
-                StartCoroutine(Entangled(condition.entangledDuration));
-            }
+            RemoveConditionOnTimer(condition, condition.conditionTimer);
         }
     }
 
@@ -71,6 +76,15 @@ public class scr_vehicleUnit : scr_towerUnit
     {
         movementLock = true;
         yield return new WaitForSeconds(duration);
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + speed);
+        foreach (GameObject player in scr_gameManager.instance.players)
+        {
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(vehicleData, health, cooldown, power, range.radius, speed);
+        }
     }
 
     public override void Death()

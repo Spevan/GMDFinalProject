@@ -1,14 +1,15 @@
-using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
-using TMPro;
 using System.Linq;
+using NUnit.Framework;
+using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
+using UnityEngine;
 
 public class scr_guiManager : MonoBehaviour
 {
     public TextMeshProUGUI cardCount, waterCount;
-    public GameObject hand, cardPrefab, statsTab, endingTab;
+    public GameObject hand, cardPrefab, statsTab, endingTab, cardDetails;
 
     public float fanSpread;
     public int cardSpacing, verticalSpacing;
@@ -129,5 +130,18 @@ public class scr_guiManager : MonoBehaviour
                 analyticsManager.UpdateAnalytics(playersList[0].GetComponent<scr_player>(), playersList[1].GetComponent<scr_player>());
                 break;
         }
+    }
+
+    public void DisplayCardDetails(scr_card cardData, float health, float cooldown, float power, float range, float speed)
+    {
+        cardDetails.GetComponentInChildren<scr_cardDetails>().cardData = cardData;
+        cardDetails.GetComponentInChildren<scr_cardDetails>().DetailUpdate(health, cooldown, power, range, speed);
+        cardDetails.SetActive(true);
+        
+    }
+
+    public void HideCardDetails()
+    {
+        cardDetails.SetActive(false);
     }
 }

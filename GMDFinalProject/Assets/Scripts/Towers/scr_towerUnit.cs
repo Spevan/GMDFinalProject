@@ -74,22 +74,6 @@ public class scr_towerUnit : scr_unit
 
     public override void SetStatuses()
     {
-        base.SetStatuses();
-        foreach (scr_status status in cardData.statuses)
-        {
-            if (status.statusType == scr_status.statusTypes.Perceptive)
-            {
-                statuses.Add(status);
-                range.radius += status.statusAmnt * status.rangePerLvl;
-            }
-        }
 
-        foreach (scr_condition condition in conditions)
-        {
-            if (condition.conditionType == scr_condition.conditionTypes.blind)
-            {
-                range.radius -= condition.conditionAmnt * condition.rangePerLvl;
-            }
-        }
     }
 }

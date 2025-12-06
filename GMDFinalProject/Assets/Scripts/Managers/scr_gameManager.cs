@@ -171,7 +171,7 @@ public class scr_gameManager : NetworkBehaviour
         if (this.gameObject.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.ServerClientId)
         {
             Debug.Log("You are now disconnecting the server");
-            //SceneManager.LoadScene("sce_mainMenu");
+            SceneManager.LoadScene("sce_mainMenu");
         }
     }
 

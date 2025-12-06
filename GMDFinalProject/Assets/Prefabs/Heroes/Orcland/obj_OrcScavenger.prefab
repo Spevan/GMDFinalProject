@@ -205,8 +205,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &-6534163511682530779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +254,8 @@ MonoBehaviour:
   health: 0
   statuses: []
   target: {fileID: 0}
+  details: {fileID: 1901881319667730593, guid: 0411cd4addb6b0a41979be4b472e0380, type: 3}
+  temp: {fileID: 0}
   movementLock: 0
   speed: 0
 --- !u!54 &7717245374602360767
