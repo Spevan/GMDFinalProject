@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_towerRangeUnit
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 4017241cb45479a4a89180329236fdcf, type: 2}
+  cardData: {fileID: 11400000, guid: d297f16d2ce6d8e4ea677a2dc187ed7c, type: 2}
   range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0
@@ -243,6 +243,10 @@ MonoBehaviour:
   health: 0
   statuses: []
   target: {fileID: 0}
+  details: {fileID: 0}
+  temp: {fileID: 0}
+  owner: {fileID: 0}
+  towerData: {fileID: 0}
   pooledProj: []
-  amountPooledProj: 0
+  amountPooledProj: 10
   ammunition: {fileID: 0}

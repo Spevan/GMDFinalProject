@@ -7,9 +7,10 @@ using UnityEngine.EventSystems;
 
 public class scr_heroUnit : scr_unit
 {
-    scr_hero heroData;
+    public scr_hero heroData;
 
     public bool movementLock;
+    bool targetLock;
     public float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,6 +19,7 @@ public class scr_heroUnit : scr_unit
         heroData = (scr_hero)cardData;
         //Set movement lock to false and hero position so it sits above ground
         movementLock = false;
+        targetLock = false;
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
 
         base.Start();
@@ -38,7 +40,14 @@ public class scr_heroUnit : scr_unit
         }
         else
         {
-            rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.fixedDeltaTime);
+            if (!targetLock)
+            {
+                rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                rb.SleepRigidbody();
+            }
         }
     }
 
@@ -62,6 +71,7 @@ public class scr_heroUnit : scr_unit
         {
             //Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
             movementLock = false;
+            targetLock = false;
             target = null;
         }
     }
@@ -88,7 +98,8 @@ public class scr_heroUnit : scr_unit
     private void OnTriggerEnter(Collider other)
     {
         //If the range collides with a tower
-        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("Generator"))
+        if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("Generator") ||
+            other.gameObject.tag.Equals("Vehicle"))
             && !other.isTrigger && other.gameObject.activeSelf && !movementLock)
         {
             if(gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
@@ -97,13 +108,14 @@ public class scr_heroUnit : scr_unit
                 {
                     if (status.statusType == scr_status.statusTypes.Healing)
                     {
-
+                        other.gameObject.GetComponent<scr_unit>().ChangeHealth(power + (status.healthPerLvl * status.statusAmnt));
                     }
                 }
             }
             else
             {
                 movementLock = true;
+                targetLock = true;
                 timer = cooldown;
                 GetTarget(other.gameObject);
             } 

@@ -48,7 +48,7 @@ public class scr_cardDetails : MonoBehaviour
         }
         else if (cardData.unit.tag.Equals("Tower"))
         {
-            range.text = (cardData as scr_tower).range.ToString();
+            range.text = cardData.range.ToString();
             if (cardData is scr_vehicle)
             {
                 speed.text = (cardData as scr_vehicle).speed.ToString();

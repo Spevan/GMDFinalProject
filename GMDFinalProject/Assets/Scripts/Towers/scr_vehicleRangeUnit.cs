@@ -1,22 +1,25 @@
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.GraphicsBuffer;
 
-public class scr_towerRangeUnit : scr_towerUnit
+public class scr_vehicleRangeUnit : scr_vehicleUnit
 {
+    public scr_vehicleRange vehicleRangeData;
+
     public List<GameObject> pooledProj = new List<GameObject>();
     public int amountPooledProj;
     public GameObject ammunition;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
+        if (cardData.GetType() == typeof(scr_vehicleRange))
+        {
+            vehicleRangeData = cardData as scr_vehicleRange;
+        }
+
         base.Start();
-        ammunition = towerData.ammunition;
+        ammunition = vehicleRangeData.ammunition;
         if (this.GetComponent<NetworkObject>().IsOwner)
         {
             for (int i = 0; i < amountPooledProj; i++)
@@ -33,12 +36,6 @@ public class scr_towerRangeUnit : scr_towerUnit
                 }
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //Spawn a new network object based on parameters
@@ -86,7 +83,7 @@ public class scr_towerRangeUnit : scr_towerUnit
         Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + 0);
         foreach (GameObject player in scr_gameManager.instance.players)
         {
-            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(towerData, health, cooldown, power, range.radius, 0);
+            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(vehicleRangeData, health, cooldown, power, range.radius, 0);
         }
     }
 }

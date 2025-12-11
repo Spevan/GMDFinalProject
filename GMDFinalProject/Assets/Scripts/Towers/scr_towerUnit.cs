@@ -8,10 +8,7 @@ using UnityEngine.EventSystems;
 public class scr_towerUnit : scr_unit
 {
     //public new override scr_tower cardData;
-    public List<GameObject> pooledProj = new List<GameObject>();
-    public int amountPooledProj;
-    scr_tower towerData;
-    public GameObject ammunition;
+    public scr_tower towerData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -20,14 +17,9 @@ public class scr_towerUnit : scr_unit
         {
             towerData = (scr_tower)cardData;
         }
-        else if(cardData.GetType() == typeof(scr_vehicle))
-        {
-            towerData = (scr_vehicle)cardData;
-        }
         //Set tower position so it sits above ground
         transform.position = transform.position + new Vector3(0, 0.5f, 0);
         base.Start();
-        ammunition = towerData.ammunition;
     }
 
     public override void Attack()
@@ -40,11 +32,11 @@ public class scr_towerUnit : scr_unit
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((target == null || !target.gameObject.activeInHierarchy) && other.gameObject.tag.Equals("Hero"))
+        if ((target == null || !target.gameObject.activeInHierarchy) && (other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Vehicle")))
         {
             //Debug.Log(other.name + " detected by " + this.cardData.name);
             timer = cooldown;
-            target = other.gameObject;
+            GetTarget(other.gameObject);
         }
     }
 
@@ -70,15 +62,6 @@ public class scr_towerUnit : scr_unit
         {
             //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
-        }
-    }
-
-    public override void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Health: " + health + ", CD: " + cooldown + ", Power: " + power + ", Range: " + range.radius + ", Speed:" + 0);
-        foreach (GameObject player in scr_gameManager.instance.players)
-        {
-            player.GetComponentInChildren<scr_guiManager>().DisplayCardDetails(towerData, health, cooldown, power, range.radius, 0);
         }
     }
 

@@ -4442,9 +4442,11 @@ MonoBehaviour:
   deckCount:
     m_InternalValue: 0
   Deck:
-  - {fileID: 11400000, guid: 8be4ad816f287d143a951f7af8e23940, type: 2}
+  - {fileID: 11400000, guid: e89f8053e5a51a34da56bb49f85f26f9, type: 2}
   - {fileID: 11400000, guid: 4017241cb45479a4a89180329236fdcf, type: 2}
   - {fileID: 11400000, guid: d297f16d2ce6d8e4ea677a2dc187ed7c, type: 2}
+  - {fileID: 11400000, guid: 06e63ef895fef4f459c57f1392260e11, type: 2}
+  - {fileID: 11400000, guid: e9d35007b7fcbf74788e98733cff2e6d, type: 2}
   - {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}
   - {fileID: 11400000, guid: 3fc070ffa42c03f45a11176f87672a28, type: 2}
   - {fileID: 11400000, guid: de8954f20d9e94240a4d8b8384729988, type: 2}

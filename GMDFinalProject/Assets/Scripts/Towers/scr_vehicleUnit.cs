@@ -6,7 +6,7 @@ public class scr_vehicleUnit : scr_towerUnit
 {
     public float speed;
     public bool movementLock;
-    scr_vehicle vehicleData;
+    public scr_vehicle vehicleData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -34,6 +34,16 @@ public class scr_vehicleUnit : scr_towerUnit
         else
         {
             rb.MovePosition(transform.position + (target.transform.position - transform.position).normalized * speed * Time.fixedDeltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((target == null || !target.gameObject.activeInHierarchy) && (other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("Vehicle")))
+        {
+            //Debug.Log(other.name + " detected by " + this.cardData.name);
+            timer = cooldown;
+            GetTarget(other.gameObject);
         }
     }
 
