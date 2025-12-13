@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Hartwoods Vineflail
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 263350130, guid: c0d329274d7ec614ba6dd135682f7a83, type: 3}
-  typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 1
   count: 0

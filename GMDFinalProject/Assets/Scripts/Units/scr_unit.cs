@@ -14,6 +14,7 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     public SphereCollider range;
     public NetworkRigidbody rb;
     public float timer, cooldown, power, health;
+    public bool attackLock;
     public List<scr_status> statuses; public List<scr_condition> conditions;
     public GameObject target, details, temp, owner;
 
@@ -26,6 +27,7 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         rb = GetComponent<NetworkRigidbody>();
         conditions = new List<scr_condition>();
         range = this.AddComponent<SphereCollider>();
+        attackLock = false;
         SetDefaultStats();
 
         foreach(GameObject player in scr_gameManager.instance.players)
@@ -39,33 +41,36 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Attack()
     {
-        Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-        target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
-        foreach (scr_status status in statuses)
+        if (!attackLock)
         {
-            if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+            target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
+            foreach (scr_status status in statuses)
             {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
-            }
-            if (status.statusType == scr_status.statusTypes.Blinding)
-            {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-            }
-            if (status.statusType == scr_status.statusTypes.Crushing)
-            {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-            }
-            if (status.statusType == scr_status.statusTypes.Heated)
-            {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-            }
-            if (status.statusType == scr_status.statusTypes.Frigid)
-            {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-            }
-            if (status.statusType == scr_status.statusTypes.Tangled && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
-            {
-                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
+                if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Blinding)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Crushing)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Heated)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Frigid)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Tangled && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
+                }
             }
         }
     }
@@ -168,6 +173,13 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }*/
 
+    public IEnumerator Stunned(int duration)
+    {
+        attackLock = true;
+        yield return new WaitForSeconds(duration);
+        attackLock = false;
+    }
+
     public IEnumerator DamageOverTime(float duration, float tickTime, int damage)
     {
         float timer = 0f;
@@ -200,8 +212,7 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     public IEnumerator RemoveConditionOnTimer(scr_condition condition, float duration)
     {
         yield return new WaitForSeconds(duration);
-        conditions.Remove(condition);
-        SetStatuses();
+        RemoveCondition(condition);
     }
 
     public void GetTarget(GameObject newTarget)

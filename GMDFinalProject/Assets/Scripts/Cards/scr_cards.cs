@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
+using System;
 
 public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, scr_IDataPersistence
 {
     public GameObject GUI, details, temp;
-    public UnityEngine.UI.Image unitSprite, typeRarity;
+    public UnityEngine.UI.Image unitSprite, typeRarity, cardBorder;
+    public Sprite[] cardBorders, typeRarities;
     public TextMeshProUGUI nameTXT, costTXT, typeTXT, descTXT;
     public scr_card cardData;
     bool detailsON;
@@ -42,7 +44,81 @@ public class scr_cards : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         typeTXT.text = "[" + cardData.unit.tag + "]";
         descTXT.text = cardData.description.ToString();
         unitSprite.sprite = cardData.unitSprite;
-        typeRarity.sprite = cardData.typeRarity;
+        switch(cardData.color)
+        {
+            case scr_card.cardColor.Orcland:
+                cardBorder.sprite = cardBorders[0];
+                switch(cardData.rarity)
+                {
+                    case scr_card.rarityType.Common:
+                        typeRarity.sprite = typeRarities[0];
+                        break;
+                    case scr_card.rarityType.Uncommon:
+                        typeRarity.sprite = typeRarities[1];
+                        break;
+                    case scr_card.rarityType.Rare:
+                        typeRarity.sprite = typeRarities[2];
+                        break;
+                    case scr_card.rarityType.Legendary:
+                        typeRarity.sprite = typeRarities[3];
+                        break;
+                }
+                break;
+            case scr_card.cardColor.Hartwood:
+                cardBorder.sprite = cardBorders[1];
+                switch (cardData.rarity)
+                {
+                    case scr_card.rarityType.Common:
+                        typeRarity.sprite = typeRarities[4];
+                        break;
+                    case scr_card.rarityType.Uncommon:
+                        typeRarity.sprite = typeRarities[5];
+                        break;
+                    case scr_card.rarityType.Rare:
+                        typeRarity.sprite = typeRarities[6];
+                        break;
+                    case scr_card.rarityType.Legendary:
+                        typeRarity.sprite = typeRarities[7];
+                        break;
+                }
+                break;
+            case scr_card.cardColor.Haevana:
+                cardBorder.sprite = cardBorders[2];
+                switch (cardData.rarity)
+                {
+                    case scr_card.rarityType.Common:
+                        typeRarity.sprite = typeRarities[8];
+                        break;
+                    case scr_card.rarityType.Uncommon:
+                        typeRarity.sprite = typeRarities[9];
+                        break;
+                    case scr_card.rarityType.Rare:
+                        typeRarity.sprite = typeRarities[10];
+                        break;
+                    case scr_card.rarityType.Legendary:
+                        typeRarity.sprite = typeRarities[11];
+                        break;
+                }
+                break;
+            case scr_card.cardColor.Steelridge:
+                cardBorder.sprite = cardBorders[3];
+                switch (cardData.rarity)
+                {
+                    case scr_card.rarityType.Common:
+                        typeRarity.sprite = typeRarities[12];
+                        break;
+                    case scr_card.rarityType.Uncommon:
+                        typeRarity.sprite = typeRarities[13];
+                        break;
+                    case scr_card.rarityType.Rare:
+                        typeRarity.sprite = typeRarities[14];
+                        break;
+                    case scr_card.rarityType.Legendary:
+                        typeRarity.sprite = typeRarities[15];
+                        break;
+                }
+                break;
+        }
     }
     
     public void SaveData(ref scr_playerData data)

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Hartsmen ColdCleavers
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -127416489, guid: c0d329274d7ec614ba6dd135682f7a83, type: 3}
-  typeRarity: {fileID: -1191198114, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 3
   color: 1
   count: 0

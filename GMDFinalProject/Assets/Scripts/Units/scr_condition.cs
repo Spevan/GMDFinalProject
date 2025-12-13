@@ -19,7 +19,7 @@ public class scr_condition
         stunned,
         mutinied,
         compromised,
-        grapped
+        grappled
     }
     public conditionTypes conditionType;
     public int conditionAmnt;

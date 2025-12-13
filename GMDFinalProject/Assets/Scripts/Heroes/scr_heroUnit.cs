@@ -151,6 +151,8 @@ public class scr_heroUnit : scr_unit
                     speed -= condition.conditionAmnt * condition.speedPerLvl;
                     break;
                 case scr_condition.conditionTypes.entangled:
+                case scr_condition.conditionTypes.stunned:
+                case scr_condition.conditionTypes.grappled:
                     StartCoroutine(Entangled(condition.entangledDuration));
                     break;
             }

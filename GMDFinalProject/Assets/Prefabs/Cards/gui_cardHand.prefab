@@ -659,6 +659,29 @@ MonoBehaviour:
   temp: {fileID: 0}
   unitSprite: {fileID: 4260299041228823118}
   typeRarity: {fileID: 6110389909838305754}
+  cardBorder: {fileID: 4334176439576143684}
+  cardBorders:
+  - {fileID: 21300000, guid: b2edaa75ec871b84fbf5431877de370e, type: 3}
+  - {fileID: 21300000, guid: a158c9f9357a8344297a89248d6831f7, type: 3}
+  - {fileID: 21300000, guid: 1756c03e48fab3d40bdb86ae07b632e3, type: 3}
+  - {fileID: 21300000, guid: 39b721b209c03144fb99174682a998e3, type: 3}
+  typeRarities:
+  - {fileID: 860304432, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 720597580, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1725997984, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 569894206, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1879715581, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 1475676829, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1191198114, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 621695595, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1445759010, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 1776656472, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -621302571, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -1900378344, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: -558232809, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
+  - {fileID: 1664191111, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   nameTXT: {fileID: 7534564089689873357}
   costTXT: {fileID: 8732963149172344515}
   typeTXT: {fileID: 73507909992517546}

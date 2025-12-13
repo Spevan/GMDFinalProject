@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1330815c7bf9aa54ba6928d87b918752, type: 3}
+  m_Name: Ration Ticket
+  m_EditorClassIdentifier: Assembly-CSharp::scr_ration
+  cards:
+  - {fileID: 11400000, guid: 0bcb8adb77b5d5a429e38371ee01a1f6, type: 2}
+  - {fileID: 11400000, guid: 2dc74670f98b2934d956059ba5c77110, type: 2}
+  - {fileID: 11400000, guid: 6055b8a0a93501545b39484ef76036fc, type: 2}
+  - {fileID: 11400000, guid: e5750c31bda917f43a1226d6ce67c633, type: 2}
+  - {fileID: 11400000, guid: d508522a0a3393840862f53e82d49886, type: 2}
