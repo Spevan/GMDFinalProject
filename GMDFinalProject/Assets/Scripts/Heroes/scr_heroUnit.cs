@@ -10,7 +10,7 @@ public class scr_heroUnit : scr_unit
     public scr_hero heroData;
 
     public bool movementLock;
-    bool targetLock;
+    bool targetLock, resurrected;
     public float speed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,6 +20,7 @@ public class scr_heroUnit : scr_unit
         //Set movement lock to false and hero position so it sits above ground
         movementLock = false;
         targetLock = false;
+        resurrected = false;
         transform.position = transform.position + new Vector3(0, 0.25f, 0);
 
         base.Start();
@@ -88,9 +89,9 @@ public class scr_heroUnit : scr_unit
         base.Attack();
         foreach (scr_status status in statuses)
         {
-            if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
+            if (status.statusType == scr_status.statusTypes.Grippy)
             {
-                ChangeHealth(Convert.ToInt32(power * (0.1 * status.statusAmnt)));
+                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.grappled, status.statusAmnt));
             }
         }
     }
@@ -100,15 +101,26 @@ public class scr_heroUnit : scr_unit
         //If the range collides with a tower
         if((other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Tower") || other.gameObject.tag.Equals("Generator") ||
             other.gameObject.tag.Equals("Vehicle"))
-            && !other.isTrigger && other.gameObject.activeSelf && !movementLock)
+            && !other.isTrigger && !movementLock)
         {
             if(gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
             {
                 foreach (scr_status status in statuses)
                 {
-                    if (status.statusType == scr_status.statusTypes.Healing)
+                    if (status.statusType == scr_status.statusTypes.Healing && 
+                        other.gameObject.GetComponent<scr_unit>().health < other.gameObject.GetComponent<scr_unit>().cardData.health)
                     {
-                        other.gameObject.GetComponent<scr_unit>().ChangeHealth(power + (status.healthPerLvl * status.statusAmnt));
+                        movementLock = true;
+                        targetLock = true;
+                        timer = cooldown;
+                        GetTarget(other.gameObject);
+                    }
+                    else if(status.statusType == scr_status.statusTypes.Miraculous && !target.GetComponent<BoxCollider>().enabled)
+                    {
+                        movementLock = true;
+                        targetLock = true;
+                        timer = cooldown;
+                        GetTarget(other.gameObject);
                     }
                 }
             }
@@ -120,6 +132,27 @@ public class scr_heroUnit : scr_unit
                 GetTarget(other.gameObject);
             } 
             //Set movement lock to true and move towards tower position
+        }
+    }
+
+    public override void ChangeHealth(float delta)
+    {
+        foreach(scr_status status in statuses)
+        {
+            if(status.statusType == scr_status.statusTypes.Grippy && target != null && target.tag.Equals("Hero"))
+            {
+                foreach(scr_condition condition in target.GetComponent<scr_unit>().conditions)
+                {
+                    if(condition.conditionType == scr_condition.conditionTypes.grappled)
+                    {
+                        target.GetComponent<scr_unit>().ChangeHealth(delta);
+                    }
+                }
+            }
+            else
+            {
+                base.ChangeHealth(delta);
+            }
         }
     }
 
@@ -152,8 +185,17 @@ public class scr_heroUnit : scr_unit
                     break;
                 case scr_condition.conditionTypes.entangled:
                 case scr_condition.conditionTypes.stunned:
+                    StartCoroutine(Entangled(condition.entangledDuration));
+                    break;
+                case scr_condition.conditionTypes.resurrected:
+                    if (!resurrected)
+                    {
+                        Resurrect(power * condition.conditionAmnt);
+                    }
+                    break;
                 case scr_condition.conditionTypes.grappled:
                     StartCoroutine(Entangled(condition.entangledDuration));
+                    StartCoroutine(Stunned(condition.entangledDuration));
                     break;
             }
             RemoveConditionOnTimer(condition, condition.conditionTimer);
@@ -165,6 +207,21 @@ public class scr_heroUnit : scr_unit
         movementLock = true;
         yield return new WaitForSeconds(duration);
         movementLock = false;
+    }
+
+    public void Resurrect(float healthToSpawn)
+    {
+        SetDefaultStats();
+        ChangeHealth(-cardData.health);
+        ChangeHealth(healthToSpawn);
+        movementLock = false;
+        targetLock = false;
+        resurrected = true;
+        this.GetComponent<BoxCollider>().enabled = true;
+        if (gameObject.transform.childCount > 0)
+        {
+            this.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)

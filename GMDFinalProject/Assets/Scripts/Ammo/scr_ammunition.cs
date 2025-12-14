@@ -55,10 +55,13 @@ public class scr_ammunition : NetworkBehaviour
     {
         if (other.gameObject == target)//gameObject.GetComponent<NetworkObject>().OwnerClientId != other.gameObject.GetComponent<NetworkObject>().OwnerClientId && !other.isTrigger)
         {
-            Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
-            target.GetComponent<scr_unit>().ChangeHealth(-sourceObj.GetComponent<scr_unit>().power);
             foreach (scr_status status in sourceObj.GetComponent<scr_unit>().statuses)
             {
+                if (status.statusType == scr_status.statusTypes.Healing)
+                {
+                    target.GetComponent<scr_unit>().ChangeHealth(sourceObj.GetComponent<scr_unit>().power * (int)status.statusAmnt);
+                    return;
+                }
                 if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
                 {
                     sourceObj.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(sourceObj.GetComponent<scr_unit>().power * (0.1 * status.statusAmnt)));
@@ -87,7 +90,17 @@ public class scr_ammunition : NetworkBehaviour
                 {
                     target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
                 }
+                if (status.statusType == scr_status.statusTypes.Paralyzer)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.stunned, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Pacifist)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.compromised, status.statusAmnt));
+                }
             }
+            Debug.Log(name + " dealt " + ammoData.damage + " damage to " + target.gameObject.name);
+            target.GetComponent<scr_unit>().ChangeHealth(-sourceObj.GetComponent<scr_unit>().power);
             Destroy();
         }
     }

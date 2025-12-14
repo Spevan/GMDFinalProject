@@ -22,21 +22,33 @@ public class scr_towerUnit : scr_unit
         base.Start();
     }
 
-    public override void Attack()
-    {
-        if (target.gameObject.tag.Equals("Hero"))
-        {
-            base.Attack();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if ((target == null || !target.gameObject.activeInHierarchy) && (other.gameObject.tag.Equals("Hero") || other.gameObject.tag.Equals("Vehicle")))
         {
-            //Debug.Log(other.name + " detected by " + this.cardData.name);
-            timer = cooldown;
-            GetTarget(other.gameObject);
+            if (gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+            {
+                foreach (scr_status status in statuses)
+                {
+                    if (status.statusType == scr_status.statusTypes.Healing &&
+                        other.gameObject.GetComponent<scr_unit>().health < other.gameObject.GetComponent<scr_unit>().cardData.health)
+                    {
+                        //Debug.Log(other.name + " detected by " + this.cardData.name);
+                        timer = cooldown;
+                        GetTarget(other.gameObject);
+                    }
+                    else if (status.statusType == scr_status.statusTypes.Miraculous && !target.GetComponent<BoxCollider>().enabled)
+                    {
+                        timer = cooldown;
+                        GetTarget(other.gameObject);
+                    }
+                }
+            }
+            else
+            {
+                timer = cooldown;
+                GetTarget(other.gameObject);
+            }
         }
     }
 
@@ -63,10 +75,5 @@ public class scr_towerUnit : scr_unit
             //Debug.Log(this.cardData.name + " has terminated " + other.name);
             target = null;
         }
-    }
-
-    public override void SetStatuses()
-    {
-
     }
 }

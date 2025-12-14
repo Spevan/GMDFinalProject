@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Prison
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 3
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 10e32903bf0dd26468684ba021b2feae, type: 3}
   cost: 20
   health: 150
   description: Produces a Tiller hero unit each cooldown trigger.

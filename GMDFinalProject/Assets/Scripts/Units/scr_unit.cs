@@ -20,7 +20,7 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Start()
     {
-        if(cardData == null)
+        if (cardData == null)
         {
             cardData = ScriptableObject.CreateInstance<scr_card>();
         }
@@ -30,9 +30,9 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         attackLock = false;
         SetDefaultStats();
 
-        foreach(GameObject player in scr_gameManager.instance.players)
+        foreach (GameObject player in scr_gameManager.instance.players)
         {
-            if(player.GetComponent<NetworkObject>().OwnerClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
+            if (player.GetComponent<NetworkObject>().OwnerClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId)
             {
                 owner = player;
             }
@@ -43,10 +43,22 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (!attackLock)
         {
-            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
-            target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
             foreach (scr_status status in statuses)
             {
+                if (status.statusType == scr_status.statusTypes.Healing && target.tag.Equals("Hero"))
+                {
+                    target.GetComponent<scr_unit>().ChangeHealth(power * (int)status.statusAmnt);
+                    return;
+                }
+                if (status.statusType == scr_status.statusTypes.Miraculous && target.tag.Equals("Hero"))
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.resurrected, status.statusAmnt));
+                    return;
+                }
+                if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
+                {
+                    ChangeHealth(Convert.ToInt32(power * (0.1 * status.statusAmnt)));
+                }
                 if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
                 {
                     target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
@@ -71,11 +83,26 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
                 {
                     target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
                 }
+                if (status.statusType == scr_status.statusTypes.Paralyzer)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.stunned, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Pacifist)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.compromised, status.statusAmnt));
+                }
+                if (status.statusType == scr_status.statusTypes.Conspiracist)
+                {
+                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.mutinied, status.statusAmnt));
+                    target.GetComponent<scr_unit>().Mutinied(gameObject.GetComponent<NetworkObject>().OwnerClientId, 5f);
+                }
             }
+            Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
+            target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
         }
     }
 
-    public void ChangeHealth(float delta)
+    public virtual void ChangeHealth(float delta)
     {
         health += delta;
 
@@ -99,12 +126,12 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 oldStatus.statusAmnt++;
             }
-            else if(count == statuses.Count)
+            else if (count == statuses.Count)
             {
                 statuses.Add(newStatus);
             }
         }
-        
+
     }
 
     public virtual void SetDefaultStats()
@@ -138,26 +165,39 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
         foreach (scr_condition condition in conditions)
         {
-            switch(condition.conditionType)
+            switch (condition.conditionType)
             {
                 case scr_condition.conditionTypes.weak:
                     power -= condition.conditionAmnt * condition.powerPerLvl;
+                    RemoveConditionOnTimer(condition, condition.conditionTimer);
                     break;
                 case scr_condition.conditionTypes.brittle:
                 case scr_condition.conditionTypes.leaking:
                     health -= condition.conditionAmnt * condition.healthPerLvl;
+                    RemoveConditionOnTimer(condition, condition.conditionTimer);
                     break;
                 case scr_condition.conditionTypes.burnt:
                     StartCoroutine(DamageOverTime(condition.burnDuration * condition.conditionAmnt, condition.fireDmgTick, condition.conditionAmnt));
+                    RemoveConditionOnTimer(condition, condition.burnDuration * condition.conditionAmnt);
                     break;
                 case scr_condition.conditionTypes.frozen:
                     cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
+                    RemoveConditionOnTimer(condition, condition.conditionTimer);
                     break;
                 case scr_condition.conditionTypes.blind:
                     range.radius -= condition.conditionAmnt * condition.rangePerLvl;
+                    RemoveConditionOnTimer(condition, condition.conditionTimer);
+                    break;
+                case scr_condition.conditionTypes.stunned:
+                case scr_condition.conditionTypes.grappled:
+                case scr_condition.conditionTypes.compromised:
+                    StartCoroutine(Stunned(condition.entangledDuration));
+                    RemoveConditionOnTimer(condition, condition.entangledDuration);
+                    break;
+                case scr_condition.conditionTypes.mutinied:
                     break;
             }
-            RemoveConditionOnTimer(condition, condition.conditionTimer);
+
         }
     }
 
@@ -183,12 +223,22 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     public IEnumerator DamageOverTime(float duration, float tickTime, int damage)
     {
         float timer = 0f;
-        while(timer < duration)
+        while (timer < duration)
         {
             ChangeHealth(damage);
             yield return new WaitForSeconds(tickTime);
             timer += tickTime;
         }
+    }
+
+    public IEnumerator Mutinied(ulong newOwner, float duration)
+    {
+        ulong previousOwner = gameObject.GetComponent<NetworkObject>().OwnerClientId;
+        gameObject.GetComponent<NetworkObject>().ChangeOwnership(newOwner);
+        rb.SetRotation(Quaternion.Inverse(gameObject.transform.rotation));
+        yield return new WaitForSeconds(duration);
+        gameObject.GetComponent<NetworkObject>().ChangeOwnership(previousOwner);
+        rb.SetRotation(Quaternion.Inverse(gameObject.transform.rotation));
     }
 
     public void AddCondition(scr_condition condition)
@@ -285,11 +335,11 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
 
-        /*this.GetComponent<BoxCollider>().enabled = false;
+        this.GetComponent<BoxCollider>().enabled = false;
         if (gameObject.transform.childCount > 0)
         {
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        }*/
-        this.gameObject.SetActive(false);
+        }
+        //this.gameObject.SetActive(false);
     }
 }

@@ -47,6 +47,27 @@ public class scr_vehicleUnit : scr_towerUnit
         }
     }
 
+    public override void ChangeHealth(float delta)
+    {
+        foreach (scr_status status in statuses)
+        {
+            if (status.statusType == scr_status.statusTypes.Grippy && target != null && target.tag.Equals("Hero"))
+            {
+                foreach (scr_condition condition in target.GetComponent<scr_unit>().conditions)
+                {
+                    if (condition.conditionType == scr_condition.conditionTypes.grappled)
+                    {
+                        target.GetComponent<scr_unit>().ChangeHealth(delta);
+                    }
+                }
+            }
+            else
+            {
+                base.ChangeHealth(delta);
+            }
+        }
+    }
+
     public override void SetDefaultStats()
     {
         speed = vehicleData.speed;
@@ -75,6 +96,7 @@ public class scr_vehicleUnit : scr_towerUnit
                     speed -= condition.conditionAmnt * condition.speedPerLvl;
                     break;
                 case scr_condition.conditionTypes.entangled:
+                case scr_condition.conditionTypes.stunned:
                     StartCoroutine(Entangled(condition.entangledDuration));
                     break;
             }

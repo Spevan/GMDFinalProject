@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f78d13ec025e946aefc32f59c30e0f, type: 3}
   m_Name: Arms Manufacturer
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::scr_card
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: -1900378344, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 1
   color: 3
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 44fc18b2d461f344688f7bc10ab783d8, type: 3}
   cost: 40
   health: 250
   description: Improves the power of all heroes whom enter its range.
@@ -29,4 +28,3 @@ MonoBehaviour:
   statuses:
   - statusType: 3
     statusAmnt: 1
-  ammunition: {fileID: 0}

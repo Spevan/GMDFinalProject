@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Collapsing Turret
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: -1725997984, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
   color: 0
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 0b16922a671590a408f23a30de8e5e07, type: 3}
   cost: 35
   health: 50
   description: A turret machine gun that refunds half its cost upon destruction.
