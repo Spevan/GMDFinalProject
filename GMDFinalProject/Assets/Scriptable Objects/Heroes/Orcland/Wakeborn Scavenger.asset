@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Wakeborn Scavenger
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -863509812, guid: 1554a9dfafc101e44b320f366c5f2d9a, type: 3}
-  typeRarity: {fileID: -1725997984, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
   color: 0
   count: 0
@@ -21,11 +20,11 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 069ebd96a8322d744b4371f2ae68e403, type: 3}
   cost: 35
-  health: 150
+  health: 175
   description: '"4LL W4T3R F0UR W4K3B0RN"'
-  power: 7.5
-  range: 6
-  maxCooldown: 0.75
+  power: 25
+  range: 5
+  maxCooldown: 4
   statuses:
   - statusType: 6
     statusAmnt: 1

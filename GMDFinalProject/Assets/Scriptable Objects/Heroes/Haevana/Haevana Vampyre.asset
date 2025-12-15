@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Haevana Vampyre
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 986977980, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
-  typeRarity: {fileID: -621302571, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
-  cardBorder: {fileID: 21300000, guid: 1756c03e48fab3d40bdb86ae07b632e3, type: 3}
   rarity: 3
   color: 2
   count: 0
@@ -24,10 +22,10 @@ MonoBehaviour:
   cost: 40
   health: 75
   description: '"THEIR BLOOD GIVES ME STRENGTH!!"'
-  power: 30
-  range: 2
-  maxCooldown: 1.5
+  power: 60
+  range: 3
+  maxCooldown: 4
   statuses:
   - statusType: 9
-    statusAmnt: 2
+    statusAmnt: 3
   speed: 4

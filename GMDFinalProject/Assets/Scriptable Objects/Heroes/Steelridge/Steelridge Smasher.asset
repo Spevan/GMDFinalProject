@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Steelridge Smasher
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -1909619145, guid: aa98317c710104f48afdf935461f2130, type: 3}
-  typeRarity: {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 3
   count: 0
@@ -24,9 +23,9 @@ MonoBehaviour:
   health: 150
   description: '"Get near the water and I''m going to smash you!"'
   power: 10
-  range: 6
+  range: 5
   maxCooldown: 1.5
   statuses:
   - statusType: 18
     statusAmnt: 1
-  speed: 2
+  speed: 3

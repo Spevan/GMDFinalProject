@@ -21,10 +21,10 @@ MonoBehaviour:
   unit: {fileID: 6070432198559468909, guid: 0b16922a671590a408f23a30de8e5e07, type: 3}
   cost: 35
   health: 50
-  description: A turret machine gun that refunds half its cost upon destruction.
-  power: 1.5
-  range: 6
-  maxCooldown: 0.1
+  description: This turret cannon will refund your water when its destroyed.
+  power: 25
+  range: 8
+  maxCooldown: 3.5
   statuses:
   - statusType: 5
     statusAmnt: 1

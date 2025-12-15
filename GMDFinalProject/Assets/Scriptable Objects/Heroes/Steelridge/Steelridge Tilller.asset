@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Steelridge Tilller
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -541942633, guid: aa98317c710104f48afdf935461f2130, type: 3}
-  typeRarity: {fileID: -780782579, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 3
   count: 0
@@ -24,7 +23,7 @@ MonoBehaviour:
   health: 100
   description: '"Stay off my field and we won''t have a problem..."'
   power: 5
-  range: 5
+  range: 4
   maxCooldown: 1
   statuses: []
   speed: 3

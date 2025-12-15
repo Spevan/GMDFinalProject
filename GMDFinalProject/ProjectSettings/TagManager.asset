@@ -9,6 +9,7 @@ TagManager:
   - PleaseDontDestroy
   - Generator
   - Vehicle
+  - Floor
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6cd3cefb97fe1f4c854564bb0a47082, type: 3}
-  m_Name: Trust-85
+  m_Name: Trust-365
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicleRange
   unitSprite: {fileID: 0}
   rarity: 3
@@ -20,12 +20,12 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: 17799dc852bd28d45b4949ea6fd6cc7e, type: 3}
   cost: 75
-  health: 200
-  description: A large tank that holds one Agent hero, destroying everything in its
-    wake.
-  power: 20
-  range: 4
-  maxCooldown: 1
+  health: 365
+  description: The most powerful weapon engineered by Ernst and powered by Wakeborn
+    Water.
+  power: 50
+  range: 6
+  maxCooldown: 5
   statuses: []
   speed: 2
   unitEquipped: {fileID: 11400000, guid: b697068eae4648b438927e20ab1e0b97, type: 2}

@@ -57,6 +57,7 @@ public class scr_heroUnit : scr_unit
         //If the range collides with a tower
         if (target != null && target.Equals(collision.gameObject))
         {
+            targetLock = true;
             if (timer <= cooldown)
             {
                 timer += Time.deltaTime;
@@ -64,8 +65,9 @@ public class scr_heroUnit : scr_unit
             else
             {
                 //Set movement lock to true and move towards tower position
-                Attack();
+                Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
                 timer = 0;
+                Attack();
             }
         }
         else if (target == null || !target.gameObject.activeSelf)
@@ -86,7 +88,7 @@ public class scr_heroUnit : scr_unit
 
     public override void Attack()
     {
-        base.Attack();
+        
         foreach (scr_status status in statuses)
         {
             if (status.statusType == scr_status.statusTypes.Grippy)
@@ -94,6 +96,7 @@ public class scr_heroUnit : scr_unit
                 target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.grappled, status.statusAmnt));
             }
         }
+        base.Attack();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -103,22 +106,25 @@ public class scr_heroUnit : scr_unit
             other.gameObject.tag.Equals("Vehicle"))
             && !other.isTrigger && !movementLock)
         {
-            if(gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
+            Debug.Log("Should attack here.");
+            if (gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
             {
                 foreach (scr_status status in statuses)
                 {
                     if (status.statusType == scr_status.statusTypes.Healing && 
                         other.gameObject.GetComponent<scr_unit>().health < other.gameObject.GetComponent<scr_unit>().cardData.health)
                     {
+                        Debug.Log("Healing");
                         movementLock = true;
-                        targetLock = true;
+                        targetLock = false;
                         timer = cooldown;
                         GetTarget(other.gameObject);
                     }
                     else if(status.statusType == scr_status.statusTypes.Miraculous && !target.GetComponent<BoxCollider>().enabled)
                     {
+                        Debug.Log("Resurrected");
                         movementLock = true;
-                        targetLock = true;
+                        targetLock = false;
                         timer = cooldown;
                         GetTarget(other.gameObject);
                     }
@@ -126,8 +132,9 @@ public class scr_heroUnit : scr_unit
             }
             else
             {
+                Debug.Log("Attack");
                 movementLock = true;
-                targetLock = true;
+                targetLock = false;
                 timer = cooldown;
                 GetTarget(other.gameObject);
             } 
@@ -146,14 +153,12 @@ public class scr_heroUnit : scr_unit
                     if(condition.conditionType == scr_condition.conditionTypes.grappled)
                     {
                         target.GetComponent<scr_unit>().ChangeHealth(delta);
+                        return;
                     }
                 }
             }
-            else
-            {
-                base.ChangeHealth(delta);
-            }
         }
+        base.ChangeHealth(delta);
     }
 
     public override void SetDefaultStats()

@@ -18,13 +18,14 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: 44fc18b2d461f344688f7bc10ab783d8, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 4f8d4ce9691a70b4486b89d97c344ef4, type: 3}
   cost: 40
   health: 250
-  description: Improves the power of all heroes whom enter its range.
+  description: One of many BRM factories that produce munitions for the Army of the
+    Committee.
   power: 0
   range: 4
-  maxCooldown: 2
+  maxCooldown: 2.5
   statuses:
   - statusType: 3
     statusAmnt: 1

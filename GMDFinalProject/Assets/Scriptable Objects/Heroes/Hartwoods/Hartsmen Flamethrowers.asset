@@ -22,9 +22,9 @@ MonoBehaviour:
   cost: 15
   health: 50
   description: '"Have you ever had a flaming knife thrown at you?"'
-  power: 3
-  range: 6
-  maxCooldown: 0.5
+  power: 12
+  range: 3
+  maxCooldown: 2
   statuses:
   - statusType: 14
     statusAmnt: 1

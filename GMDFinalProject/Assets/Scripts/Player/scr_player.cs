@@ -101,7 +101,7 @@ public class scr_player : NetworkBehaviour
         {
             //card.player = this;
         }
-
+        DrawCard();
     }
 
     // Update is called once per frame
@@ -128,8 +128,9 @@ public class scr_player : NetworkBehaviour
     {
         if (Deck.Count > 0 && GUI.cardsInHand.Count < MAX_HAND_SIZE)
         {
-            GUI.DrawCard(Deck[0], this);
-            Deck.RemoveAt(0);
+            int cardToDraw = Random.Range(0, Deck.Count);
+            GUI.DrawCard(Deck[cardToDraw], this);
+            Deck.RemoveAt(cardToDraw);
             deckCount.Value = Deck.Count;
             GUI.ChangeCardCount(deckCount.Value);
         }
@@ -137,16 +138,19 @@ public class scr_player : NetworkBehaviour
 
     public void PlayCard(scr_card card)
     {
-        int discount = 0;
-        foreach (scr_status status in card.statuses)
+        if (card.cost >= water.Value)
         {
-            if(status.statusType == scr_status.statusTypes.Frugal)
+            int discount = 0;
+            foreach (scr_status status in card.statuses)
             {
-                discount = status.statusAmnt * discountPerLevel;
+                if (status.statusType == scr_status.statusTypes.Frugal)
+                {
+                    discount = status.statusAmnt * discountPerLevel;
+                }
             }
+            ChangeWater(-card.cost + discount);
+            cardsPlayed.Value += 1;
         }
-        ChangeWater(-card.cost + discount);
-        cardsPlayed.Value += 1;
     }
 
     public void ChangeWater(int waterDelta)

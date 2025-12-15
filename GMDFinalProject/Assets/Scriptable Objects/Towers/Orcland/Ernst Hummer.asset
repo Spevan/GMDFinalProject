@@ -20,12 +20,12 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 6070432198559468909, guid: 0ee67972d3950e74482ffe0f94836be2, type: 3}
   cost: 25
-  health: 100
-  description: A small truck that holds two Rifleman heroes, one armed with a mounted
-    rifle.
+  health: 175
+  description: An all-terrain utility vehicle that holds a Rifleman, armed with a
+    mounted rifle.
   power: 5
-  range: 6
-  maxCooldown: 0.5
+  range: 7
+  maxCooldown: 3
   statuses: []
   speed: 4
   unitEquipped: {fileID: 11400000, guid: de02b730702688a47a24838842f1e36c, type: 2}

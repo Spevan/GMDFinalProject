@@ -18,14 +18,14 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: f5cc266765267bf4eb5d6460ea003623, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 2cedb5fc4ac30d6458d4aaeb2257ebce, type: 3}
   cost: 30
   health: 125
-  description: The central chapel of the Church, providing healing to all in its
-    range.
-  power: 8
-  range: 5
-  maxCooldown: 0.5
+  description: The central chapel of the Haevanic Church, providing healing to all
+    in its range.
+  power: 25
+  range: 7
+  maxCooldown: 5
   statuses:
   - statusType: 8
     statusAmnt: 2

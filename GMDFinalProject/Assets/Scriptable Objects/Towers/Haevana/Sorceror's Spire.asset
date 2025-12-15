@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Sorceror's Spire
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: 621695595, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 2
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: f0ab9165f8b6d724d97510e262188441, type: 3}
   cost: 15
   health: 100
-  description: A slow, medium-ranged tower that lacks power but has good defense.
-  power: 12
-  range: 3
-  maxCooldown: 1
+  description: Bell tower monuments utilitzed by mages during the war to defend the
+    Church's honor.
+  power: 20
+  range: 6
+  maxCooldown: 6
   statuses: []
   ammunition: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

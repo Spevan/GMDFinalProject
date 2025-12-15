@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
-  m_Name: Tripmine
+  m_Name: BRM Prison
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: -1319179337, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
-  color: 1
+  color: 3
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
-  cost: 10
-  health: 0
-  description: Mines that push enemies away upon entering their range.
+  unit: {fileID: 6070432198559468909, guid: 10e32903bf0dd26468684ba021b2feae, type: 3}
+  cost: 20
+  health: 150
+  description: Where the Committee houses their worst criminals. Once rehabilitated,
+    they fight for Steelridge to the death.
   power: 0
-  range: 1
-  maxCooldown: 0
+  range: 0
+  maxCooldown: 4
   statuses: []
-  ammunition: {fileID: 0}
+  ammunition: {fileID: 4841726575583476779, guid: 3cbd755563c4ce74ba22ba635776ab92, type: 3}

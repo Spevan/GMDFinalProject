@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Steelridge Spy
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 707679962, guid: aa98317c710104f48afdf935461f2130, type: 3}
-  typeRarity: {fileID: -558232809, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 2
   color: 3
   count: 0
@@ -25,8 +24,8 @@ MonoBehaviour:
   description: '"Hey friend, don''t you love the Secretary?! Join the Special Forces!"'
   power: 1
   range: 3
-  maxCooldown: 10
+  maxCooldown: 5
   statuses:
   - statusType: 19
     statusAmnt: 2
-  speed: 4
+  speed: 2

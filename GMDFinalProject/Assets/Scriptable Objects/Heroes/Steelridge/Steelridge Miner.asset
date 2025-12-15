@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Steelridge Miner
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -985567640, guid: aa98317c710104f48afdf935461f2130, type: 3}
-  typeRarity: {fileID: -1900378344, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 1
   color: 3
   count: 0
@@ -24,8 +23,8 @@ MonoBehaviour:
   health: 200
   description: '"Mining jobs are down since the mines went public, gotta do this
     now..."'
-  power: 5
-  range: 5
+  power: 6
+  range: 4
   maxCooldown: 3
   statuses:
   - statusType: 21

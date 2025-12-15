@@ -16,10 +16,10 @@ GameObject:
   - component: {fileID: 9060199011452161778}
   - component: {fileID: 4640057384263600510}
   - component: {fileID: -7389392417467665142}
-  - component: {fileID: -8194423884130881282}
+  - component: {fileID: -4335197963295105716}
   m_Layer: 0
-  m_Name: obj_honesty85
-  m_TagString: Vehicle
+  m_Name: obj_scorchedEarth
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8646339, y: 0.47, z: 0.17287223}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 867474663
+  GlobalObjectIdHash: 857459509
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -202,7 +202,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 1
 --- !u!114 &-7389392417467665142
 MonoBehaviour:
@@ -221,7 +221,7 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!114 &-8194423884130881282
+--- !u!114 &-4335197963295105716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,11 +230,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6070432198559468909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd5f6b0942e52548a3c657501a0775e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0eef2e92d6045b84c832f7acee183d0a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::scr_vehicleRangeUnit
+  m_EditorClassIdentifier: Assembly-CSharp::scr_towerUnit
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 3d50ba583d2963545b7642fb34904e88, type: 2}
+  cardData: {fileID: 11400000, guid: e44df257555ea734fa017412227d3fbc, type: 2}
   range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0
@@ -248,10 +248,3 @@ MonoBehaviour:
   temp: {fileID: 0}
   owner: {fileID: 0}
   towerData: {fileID: 0}
-  speed: 0
-  movementLock: 0
-  vehicleData: {fileID: 0}
-  vehicleRangeData: {fileID: 0}
-  pooledProj: []
-  amountPooledProj: 10
-  ammunition: {fileID: 0}

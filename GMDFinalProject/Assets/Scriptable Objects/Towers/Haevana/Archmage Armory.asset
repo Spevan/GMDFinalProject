@@ -18,13 +18,14 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: 7aa4e16524c86124a8426b36245af505, type: 3}
+  unit: {fileID: 6070432198559468909, guid: e6d4a6355715b6b4d9b73dd64c8ce593, type: 3}
   cost: 25
   health: 75
-  description: An armory used by Haevana's mages to improve their fortitude.
+  description: The mages of Haevana have flocked to this place to concentrate on
+    their magical defenses.
   power: 0
-  range: 4
-  maxCooldown: 0.5
+  range: 5
+  maxCooldown: 5
   statuses:
   - statusType: 4
-    statusAmnt: 3
+    statusAmnt: 1

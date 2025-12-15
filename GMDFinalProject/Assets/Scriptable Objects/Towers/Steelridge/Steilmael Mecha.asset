@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb081a0ca35d7845b0fbe3ea94a46b4, type: 3}
-  m_Name: Mecha
+  m_Name: Steilmael Mecha
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicle
   unitSprite: {fileID: 0}
   rarity: 3
@@ -21,7 +21,8 @@ MonoBehaviour:
   unit: {fileID: 6070432198559468909, guid: ff36ace75021ad246ad76b9db5f11ed8, type: 3}
   cost: 75
   health: 500
-  description: A large suit of armor that a Steelridge Smasher pilots.
+  description: Protected by a suit of steel armor, Smasher's can destroy anything
+    in their wake when piloting marvel of engineering.
   power: 30
   range: 3
   maxCooldown: 1.5

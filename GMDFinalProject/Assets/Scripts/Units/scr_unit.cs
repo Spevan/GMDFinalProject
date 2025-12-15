@@ -41,8 +41,6 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Attack()
     {
-        if (!attackLock)
-        {
             foreach (scr_status status in statuses)
             {
                 if (status.statusType == scr_status.statusTypes.Healing && target.tag.Equals("Hero"))
@@ -99,7 +97,6 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
             target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
-        }
     }
 
     public virtual void ChangeHealth(float delta)
@@ -125,10 +122,12 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             if (oldStatus.statusType == newStatus.statusType)
             {
                 oldStatus.statusAmnt++;
+                return;
             }
             else if (count == statuses.Count)
             {
                 statuses.Add(newStatus);
+                return;
             }
         }
 
@@ -169,30 +168,30 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 case scr_condition.conditionTypes.weak:
                     power -= condition.conditionAmnt * condition.powerPerLvl;
-                    RemoveConditionOnTimer(condition, condition.conditionTimer);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.conditionTimer));
                     break;
                 case scr_condition.conditionTypes.brittle:
                 case scr_condition.conditionTypes.leaking:
                     health -= condition.conditionAmnt * condition.healthPerLvl;
-                    RemoveConditionOnTimer(condition, condition.conditionTimer);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.conditionTimer));
                     break;
                 case scr_condition.conditionTypes.burnt:
                     StartCoroutine(DamageOverTime(condition.burnDuration * condition.conditionAmnt, condition.fireDmgTick, condition.conditionAmnt));
-                    RemoveConditionOnTimer(condition, condition.burnDuration * condition.conditionAmnt);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.burnDuration * condition.conditionAmnt));
                     break;
                 case scr_condition.conditionTypes.frozen:
                     cooldown += condition.conditionAmnt * condition.cooldownPerLevel;
-                    RemoveConditionOnTimer(condition, condition.conditionTimer);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.conditionTimer));
                     break;
                 case scr_condition.conditionTypes.blind:
                     range.radius -= condition.conditionAmnt * condition.rangePerLvl;
-                    RemoveConditionOnTimer(condition, condition.conditionTimer);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.conditionTimer));
                     break;
                 case scr_condition.conditionTypes.stunned:
                 case scr_condition.conditionTypes.grappled:
                 case scr_condition.conditionTypes.compromised:
                     StartCoroutine(Stunned(condition.entangledDuration));
-                    RemoveConditionOnTimer(condition, condition.entangledDuration);
+                    StartCoroutine(RemoveConditionOnTimer(condition, condition.entangledDuration));
                     break;
                 case scr_condition.conditionTypes.mutinied:
                     break;
@@ -312,16 +311,17 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Death()
     {
-        foreach (scr_status status in statuses)
-        {
-            if(status.statusType == scr_status.statusTypes.Recyclable)
-            {
-                scr_player.instance.ChangeWater(Convert.ToInt32((float)cardData.cost * ((float)status.statusAmnt * 0.5f)));
-            }
-        }
-
         foreach(GameObject player in scr_gameManager.instance.players)
         {
+            foreach (scr_status status in statuses)
+            {
+                if (player.GetComponent<NetworkObject>().OwnerClientId == gameObject.GetComponent<NetworkObject>().OwnerClientId &&
+                    status.statusType == scr_status.statusTypes.Recyclable)
+                {
+                    player.GetComponent<scr_player>().ChangeWater(Convert.ToInt32((float)cardData.cost * ((float)status.statusAmnt * 0.25f)));
+                }
+            }
+
             if (player.GetComponent<NetworkObject>().OwnerClientId != this.gameObject.GetComponent<NetworkObject>().OwnerClientId)
             {
                 if (NetworkManager.IsServer)
@@ -340,6 +340,6 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         }
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }

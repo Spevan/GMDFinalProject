@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Haevana Sorceror
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -1483136580, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
-  typeRarity: {fileID: 621695595, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
-  cardBorder: {fileID: 21300000, guid: 1756c03e48fab3d40bdb86ae07b632e3, type: 3}
   rarity: 0
   color: 2
   count: 0
@@ -24,8 +22,8 @@ MonoBehaviour:
   cost: 20
   health: 100
   description: '"My ki beads help channel my spells into my punches." '
-  power: 20
+  power: 50
   range: 4
-  maxCooldown: 2
+  maxCooldown: 5
   statuses: []
   speed: 5

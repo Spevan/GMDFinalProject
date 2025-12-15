@@ -18,13 +18,13 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: 45feba8622c024146b742b911f24151e, type: 3}
+  unit: {fileID: 6070432198559468909, guid: e1187bc336d5c084ab1a3d75d22c727a, type: 3}
   cost: 50
   health: 100
-  description: Any enemy heroes who enter its range cannot attack.
+  description: An international symbol of peace. No violence allowed on its premises.
   power: 0
   range: 4
-  maxCooldown: 5
+  maxCooldown: 3
   statuses:
   - statusType: 19
     statusAmnt: 2

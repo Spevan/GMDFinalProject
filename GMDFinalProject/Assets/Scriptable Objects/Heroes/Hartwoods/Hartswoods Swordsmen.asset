@@ -23,7 +23,7 @@ MonoBehaviour:
   health: 75
   description: '"Cutting through..! heh.."'
   power: 5
-  range: 8
-  maxCooldown: 1.5
+  range: 5
+  maxCooldown: 2.5
   statuses: []
   speed: 8

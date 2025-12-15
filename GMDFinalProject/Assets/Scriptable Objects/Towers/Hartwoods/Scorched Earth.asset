@@ -9,24 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3decf0d151b58b04397af8f3df427302, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f78d13ec025e946aefc32f59c30e0f, type: 3}
   m_Name: Scorched Earth
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::scr_card
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: 1475676829, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
-  rarity: 2
+  rarity: 3
   color: 1
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: e15dc18c73b95514090f53437901e38e, type: 3}
   cost: 40
   health: 50
-  description: 'Leaves a burning trail that leaves enemies unable to access resources. '
+  description: Mother Nature, we are sorry for what we must do... but the idolaters
+    must burn!
   power: 3
   range: 3
-  maxCooldown: 0.25
+  maxCooldown: 0.5
   statuses:
   - statusType: 14
-    statusAmnt: 2
-  ammunition: {fileID: 0}
+    statusAmnt: 3

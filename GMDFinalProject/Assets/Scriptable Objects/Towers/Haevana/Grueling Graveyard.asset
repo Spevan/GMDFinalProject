@@ -18,13 +18,14 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: f5cc266765267bf4eb5d6460ea003623, type: 3}
+  unit: {fileID: 6070432198559468909, guid: efdcd111fc94177428550902a4227510, type: 3}
   cost: 65
   health: 50
-  description: Resurrects heroes who fall within its range.
-  power: 0
-  range: 6
+  description: Where the Church's greatest heroes are buried, and rumors say that
+    some return from death...
+  power: 50
+  range: 8
   maxCooldown: 3
   statuses:
   - statusType: 17
-    statusAmnt: 1
+    statusAmnt: 3

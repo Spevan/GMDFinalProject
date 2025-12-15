@@ -22,8 +22,8 @@ MonoBehaviour:
   cost: 30
   health: 50
   description: '"Get over here!"'
-  power: 10
-  range: 7
+  power: 8
+  range: 3
   maxCooldown: 2
   statuses:
   - statusType: 16

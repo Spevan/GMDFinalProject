@@ -21,11 +21,11 @@ MonoBehaviour:
   unit: {fileID: 6070432198559468909, guid: 119f8678cf2443e4f914ebffa091cc00, type: 3}
   cost: 45
   health: 150
-  description: A haunted house that absorbs the life energy of all who enter its
-    range.
-  power: 20
-  range: 4
-  maxCooldown: 1
+  description: This mansion was once owned by the Royal Family, now anyone who has
+    gone near has never returned...
+  power: 75
+  range: 3
+  maxCooldown: 4
   statuses:
   - statusType: 9
-    statusAmnt: 1
+    statusAmnt: 3

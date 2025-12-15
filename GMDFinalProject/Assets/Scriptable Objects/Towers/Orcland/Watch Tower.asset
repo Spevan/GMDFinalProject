@@ -13,20 +13,19 @@ MonoBehaviour:
   m_Name: Watch Tower
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 0}
-  typeRarity: {fileID: 860304432, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 0
   color: 0
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: c9c8cb2476c280146990fcb1caaa3260, type: 3}
+  unit: {fileID: 6070432198559468909, guid: b5dd24b84f5a035408231ef419fe1913, type: 3}
   cost: 20
-  health: 150
+  health: 125
   description: Eliminates all enemies within range, and boosts productivity of nearby
     towers.
-  power: 10
+  power: 7.5
   range: 10
-  maxCooldown: 0.75
+  maxCooldown: 2
   statuses:
   - statusType: 7
     statusAmnt: 1

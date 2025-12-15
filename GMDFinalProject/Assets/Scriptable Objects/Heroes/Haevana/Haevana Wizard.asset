@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Haevana Wizard
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 1626117529, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
-  typeRarity: {fileID: -1445759010, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
-  cardBorder: {fileID: 21300000, guid: 1756c03e48fab3d40bdb86ae07b632e3, type: 3}
   rarity: 1
   color: 2
   count: 0
@@ -24,9 +22,9 @@ MonoBehaviour:
   cost: 30
   health: 50
   description: '"My pure blood allows me to cast powerful spells!"'
-  power: 15
+  power: 40
   range: 6
-  maxCooldown: 1
+  maxCooldown: 3.5
   statuses: []
   speed: 4
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

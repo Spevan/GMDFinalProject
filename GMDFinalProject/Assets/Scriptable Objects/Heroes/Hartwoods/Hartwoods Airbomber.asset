@@ -23,8 +23,8 @@ MonoBehaviour:
   health: 25
   description: '"My bombs will blow you away!!"'
   power: 1
-  range: 9
-  maxCooldown: 3
+  range: 4
+  maxCooldown: 1.5
   statuses: []
   speed: 5
   ammo: {fileID: 4348946028656445628, guid: e788c6db8e202a14ca482c290ee8a8d0, type: 3}

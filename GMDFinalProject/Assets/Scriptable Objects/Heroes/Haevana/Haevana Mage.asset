@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Haevana Mage
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 1560527630, guid: de600dc9391a4f141a9973baf9719c72, type: 3}
-  typeRarity: {fileID: 621695595, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
-  cardBorder: {fileID: 21300000, guid: 1756c03e48fab3d40bdb86ae07b632e3, type: 3}
   rarity: 0
   color: 2
   count: 0
@@ -25,9 +23,9 @@ MonoBehaviour:
   health: 50
   description: '"I''m still learning all the spells but I hope to become a Wizard
     someday."'
-  power: 10
-  range: 4
-  maxCooldown: 2
+  power: 25
+  range: 5
+  maxCooldown: 5
   statuses:
   - statusType: 8
     statusAmnt: 1

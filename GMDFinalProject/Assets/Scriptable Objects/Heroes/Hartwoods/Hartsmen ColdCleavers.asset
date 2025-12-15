@@ -23,8 +23,8 @@ MonoBehaviour:
   health: 125
   description: '"I''m cleaving my opponents frozen with my axes!"'
   power: 15
-  range: 6
-  maxCooldown: 1.25
+  range: 2
+  maxCooldown: 1.5
   statuses:
   - statusType: 15
     statusAmnt: 2

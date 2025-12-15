@@ -2,25 +2,30 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class scr_towerSupportUnit : scr_towerUnit
+public class scr_towerSupportUnit : scr_unit
 {
+    private void Start()
+    {
+        transform.position = transform.position + new Vector3(0, 0.5f, 0);
+        base.Start();
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if(!other.isTrigger && other.gameObject.activeSelf && 
+        if (!other.gameObject.transform.tag.Equals("Floor") && !other.isTrigger &&
             gameObject.GetComponent<NetworkObject>().OwnerClientId == other.gameObject.GetComponent<NetworkObject>().OwnerClientId)
         {
-            
-            if (timer <= cooldown)
-            {
-                timer += Time.deltaTime;
-            }
-            else
-            {
-                //Set movement lock to true and move towards tower position
-                //Debug.Log(this.cardData.name + " is attacking " + other.name);
-                Support(other);
-                timer = 0;
-            }
+                if (timer <= cooldown)
+                {
+                    timer += Time.deltaTime;
+                }
+                else
+                {
+                    //Set movement lock to true and move towards tower position
+                    //Debug.Log(this.cardData.name + " is attacking " + other.name);
+                    Support(other);
+                    timer = 0;
+                }
         }
     }
 

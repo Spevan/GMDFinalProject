@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Steelridge Knight
   m_EditorClassIdentifier: 
   unitSprite: {fileID: -15532698, guid: aa98317c710104f48afdf935461f2130, type: 3}
-  typeRarity: {fileID: 1664191111, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 3
   color: 3
   count: 0
@@ -23,8 +22,8 @@ MonoBehaviour:
   cost: 50
   health: 300
   description: '"My honor used to lie with the King but now Steilmael is my boss..."'
-  power: 20
-  range: 4
+  power: 15
+  range: 2
   maxCooldown: 1.25
   statuses: []
-  speed: 1
+  speed: 2

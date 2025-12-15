@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scr_vehicleRangeUnit
   ShowTopMostFoldoutHeaderGroup: 1
-  cardData: {fileID: 11400000, guid: 9e2eaa4e024a1bd46936654e677d69d7, type: 2}
+  cardData: {fileID: 11400000, guid: 520fbd8f027ed2942af1514b1d7a0226, type: 2}
   range: {fileID: 0}
   rb: {fileID: 0}
   timer: 0

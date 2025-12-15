@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Wakeborn Agent
   m_EditorClassIdentifier: 
   unitSprite: {fileID: 2032625440, guid: 1554a9dfafc101e44b320f366c5f2d9a, type: 3}
-  typeRarity: {fileID: 569894206, guid: fedaf1e826e9031439f5afd15aff32ce, type: 3}
   rarity: 3
   color: 0
   count: 0
@@ -21,11 +20,11 @@ MonoBehaviour:
   loaded: 0
   unit: {fileID: 4841726575583476779, guid: 61010280cd9bcc346a1e70381f37839e, type: 3}
   cost: 50
-  health: 125
+  health: 150
   description: '"Y0U C4Nt E5C4P3 N0W"'
-  power: 5
-  range: 10
-  maxCooldown: 0.25
+  power: 25
+  range: 8
+  maxCooldown: 3.5
   statuses:
   - statusType: 1
     statusAmnt: 1

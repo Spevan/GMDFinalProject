@@ -18,10 +18,11 @@ MonoBehaviour:
   count: 0
   deckCount: 0
   loaded: 0
-  unit: {fileID: 6070432198559468909, guid: 2323a2aed6195a74bb6304cc7fc61477, type: 3}
+  unit: {fileID: 6070432198559468909, guid: 30e38afc9fa6b8649b67310b75f1ad80, type: 3}
   cost: 25
   health: 200
-  description: Improves the speed of all heroes whom enter its range.
+  description: Even the best and brightest must train their skills to keep fighting
+    for glory.
   power: 0
   range: 6
   maxCooldown: 2
