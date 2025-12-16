@@ -33,15 +33,18 @@ public class scr_towerSupportUnit : scr_unit
     {
         foreach (scr_status status in cardData.statuses)
         {
-            //If the status found is not healing, this unit provides the other with that status
-            if (status.statusType != scr_status.statusTypes.Healing)
-            { 
-                other.gameObject.GetComponent<scr_unit>().GetStatus(status);
-            }
-            //If the status found is healing, heal that unit
-            else
+            if (!target.GetComponent<scr_unit>().statuses.Contains(status))
             {
-                other.gameObject.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
+                //If the status found is not healing, this unit provides the other with that status
+                if (status.statusType != scr_status.statusTypes.Healing)
+                {
+                    other.gameObject.GetComponent<scr_unit>().GetStatus(status);
+                }
+                //If the status found is healing, heal that unit
+                else
+                {
+                    other.gameObject.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(power * status.statusAmnt));
+                }
             }
         }
     }

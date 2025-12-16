@@ -38,6 +38,19 @@ public class scr_vehicleRangeUnit : scr_vehicleUnit
         }
     }
 
+    public override void Move()
+    {
+        if (!movementLock) //If the movement lock is false
+        {
+            //Hero moves forward
+            rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rb.SetLinearVelocity(Vector3.zero);
+        }
+    }
+
     //Spawn a new network object based on parameters
     public void SpawnNetworkAmmo(string ammoName, Vector3 pos, Quaternion rot, ulong clientID)
     {

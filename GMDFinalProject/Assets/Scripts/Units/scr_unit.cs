@@ -41,62 +41,72 @@ public class scr_unit : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Attack()
     {
+        if (!attackLock)
+        {
             foreach (scr_status status in statuses)
             {
-                if (status.statusType == scr_status.statusTypes.Healing && target.tag.Equals("Hero"))
+                if(!target.GetComponent<scr_unit>().statuses.Contains(status))
                 {
-                    target.GetComponent<scr_unit>().ChangeHealth(power * (int)status.statusAmnt);
-                    return;
-                }
-                if (status.statusType == scr_status.statusTypes.Miraculous && target.tag.Equals("Hero"))
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.resurrected, status.statusAmnt));
-                    return;
-                }
-                if (status.statusType == scr_status.statusTypes.Vampiric && target.tag.Equals("Hero"))
-                {
-                    ChangeHealth(Convert.ToInt32(power * (0.1 * status.statusAmnt)));
-                }
-                if (status.statusType == scr_status.statusTypes.Sleepy && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Blinding)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Crushing)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Heated)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Frigid)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Tangled && (target.tag.Equals("Hero") || target.tag.Equals("Vehicle")))
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Paralyzer)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.stunned, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Pacifist)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.compromised, status.statusAmnt));
-                }
-                if (status.statusType == scr_status.statusTypes.Conspiracist)
-                {
-                    target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.mutinied, status.statusAmnt));
-                    target.GetComponent<scr_unit>().Mutinied(gameObject.GetComponent<NetworkObject>().OwnerClientId, 5f);
+                    switch(status.statusType)
+                    {
+                        case scr_status.statusTypes.Healing:
+                            if(target.tag.Equals("Hero"))
+                            {
+                                target.GetComponent<scr_unit>().ChangeHealth(power * (int)status.statusAmnt);
+                            }
+                            break;
+                        case scr_status.statusTypes.Miraculous:
+                            if (target.tag.Equals("Hero"))
+                            {
+                                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.resurrected, status.statusAmnt));
+                            }
+                            break;
+                        case scr_status.statusTypes.Vampiric:
+                            if(target.tag.Equals("Hero"))
+                            {
+                                ChangeHealth(Convert.ToInt32(power * (0.1 * status.statusAmnt)));
+                            }
+                            break;
+                        case scr_status.statusTypes.Sleepy:
+                            if(target.tag.Equals("Hero") || target.tag.Equals("Vehicle"))
+                            {
+                                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.exhausted, status.statusAmnt));
+                            }
+                            break;
+                        case scr_status.statusTypes.Blinding:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.blind, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Crushing:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.weak, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Heated:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.burnt, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Frigid:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.frozen, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Tangled:
+                            if(target.tag.Equals("Hero") || target.tag.Equals("Vehicle"))
+                            {
+                                target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.entangled, status.statusAmnt));
+                            }
+                            break;
+                        case scr_status.statusTypes.Paralyzer:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.stunned, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Pacifist:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.compromised, status.statusAmnt));
+                            break;
+                        case scr_status.statusTypes.Conspiracist:
+                            target.GetComponent<scr_unit>().AddCondition(new scr_condition(scr_condition.conditionTypes.mutinied, status.statusAmnt));
+                            target.GetComponent<scr_unit>().Mutinied(gameObject.GetComponent<NetworkObject>().OwnerClientId, 5f);
+                            break;
+                    }
                 }
             }
             Debug.Log(this.cardData.name + " dealt " + power + " damage to " + target.name);
             target.GetComponent<scr_unit>().ChangeHealth(Convert.ToInt32(-power));
+        }
     }
 
     public virtual void ChangeHealth(float delta)

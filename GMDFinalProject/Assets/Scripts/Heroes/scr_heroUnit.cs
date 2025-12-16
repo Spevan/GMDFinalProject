@@ -47,13 +47,14 @@ public class scr_heroUnit : scr_unit
             }
             else
             {
-                rb.SleepRigidbody();
+                rb.SetLinearVelocity(Vector3.zero);
             }
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        Debug.Log("Collided with " +  collision.gameObject.name);
         //If the range collides with a tower
         if (target != null && target.Equals(collision.gameObject))
         {
@@ -65,14 +66,14 @@ public class scr_heroUnit : scr_unit
             else
             {
                 //Set movement lock to true and move towards tower position
-                Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
+                Debug.Log(this.cardData.name + " deals " + power + " damage to " + collision.gameObject.name);
                 timer = 0;
                 Attack();
             }
         }
         else if (target == null || !target.gameObject.activeSelf)
         {
-            //Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
+            Debug.Log(this.cardData.name + " has terminated " + collision.gameObject.name);
             movementLock = false;
             targetLock = false;
             target = null;
@@ -153,7 +154,7 @@ public class scr_heroUnit : scr_unit
                     if(condition.conditionType == scr_condition.conditionTypes.grappled)
                     {
                         target.GetComponent<scr_unit>().ChangeHealth(delta);
-                        return;
+                        break;
                     }
                 }
             }
